@@ -1,4 +1,4 @@
-import { Eye } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
@@ -10,6 +10,7 @@ import { AppError } from "../../apis/error";
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const [show, setShow] = useState<boolean>(false);
   const navigate = useNavigate();
   const { dispatch: useLogin } = useAuthLogin();
   const onSubmit = (event: any) => {
@@ -55,7 +56,7 @@ export default function LoginPage() {
                 >
                   <input
                     type="text"
-                    placeholder="Email"
+                    placeholder="Email *"
                     name="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -63,14 +64,24 @@ export default function LoginPage() {
                   />
                   <div className="w-full relative">
                     <input
-                      type="password"
-                      placeholder="Mật khẩu"
+                      type={show ? "text" : "password"}
+                      placeholder="Mật khẩu *"
                       name="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
                     />
-                    <Eye className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer" />
+                    {show ? (
+                      <Eye
+                        className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer"
+                        onClick={() => setShow(false)}
+                      />
+                    ) : (
+                      <EyeOff
+                        className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer"
+                        onClick={() => setShow(true)}
+                      />
+                    )}
                   </div>
                   <button
                     type="submit"

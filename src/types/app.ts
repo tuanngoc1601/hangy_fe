@@ -14,5 +14,12 @@ export interface APIResponse<T> {
 }
 
 export interface AuthResponse {
-  
+  email: string;
+}
+
+export interface RegisterForm {
+  email: string;
+  username: string;
+  password: string;
+  password_confirmation: string;
 }
