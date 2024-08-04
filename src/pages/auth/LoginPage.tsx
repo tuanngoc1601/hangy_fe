@@ -2,19 +2,33 @@ import { Eye, EyeOff } from "lucide-react";
 import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAuthLogin } from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { AppError } from "../../apis/error";
+import { checkValidFormLogin } from "../../lib/utils";
+import clsx from "clsx";
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [show, setShow] = useState<boolean>(false);
   const navigate = useNavigate();
+  const [errorMessage, setErrorMessage] = useState<{
+    email: string;
+    password: string;
+  }>({
+    email: "",
+    password: "",
+  });
+  const [checkData, setCheckData] = useState<boolean>(false);
   const { dispatch: useLogin } = useAuthLogin();
   const onSubmit = (event: any) => {
     event.preventDefault();
+    if (!checkData) {
+      setErrorMessage(checkValidFormLogin({ email, password }));
+    }
+    setCheckData(true);
     useLogin({ email, password })
       .then((resp) => {
         if (!resp.data) {
@@ -29,6 +43,12 @@ export default function LoginPage() {
         }
       });
   };
+
+  useEffect(() => {
+    if (checkData) {
+      setErrorMessage(checkValidFormLogin({ email, password }));
+    }
+  }, [email, password]);
   return (
     <main className="h-full w-full flex flex-col justify-start">
       <header className="flex w-full flex-row items-center justify-between h-[84px] max-w-[1200px] mx-auto">
@@ -54,14 +74,24 @@ export default function LoginPage() {
                   onSubmit={onSubmit}
                   className="w-full flex flex-col gap-6"
                 >
-                  <input
-                    type="text"
-                    placeholder="Email *"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
-                  />
+                  <div className="w-full flex-1">
+                    <input
+                      type="text"
+                      placeholder="Email *"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={clsx(
+                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
+                        !!errorMessage.email && "border-[#ff424f] bg-[#fff6f7]"
+                      )}
+                    />
+                    {errorMessage.email && (
+                      <p className="text-[#ff424f] mt-1 text-xs">
+                        {errorMessage.email}
+                      </p>
+                    )}
+                  </div>
                   <div className="w-full relative">
                     <input
                       type={show ? "text" : "password"}
@@ -69,7 +99,11 @@ export default function LoginPage() {
                       name="password"
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
+                      className={clsx(
+                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
+                        !!errorMessage.password &&
+                          "border-[#ff424f] bg-[#fff6f7]"
+                      )}
                     />
                     {show ? (
                       <Eye
@@ -82,10 +116,20 @@ export default function LoginPage() {
                         onClick={() => setShow(true)}
                       />
                     )}
+                    {errorMessage.password && (
+                      <p className="text-[#ff424f] mt-1 text-xs">
+                        {errorMessage.password}
+                      </p>
+                    )}
                   </div>
                   <button
                     type="submit"
-                    disabled={!email || !password}
+                    disabled={
+                      !email ||
+                      !password ||
+                      !!errorMessage.email ||
+                      !!errorMessage.password
+                    }
                     className="w-full rounded text-white bg-[#ee4e2e] uppercase text-center outline-none h-10 text-md disabled:bg-[#ee4e2e]/[0.7]"
                   >
                     Đăng nhập

@@ -15,6 +15,9 @@ export interface APIResponse<T> {
 
 export interface AuthResponse {
   email: string;
+  username: string;
+  name: string | null;
+  access_token: string;
 }
 
 export interface RegisterForm {

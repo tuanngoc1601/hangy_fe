@@ -1,20 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
 import { useNavigate } from "react-router-dom";
 import { useAuthRegister } from "../../apis/auth";
 import { AppError } from "../../apis/error";
+import clsx from "clsx";
+import { checkValidFormRegister } from "../../lib/utils";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [confirmPassword, setConfirmPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
+  const [errorMessage, setErrorMessage] = useState({
+    email: "",
+    username: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const [checkData, setCheckData] = useState<boolean>(false);
   const { dispatch: useRegister } = useAuthRegister();
   const navigate = useNavigate();
   const onSubmit = (event: any) => {
     event.preventDefault();
+    if (!checkData) {
+      setErrorMessage(
+        checkValidFormRegister(email, username, password, confirmPassword)
+      );
+    }
+    setCheckData(true);
     useRegister({
       email,
       username,
@@ -34,6 +49,14 @@ export default function RegisterPage() {
         }
       });
   };
+
+  useEffect(() => {
+    if (checkData) {
+      setErrorMessage(
+        checkValidFormRegister(email, username, password, confirmPassword)
+      );
+    }
+  }, [email, username, password, confirmPassword]);
   return (
     <main className="h-full w-full flex flex-col justify-start">
       <header className="flex w-full flex-row items-center justify-between h-[84px] max-w-[1200px] mx-auto">
@@ -59,41 +82,93 @@ export default function RegisterPage() {
                   onSubmit={onSubmit}
                   className="w-full flex flex-col gap-4"
                 >
-                  <input
-                    type="text"
-                    placeholder="Email *"
-                    name="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Tên người dùng *"
-                    name="username"
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                    className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Mật khẩu *"
-                    name="password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Xác nhận mật khẩu *"
-                    name="password"
-                    value={confirmPassword}
-                    onChange={(e) => setConfirmPassword(e.target.value)}
-                    className="w-full p-3 flex-1 bg-white border rounded outline-none h-10"
-                  />
+                  <div className="w-full flex-1">
+                    <input
+                      type="text"
+                      placeholder="Email *"
+                      name="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className={clsx(
+                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
+                        !!errorMessage.email && "border-[#ff424f] bg-[#fff6f7]"
+                      )}
+                    />
+                    {errorMessage.email && (
+                      <p className="text-[#ff424f] mt-1 text-xs">
+                        {errorMessage.email}
+                      </p>
+                    )}
+                  </div>
+                  <div className="w-full flex-1">
+                    <input
+                      type="text"
+                      placeholder="Tên người dùng *"
+                      name="username"
+                      value={username}
+                      onChange={(e) => setUsername(e.target.value)}
+                      className={clsx(
+                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
+                        !!errorMessage.username &&
+                          "border-[#ff424f] bg-[#fff6f7]"
+                      )}
+                    />
+                    {errorMessage.username && (
+                      <p className="text-[#ff424f] mt-1 text-xs">
+                        {errorMessage.username}
+                      </p>
+                    )}
+                  </div>
+                  <div className="w-full flex-1">
+                    <input
+                      type="password"
+                      placeholder="Mật khẩu *"
+                      name="password"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className={clsx(
+                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
+                        !!errorMessage.password &&
+                          "border-[#ff424f] bg-[#fff6f7]"
+                      )}
+                    />
+                    {errorMessage.password && (
+                      <p className="text-[#ff424f] mt-1 text-xs">
+                        {errorMessage.password}
+                      </p>
+                    )}
+                  </div>
+                  <div className="w-full flex-1">
+                    <input
+                      type="password"
+                      placeholder="Xác nhận mật khẩu *"
+                      name="password"
+                      value={confirmPassword}
+                      onChange={(e) => setConfirmPassword(e.target.value)}
+                      className={clsx(
+                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
+                        !!errorMessage.confirmPassword &&
+                          "border-[#ff424f] bg-[#fff6f7]"
+                      )}
+                    />
+                    {errorMessage.confirmPassword && (
+                      <p className="text-[#ff424f] mt-1 text-xs">
+                        {errorMessage.confirmPassword}
+                      </p>
+                    )}
+                  </div>
                   <button
                     type="submit"
-                    disabled={!email || !password}
+                    disabled={
+                      !email ||
+                      !username ||
+                      !password ||
+                      !confirmPassword ||
+                      !!errorMessage.email ||
+                      !!errorMessage.username ||
+                      !!errorMessage.password ||
+                      !!errorMessage.confirmPassword
+                    }
                     className="w-full rounded text-white bg-[#ee4e2e] uppercase text-center outline-none h-10 text-md disabled:bg-[#ee4e2e]/[0.7]"
                   >
                     Đăng ký
