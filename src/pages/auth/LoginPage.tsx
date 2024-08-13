@@ -3,7 +3,7 @@ import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
 import { useEffect, useState } from "react";
-import { useAuthLogin } from "../../apis/auth";
+import { useAuthGoogleUrl, useAuthLogin } from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { AppError } from "../../apis/error";
 import { checkValidFormLogin } from "../../lib/utils";
@@ -23,6 +23,7 @@ export default function LoginPage() {
   });
   const [checkData, setCheckData] = useState<boolean>(false);
   const { dispatch: useLogin } = useAuthLogin();
+  const { data: googleUrlRedirect } = useAuthGoogleUrl();
   const onSubmit = (event: any) => {
     event.preventDefault();
     if (!checkData) {
@@ -150,10 +151,10 @@ export default function LoginPage() {
                     <FacebookIcon />
                     Facebook
                   </button>
-                  <button className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26]">
+                  <a href={googleUrlRedirect} className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer">
                     <GoogleIcon />
                     Google
-                  </button>
+                  </a>
                 </div>
                 <div className="text-sm text-[#00000042] flex gap-1 justify-center items-center mt-4">
                   Bạn chưa có tài khoản?{" "}

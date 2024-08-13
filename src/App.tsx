@@ -3,6 +3,7 @@ import HomePage from "./pages/HomePage";
 import { LayoutFull } from "./pages/Layout";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
+import GoogleLogin from "./pages/auth/GoogleLogin";
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/auth/login", Component: LoginPage, id: "login" },
       { path: "/auth/register", Component: RegisterPage, id: "register" },
+      { path: "/auth/google/callback", Component: GoogleLogin, id: "google-login" },
     ],
   },
 ]);
