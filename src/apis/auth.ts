@@ -45,7 +45,7 @@ export function useAuthGoogleUrl() {
 
 export function useLoginGoogleCallback() {
   const { data, error } = useSWR(`/api/v1/auth/google-auth/callback`, (url) =>
-    fetchTyped<any>(url, {
+    fetchTyped<never>(url, {
       method: "GET",
       // mode: "no-cors",
     })

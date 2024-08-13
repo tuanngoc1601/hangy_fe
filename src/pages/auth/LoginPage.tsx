@@ -24,7 +24,7 @@ export default function LoginPage() {
   const [checkData, setCheckData] = useState<boolean>(false);
   const { dispatch: useLogin } = useAuthLogin();
   const { data: googleUrlRedirect } = useAuthGoogleUrl();
-  const onSubmit = (event: any) => {
+  const onSubmit = (event) => {
     event.preventDefault();
     if (!checkData) {
       setErrorMessage(checkValidFormLogin({ email, password }));
