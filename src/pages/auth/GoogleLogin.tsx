@@ -1,15 +1,15 @@
-import { useEffect } from "react";
-import { fetchTyped } from "../../apis/apiv1";
+import { useNavigate } from "react-router-dom";
+import { useLoginGoogleCallback } from "../../apis/auth";
+import useHangyStore from "../../lib/useStore";
 
 export default function GoogleLogin() {
   const query = window.location.search;
-  console.log('query', query)
-  useEffect(() => {
-    fetchTyped<never>(`/api/v1/auth/google-auth/callback${query}`, {
-      method: "GET",
-      // mode: "cors",
-    }).then((resp) => console.log(resp));
-  }, []);
+  const navigate = useNavigate();
+  const { data: user } = useLoginGoogleCallback(query);
+  const setToken = useHangyStore((state) => state.setToken);
+  if (user) {
+    setToken(user?.access_token);
+  }
 
-  return <div>Google Login</div>;
+  return navigate("/", { replace: true });
 }

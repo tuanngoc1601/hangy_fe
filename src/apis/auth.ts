@@ -2,6 +2,7 @@ import useSWR from "swr";
 import { AuthResponse, RegisterForm } from "../types/app";
 import { fetchTyped } from "./apiv1";
 import useSWRMutation from "swr/mutation";
+import useSWRImmutable from "swr/immutable";
 
 export function useAuthLogin() {
   const { trigger } = useSWRMutation(
@@ -43,12 +44,13 @@ export function useAuthGoogleUrl() {
   return { data: data?.data, isLoading, error };
 }
 
-export function useLoginGoogleCallback() {
-  const { data, error } = useSWR(`/api/v1/auth/google-auth/callback`, (url) =>
-    fetchTyped<never>(url, {
-      method: "GET",
-      // mode: "no-cors",
-    })
+export function useLoginGoogleCallback(query: string | undefined) {
+  const { data, error } = useSWRImmutable(
+    query ? `/api/v1/auth/google-auth/callback${query}` : null,
+    (url) =>
+      fetchTyped<AuthResponse>(url, {
+        method: "GET",
+      })
   );
 
   return { data: data?.data, error };

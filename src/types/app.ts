@@ -18,6 +18,8 @@ export interface AuthResponse {
   username: string;
   name: string | null;
   access_token: string;
+  google_id: string;
+  email_verified_at: string | null;
 }
 
 export interface RegisterForm {
