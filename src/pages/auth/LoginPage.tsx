@@ -3,11 +3,12 @@ import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
 import { useEffect, useState } from "react";
-import { useAuthGoogleUrl, useAuthLogin } from "../../apis/auth";
+import { useAuthFacebookUrl, useAuthGoogleUrl, useAuthLogin } from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { AppError } from "../../apis/error";
 import { checkValidFormLogin } from "../../lib/utils";
 import clsx from "clsx";
+import useHangyStore from "../../lib/useStore";
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
@@ -22,9 +23,11 @@ export default function LoginPage() {
     password: "",
   });
   const [checkData, setCheckData] = useState<boolean>(false);
+  const setToken = useHangyStore((state) => state.setToken);
   const { dispatch: useLogin } = useAuthLogin();
   const { data: googleUrlRedirect } = useAuthGoogleUrl();
-  const onSubmit = (event) => {
+  const { data: facebookUrlRedirect } = useAuthFacebookUrl();
+  const onSubmit = (event: any) => {
     event.preventDefault();
     if (!checkData) {
       setErrorMessage(checkValidFormLogin({ email, password }));
@@ -36,6 +39,7 @@ export default function LoginPage() {
           console.log("something went wrong!");
           return;
         }
+        setToken(resp.data.access_token);
         navigate("/", { replace: true });
       })
       .catch((err) => {
@@ -147,10 +151,10 @@ export default function LoginPage() {
                   <div className="h-[0.5px] flex-1 w-full bg-[#dbdbdb]"></div>
                 </div>
                 <div className="flex flex-wrap justify-between items-center gap-2.5 mt-4">
-                  <button className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26]">
+                  <a href={facebookUrlRedirect} className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer">
                     <FacebookIcon />
                     Facebook
-                  </button>
+                  </a>
                   <a href={googleUrlRedirect} className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer">
                     <GoogleIcon />
                     Google

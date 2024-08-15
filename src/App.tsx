@@ -4,6 +4,7 @@ import { LayoutFull } from "./pages/Layout";
 import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import GoogleLogin from "./pages/auth/GoogleLogin";
+import FacebookLogin from "./pages/auth/FacebookLogin";
 
 const router = createBrowserRouter([
   {
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "/auth/login", Component: LoginPage, id: "login" },
       { path: "/auth/register", Component: RegisterPage, id: "register" },
       { path: "/auth/google/callback", Component: GoogleLogin, id: "google-login" },
+      { path: "/auth/facebook/callback", Component: FacebookLogin, id: "facebook-login" },
     ],
   },
 ]);
