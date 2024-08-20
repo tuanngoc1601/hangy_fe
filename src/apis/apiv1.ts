@@ -42,6 +42,16 @@ export function useFetchTyped<T, K = APIResponse<T>>() {
             };
           }
 
+          if (refresh_token && checkIfTokenExpired(refresh_token)) {
+            return fetch(`${API_V1 || ""}/api/v1/auth/logout`, {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: `Bearer ${data?.data?.access_token}`,
+              },
+            }).then((resp) => resp.json());
+          }
+
           return fetch(_input, init).then(async (response) => {
             if (response.ok) {
               const body = await response.json();
