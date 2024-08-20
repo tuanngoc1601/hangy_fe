@@ -5,6 +5,7 @@ import LoginPage from "./pages/auth/LoginPage";
 import RegisterPage from "./pages/auth/RegisterPage";
 import GoogleLogin from "./pages/auth/GoogleLogin";
 import FacebookLogin from "./pages/auth/FacebookLogin";
+import { ProtectedRoute } from "./pages/auth/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -12,6 +13,7 @@ const router = createBrowserRouter([
     children: [{ path: "/", Component: HomePage, id: "index" }],
   },
   {
+    Component: ProtectedRoute,
     children: [
       { path: "/auth/login", Component: LoginPage, id: "login" },
       { path: "/auth/register", Component: RegisterPage, id: "register" },

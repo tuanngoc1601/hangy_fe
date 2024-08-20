@@ -1,6 +1,6 @@
 // import useSWR from "swr";
 import { AuthResponse, RegisterForm } from "../types/app";
-import { fetchTyped } from "./apiv1";
+import { fetchTyped, useFetchTyped } from "./apiv1";
 import useSWRMutation from "swr/mutation";
 import useSWRImmutable from "swr/immutable";
 import useHangyStore from "../lib/useStore";
@@ -82,18 +82,30 @@ export function useLoginFacebookCallback(query: string | undefined) {
 }
 
 export function useAuthLogout() {
+  const useFetch = useFetchTyped<string>();
   const access_token = useHangyStore((state) => state.access_token);
-  const { trigger } = useSWRMutation(
-    access_token ? "/api/v1/auth/logout" : null,
-    (url: string) => {
-      return fetchTyped<string>(url, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${access_token}`,
-        },
-      });
-    }
-  );
+  const { trigger } = useSWRMutation("/api/v1/auth/logout", (url: string) => {
+    return useFetch(url, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${access_token}`,
+      },
+    });
+  });
+
+  return { dispatch: trigger };
+}
+
+export function useRefreshToken() {
+  const refresh_token = useHangyStore((state) => state.refresh_token);
+  const { trigger } = useSWRMutation("/api/v1/auth/refresh", (url: string) => {
+    return fetchTyped<AuthResponse>(url, {
+      method: "POST",
+      body: JSON.stringify({
+        refresh_token: refresh_token,
+      }),
+    });
+  });
 
   return { dispatch: trigger };
 }

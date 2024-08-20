@@ -7,6 +7,7 @@ import { useAuthRegister } from "../../apis/auth";
 import { AppError } from "../../apis/error";
 import clsx from "clsx";
 import { checkValidFormRegister } from "../../lib/utils";
+import useHangyStore from "../../lib/useStore";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>("");
@@ -22,6 +23,7 @@ export default function RegisterPage() {
   const [checkData, setCheckData] = useState<boolean>(false);
   const { dispatch: useRegister } = useAuthRegister();
   const navigate = useNavigate();
+  const setToken = useHangyStore((state) => state.setToken);
   const onSubmit = (event: any) => {
     event.preventDefault();
     if (!checkData) {
@@ -41,6 +43,10 @@ export default function RegisterPage() {
           console.log("something went wrong!");
           return;
         }
+        setToken(resp.data?.access_token);
+        useHangyStore.setState({
+          refresh_token: resp.data?.refresh_token,
+        });
         navigate("/", { replace: true });
       })
       .catch((err) => {

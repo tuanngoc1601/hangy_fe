@@ -8,10 +8,14 @@ export default function HomePage() {
   const navigate = useNavigate();
   function onLogoutSubmit() {
     useLogoutAction().then((resp) => {
-      if(!resp.data) {
+      if (!resp.data) {
         console.log("Something went wrong!");
+        return;
       }
       setToken("");
+      useHangyStore.setState({
+        refresh_token: "",
+      });
       navigate("/auth/login", { replace: true });
     });
   }

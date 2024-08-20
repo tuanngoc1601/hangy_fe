@@ -8,7 +8,10 @@ export default function GoogleLogin() {
   const { data: user } = useLoginGoogleCallback(query);
   const setToken = useHangyStore((state) => state.setToken);
   if (user) {
-    setToken(user?.access_token);
+    setToken(user.access_token);
+    useHangyStore.setState({
+      refresh_token: user.refresh_token,
+    });
   }
 
   return navigate("/", { replace: true });

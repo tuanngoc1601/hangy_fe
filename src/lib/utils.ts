@@ -1,3 +1,5 @@
+import { jwtDecode } from "jwt-decode";
+
 function validateEmail(email: string) {
   const pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
   return pattern.test(email);
@@ -43,4 +45,14 @@ export function checkValidFormRegister(
     error.confirmPassword = "Mật khẩu xác thực chưa chính xác.";
 
   return error;
+}
+
+export function checkIfTokenExpired(accessToken: string): boolean {
+  // check token payload
+  const tokenPayload: any = jwtDecode(accessToken);
+  // check token expiration date in payload
+  const tokenExpiration = tokenPayload.exp;
+  const now = new Date().getTime() / 1000; // token exp shaved off milliseconds
+  // if (expiration date is greater than current date)
+  return now > tokenExpiration;
 }

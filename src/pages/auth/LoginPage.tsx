@@ -3,7 +3,11 @@ import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
 import { useEffect, useState } from "react";
-import { useAuthFacebookUrl, useAuthGoogleUrl, useAuthLogin } from "../../apis/auth";
+import {
+  useAuthFacebookUrl,
+  useAuthGoogleUrl,
+  useAuthLogin,
+} from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { AppError } from "../../apis/error";
 import { checkValidFormLogin } from "../../lib/utils";
@@ -39,7 +43,10 @@ export default function LoginPage() {
           console.log("something went wrong!");
           return;
         }
-        setToken(resp.data.access_token);
+        setToken(resp.data?.access_token);
+        useHangyStore.setState({
+          refresh_token: resp.data?.refresh_token,
+        });
         navigate("/", { replace: true });
       })
       .catch((err) => {
@@ -151,11 +158,17 @@ export default function LoginPage() {
                   <div className="h-[0.5px] flex-1 w-full bg-[#dbdbdb]"></div>
                 </div>
                 <div className="flex flex-wrap justify-between items-center gap-2.5 mt-4">
-                  <a href={facebookUrlRedirect} className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer">
+                  <a
+                    href={facebookUrlRedirect}
+                    className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer"
+                  >
                     <FacebookIcon />
                     Facebook
                   </a>
-                  <a href={googleUrlRedirect} className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer">
+                  <a
+                    href={googleUrlRedirect}
+                    className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer"
+                  >
                     <GoogleIcon />
                     Google
                   </a>
