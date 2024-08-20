@@ -1,10 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useLoginFacebookCallback } from "../../apis/auth";
 import useHangyStore from "../../lib/useStore";
 
 export default function FacebookLogin() {
   const query = window.location.search;
-  const navigate = useNavigate();
   const { data: user } = useLoginFacebookCallback(query);
   const setToken = useHangyStore((state) => state.setToken);
   if (user) {
@@ -14,5 +13,5 @@ export default function FacebookLogin() {
     });
   }
 
-  return navigate("/", { replace: true });
+  return <Navigate to={"/"} replace />;
 }
