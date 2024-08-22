@@ -33,9 +33,9 @@ export function useAuthRegister() {
   return { dispatch: trigger };
 }
 
-export function useAuthGoogleUrl() {
+export function useAuthSocialUrl(provider: string) {
   const { data, error, isLoading } = useSWRImmutable(
-    "/api/v1/auth/google-auth/redirect",
+    `/api/v1/auth/social-auth/${provider}/redirect`,
     (url) =>
       fetchTyped<string>(url, {
         method: "GET",
@@ -45,40 +45,19 @@ export function useAuthGoogleUrl() {
   return { data: data?.data, isLoading, error };
 }
 
-export function useAuthFacebookUrl() {
-  const { data, error, isLoading } = useSWRImmutable(
-    "/api/v1/auth/facebook-auth/redirect",
+export function useLoginSocialCallback(
+  query: string | undefined,
+  provider: string
+) {
+  const { data, isLoading, error } = useSWRImmutable(
+    query ? `/api/v1/auth/social-auth/${provider}/callback${query}` : null,
     (url) =>
-      fetchTyped<string>(url, {
+      fetchTyped<AuthResponse>(url, {
         method: "GET",
       })
   );
 
   return { data: data?.data, isLoading, error };
-}
-
-export function useLoginGoogleCallback(query: string | undefined) {
-  const { data, error } = useSWRImmutable(
-    query ? `/api/v1/auth/google-auth/callback${query}` : null,
-    (url) =>
-      fetchTyped<AuthResponse>(url, {
-        method: "GET",
-      })
-  );
-
-  return { data: data?.data, error };
-}
-
-export function useLoginFacebookCallback(query: string | undefined) {
-  const { data, error } = useSWRImmutable(
-    query ? `/api/v1/auth/facebook-auth/callback${query}` : null,
-    (url) =>
-      fetchTyped<AuthResponse>(url, {
-        method: "GET",
-      })
-  );
-
-  return { data: data?.data, error };
 }
 
 export function useAuthLogout() {

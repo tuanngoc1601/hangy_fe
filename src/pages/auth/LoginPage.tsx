@@ -3,11 +3,7 @@ import Logo from "../../assets/Logo";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
 import { useEffect, useState } from "react";
-import {
-  useAuthFacebookUrl,
-  useAuthGoogleUrl,
-  useAuthLogin,
-} from "../../apis/auth";
+import { useAuthLogin, useAuthSocialUrl } from "../../apis/auth";
 import { useNavigate } from "react-router-dom";
 import { AppError } from "../../apis/error";
 import { checkValidFormLogin } from "../../lib/utils";
@@ -29,8 +25,8 @@ export default function LoginPage() {
   const [checkData, setCheckData] = useState<boolean>(false);
   const setToken = useHangyStore((state) => state.setToken);
   const { dispatch: useLogin } = useAuthLogin();
-  const { data: googleUrlRedirect } = useAuthGoogleUrl();
-  const { data: facebookUrlRedirect } = useAuthFacebookUrl();
+  const { data: googleUrlRedirect } = useAuthSocialUrl("google");
+  const { data: facebookUrlRedirect } = useAuthSocialUrl("facebook");
   const onSubmit = (event: any) => {
     event.preventDefault();
     if (!checkData) {

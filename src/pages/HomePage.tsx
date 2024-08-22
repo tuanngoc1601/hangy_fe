@@ -20,7 +20,7 @@ export default function HomePage() {
     });
   }
   return (
-    <div>
+    <div className="mt-[75px]">
       Home Page
       <button
         className="px-4 py-2 bg-stone-500 text-lg rounded-md outline-none"
