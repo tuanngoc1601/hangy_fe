@@ -8,7 +8,7 @@ export default function Header() {
   const navigate = useNavigate();
   const access_token = useHangyStore((state) => state.access_token);
   return (
-    <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center">
+    <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
       <div onClick={() => navigate("/")}>
         <Logo />
       </div>
