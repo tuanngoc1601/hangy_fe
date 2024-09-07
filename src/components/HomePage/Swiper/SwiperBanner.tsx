@@ -3,7 +3,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { EffectFade, Navigation, Pagination } from "swiper/modules";
+import { EffectFade, Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper as SwiperType } from "swiper";
 import { motion } from "framer-motion";
 import { useRef } from "react";
@@ -15,7 +15,7 @@ export default function SwiperBanner() {
   const swiperRef = useRef<SwiperType>();
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { delay: 0.7, duration: 0.7 } },
+    visible: { opacity: 1, y: 0, transition: { delay: 0.3, duration: 0.7 } },
   };
   return (
     <motion.div
@@ -33,7 +33,11 @@ export default function SwiperBanner() {
         pagination={{
           clickable: true,
         }}
-        modules={[EffectFade, Navigation, Pagination]}
+        autoplay={{
+          delay: 4000,
+          disableOnInteraction: false,
+        }}
+        modules={[EffectFade, Navigation, Pagination, Autoplay]}
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
