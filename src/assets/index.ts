@@ -10,3 +10,5 @@ export { default as Arrival4 } from "./images/featured/arrival4.png";
 export { default as Service1Img } from "./images/services/service1Img.png";
 export { default as service2Img } from "./images/services/service2Img.png";
 export { default as service3Img } from "./images/services/service3Img.png";
+export { default as ProductImg } from "./images/product.jpeg";
+export { default as AddCartImg } from "./images/addcart.png";

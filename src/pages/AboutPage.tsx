@@ -1,3 +1,3 @@
 export default function AboutPage() {
-  return <div>About Page</div>;
+  return <div className="mt-[75px]">About Page</div>;
 }

@@ -6,19 +6,37 @@ import RegisterPage from "./pages/auth/RegisterPage";
 import GoogleLogin from "./pages/auth/GoogleLogin";
 import FacebookLogin from "./pages/auth/FacebookLogin";
 import { ProtectedRoute } from "./pages/auth/ProtectedRoute";
+import AboutPage from "./pages/AboutPage";
+import ProductDetail from "./pages/ProductDetail";
 
 const router = createBrowserRouter([
   {
     Component: LayoutFull,
-    children: [{ path: "/", Component: HomePage, id: "index" }],
+    children: [
+      { path: "/", Component: HomePage, id: "index" },
+      { path: "/hangy-about", Component: AboutPage, id: "about" },
+      {
+        path: "/products/:slug",
+        Component: ProductDetail,
+        id: "product-detail",
+      },
+    ],
   },
   {
     Component: ProtectedRoute,
     children: [
       { path: "/auth/login", Component: LoginPage, id: "login" },
       { path: "/auth/register", Component: RegisterPage, id: "register" },
-      { path: "/auth/google/callback", Component: GoogleLogin, id: "google-login" },
-      { path: "/auth/facebook/callback", Component: FacebookLogin, id: "facebook-login" },
+      {
+        path: "/auth/google/callback",
+        Component: GoogleLogin,
+        id: "google-login",
+      },
+      {
+        path: "/auth/facebook/callback",
+        Component: FacebookLogin,
+        id: "facebook-login",
+      },
     ],
   },
 ]);

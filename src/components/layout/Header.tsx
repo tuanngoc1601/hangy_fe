@@ -61,7 +61,7 @@ export default function Header() {
           </li>
           <li className="h-full cursor-pointer">
             <NavLink
-              to="/about"
+              to="/hangy-about"
               className={({ isActive }: { isActive: boolean }) =>
                 [
                   "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",

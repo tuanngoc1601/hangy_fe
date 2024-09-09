@@ -5,7 +5,7 @@ import Footter from "../components/layout/Footter";
 
 export const LayoutFull: FC = () => {
   return (
-    <div className="relative h-full w-full flex-col overflow-hidden text-foreground">
+    <div className="relative h-full w-full flex-col overflow-hidden text-foreground bg-[#f5f5f5]">
       <Header />
       <div className="flex-1">
         <Outlet />

@@ -4,11 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: '#ee4e2e',
+        primary: "#ee4e2e",
       },
       backgroundImage: {
-        'authBg': "url('/src/assets/backgrounds/bgAuth.png')",
-        gradient: 'linear-gradient(274.59deg, #19bfef -11.3%, #0dc9ec 50.13%, #00e3d0 111.55%)',
+        authBg: "url('/src/assets/backgrounds/bgAuth.png')",
+        flashSaleBg: "url('/src/assets/backgrounds/flashSale.png')",
+        gradient:
+          "linear-gradient(274.59deg, #19bfef -11.3%, #0dc9ec 50.13%, #00e3d0 111.55%)",
       },
     },
   },
