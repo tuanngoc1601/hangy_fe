@@ -11,7 +11,7 @@ import Button from "../components/common/Button";
 import Services from "../components/HomePage/Featured/Services";
 import Feature from "../components/HomePage/Featured/Feature";
 import SwiperBanner from "../components/HomePage/Swiper/SwiperBanner";
-import CountdownTime from "../components/CountdownTime";
+import CountdownTime from "../components/HomePage/CountdownTime";
 import SwiperSlider from "../components/SwiperSlider";
 import { buttonVariant, typographyVariant } from "../lib/variants";
 

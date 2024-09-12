@@ -77,7 +77,10 @@ export default function Header() {
         </ul>
       </nav>
       <div className="flex items-center justify-end gap-6 flex-none">
-        <div className="relative cursor-pointer">
+        <div
+          className="relative cursor-pointer"
+          onClick={() => navigate("/cart")}
+        >
           <HiOutlineShoppingBag className="text-3xl text-textColor" />
           <div className="h-5 w-5 rounded-full bg-red-500 flex items-center justify-center absolute -top-1.5 -right-1">
             <p className="text-white text-sm font-semibold">3</p>

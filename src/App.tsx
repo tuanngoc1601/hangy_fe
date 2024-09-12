@@ -8,6 +8,7 @@ import FacebookLogin from "./pages/auth/FacebookLogin";
 import { ProtectedRoute } from "./pages/auth/ProtectedRoute";
 import AboutPage from "./pages/AboutPage";
 import ProductDetail from "./pages/ProductDetail";
+import CartPage from "./pages/CartPage";
 
 const router = createBrowserRouter([
   {
@@ -20,6 +21,7 @@ const router = createBrowserRouter([
         Component: ProductDetail,
         id: "product-detail",
       },
+      { path: "/cart", Component: CartPage, id: "cart" },
     ],
   },
   {
