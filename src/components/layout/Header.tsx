@@ -1,8 +1,7 @@
-import Logo from "../../assets/Logo";
 import useHangyStore from "../../lib/useStore";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { Avatar } from "../../assets";
+import { Avatar, LogoHangy } from "../../assets";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -10,7 +9,7 @@ export default function Header() {
   return (
     <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
       <div onClick={() => navigate("/")}>
-        <Logo />
+        <img src={LogoHangy} alt="hangy-logo" className="w-[167px]" />
       </div>
       <nav className="h-full w-full py-[15px] flex items-center justify-center">
         <ul className="flex items-center gap-4 list-none text-base h-full font-semibold">

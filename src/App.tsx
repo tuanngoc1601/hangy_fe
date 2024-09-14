@@ -9,6 +9,7 @@ import { ProtectedRoute } from "./pages/auth/ProtectedRoute";
 import AboutPage from "./pages/AboutPage";
 import ProductDetail from "./pages/ProductDetail";
 import CartPage from "./pages/CartPage";
+import PaymentPage from "./pages/PaymentPage";
 
 const router = createBrowserRouter([
   {
@@ -22,6 +23,11 @@ const router = createBrowserRouter([
         id: "product-detail",
       },
       { path: "/cart", Component: CartPage, id: "cart" },
+      {
+        path: "/checkout",
+        Component: PaymentPage,
+        id: "payment",
+      },
     ],
   },
   {
@@ -45,7 +51,7 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <div className="min-h-screen w-full h-full flex flex-col items-center justify-start bg-white overflow-hidden text-[#222222]">
+    <div className="min-h-screen w-full h-full flex flex-col items-center justify-start bg-white text-[#222222]">
       <RouterProvider router={router} />
     </div>
   );

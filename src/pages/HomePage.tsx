@@ -97,7 +97,7 @@ export default function HomePage() {
             variants={buttonVariant}
             viewport={{ once: true }}
           >
-            <Button>Xem tất cả</Button>
+            <Button className="text-white">Xem tất cả</Button>
           </motion.div>
         </div>
         <SwiperSlider
@@ -127,7 +127,7 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={buttonVariant}
           >
-            <Button>Chi tiết</Button>
+            <Button className="text-white">Chi tiết</Button>
           </motion.div>
         </div>
         <SwiperSlider

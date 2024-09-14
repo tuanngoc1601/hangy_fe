@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Container from "../components/layout/Container";
 import BreadcrumbIcon from "../components/icons/BreadcrumbIcon";
 import Checkbox from "../components/common/Checkbox";
@@ -10,6 +10,7 @@ import { Swiper as SwiperType } from "swiper";
 
 export default function CartPage() {
   const swiperProducts = useRef<SwiperType>();
+  const navigate = useNavigate();
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
@@ -39,7 +40,7 @@ export default function CartPage() {
         <CartItem />
         <CartItem />
       </div>
-      <section className="sticky z-30 bg-white text-base font-medium w-full mt-5 text-[#222222]">
+      <section className="sticky z-30 bg-white text-base font-medium w-full mt-5 text-[#222222] bottom-0 shadow-[0_-1px_3px_-1px_rgba(0,0,0,0.3)]">
         <div className="flex items-center justify-end py-3 gap-52">
           <div className="flex items-center gap-2">
             <VoucherIcon />
@@ -63,7 +64,10 @@ export default function CartPage() {
               <span className="text-primary text-2xl ms-[5px]">₫0</span>
             </div>
             <div>
-              <Button className="capitalize font-light h-10 text-sm rounded-sm w-[210px]">
+              <Button
+                className="capitalize font-light h-10 text-sm rounded-sm w-[210px] text-white"
+                action={() => navigate("/checkout")}
+              >
                 Mua hàng
               </Button>
             </div>
@@ -74,9 +78,13 @@ export default function CartPage() {
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
             <div className="bg-[#ee4d2d] h-6 w-3 rounded-sm"></div>
-            <h3 className="text-2xl font-semibold uppercase text-[#0000008a]">Có thể bạn cũng thích</h3>
+            <h3 className="text-2xl font-semibold uppercase text-[#0000008a]">
+              Có thể bạn cũng thích
+            </h3>
           </div>
-          <Button className="bg-transparent text-primary font-light flex items-center justify-center py-[5px] px-[7px]">Xem tất cả</Button>
+          <Button className="bg-transparent text-primary font-light flex items-center justify-center py-[5px] px-[7px]">
+            Xem tất cả
+          </Button>
         </div>
         <SwiperSlider
           swiperRef={swiperProducts}

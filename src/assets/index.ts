@@ -12,3 +12,4 @@ export { default as service2Img } from "./images/services/service2Img.png";
 export { default as service3Img } from "./images/services/service3Img.png";
 export { default as ProductImg } from "./images/product.jpeg";
 export { default as AddCartImg } from "./images/addcart.png";
+export { default as LogoHangy } from "./logo.png";

@@ -507,7 +507,7 @@ export default function ProductDetail() {
             <div className="bg-[#ee4d2d] h-8 w-3 rounded-sm"></div>
             <h3 className="text-4xl font-semibold">Sản phẩm liên quan</h3>
           </div>
-          <Button>Xem tất cả</Button>
+          <Button className="text-white">Xem tất cả</Button>
         </div>
         <SwiperSlider
           swiperRef={swiperRelated}

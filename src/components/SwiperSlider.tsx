@@ -39,7 +39,7 @@ export default function SwiperSlider({
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        className="overflow-visible"
+        className="overflow-visible overflow-x-hidden"
       >
         <SwiperSlide>
           <ProductItem />

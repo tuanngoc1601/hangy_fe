@@ -1,4 +1,4 @@
-import LogoFooter from "../../assets/LogoFootter";
+import { LogoHangy } from "../../assets";
 import Facebook from "../icons/footer/Facebook";
 import Github from "../icons/footer/Github";
 import Telegram from "../icons/footer/Telegram";
@@ -34,7 +34,7 @@ export default function Footter() {
       </div>
       <div className="py-6 flex flex-row items-start gap-16 border-b border-[#3a4f74]">
         <div className="w-[320px] flex-none">
-          <LogoFooter />
+          <img src={LogoHangy} alt="" className="w-[167px]" />
           <p className="mt-8 text-base text-[#eaecf0]">
             Nền tảng Web3 về giáo dục hàng đầu tại RENEC Blockchain.
           </p>
