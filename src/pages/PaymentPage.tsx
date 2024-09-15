@@ -19,7 +19,7 @@ export default function PaymentPage() {
           }}
         ></div>
         <div className="pt-7 px-[30px] pb-6 w-full">
-          <div className="flex items-center text-lg text-primary font-medium mb-5">
+          <div className="flex items-center text-lg text-[#1c95c9] font-medium mb-5">
             <LocationIcon />
             <span className="capitalize ms-[9px]">Địa chỉ nhận hàng</span>
           </div>
@@ -30,7 +30,7 @@ export default function PaymentPage() {
             <span className="text-[#000000cc] font-medium ms-5">
               Số 19, Ngõ 123 Yên Xá, Xã Tân Triều, Huyện Thanh Trì, Hà Nội
             </span>
-            <span className="text-primary flex items-center justify-center border-[0.5px] rounded-[1px] text-[10px] py-0.5 px-[5px] capitalize ms-[15px] font-medium border-primary h-[17px]">
+            <span className="text-[#1c95c9] flex items-center justify-center border-[0.5px] rounded-[1px] text-[10px] py-0.5 px-[5px] capitalize ms-[15px] font-medium border-[#1c95c9] h-[17px]">
               Mặc định
             </span>
             <span className="text-sm text-[#4080ee] cursor-pointer ms-10 ">
@@ -68,7 +68,7 @@ export default function PaymentPage() {
                     Máy tăm nước HANGY HG23 và HF- 2 nâng cấp chống thấm nước
                     [BẢO HÀNH ĐỔI MỚI 12 THÁNG - KÈM CỦ SẠC]
                   </h3>
-                  <span className="mt-0.5 text-primary leading-3 border border-primary rounded-sm text-[10px] px-0.5 w-fit">
+                  <span className="mt-0.5 text-[#1c95c9] leading-3 border border-[#1c95c9] rounded-sm text-[10px] px-0.5 w-fit">
                     Đổi trả miễn phí 7 ngày
                   </span>
                 </div>
@@ -130,7 +130,7 @@ export default function PaymentPage() {
             <span className="text-sm text-[#0000008a]">
               Tổng số tiền (2 sản phẩm):
             </span>
-            <span className="text-primary font-semibold text-xl">₫715.500</span>
+            <span className="text-[#1c95c9] font-semibold text-xl">₫715.500</span>
           </div>
         </div>
       </div>
@@ -153,7 +153,7 @@ export default function PaymentPage() {
           <div className="text-[#000000cc] flex flex-col">
             <span className="text-end leading-10">₫699.000</span>
             <span className="text-end leading-10">₫16.500</span>
-            <span className="text-[28px] text-primary text-end leading-[50px]">
+            <span className="text-[28px] text-[#1c95c9] text-end leading-[50px]">
               ₫715.500
             </span>
           </div>
@@ -163,7 +163,7 @@ export default function PaymentPage() {
             Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo{" "}
             <span className="text-[#4080ee] font-medium cursor-pointer">Điều khoản Hangy</span>
           </p>
-          <Button className="bg-primary text-white outline-none py-3 px-[14px] rounded-sm h-10 w-[210px] flex items-center justify-center border border-black/10 shadow-[0_1px_1px_0px_rgba(0,0,0,0.03)]">
+          <Button className="bg-[#1c95c9] text-white outline-none py-3 px-[14px] rounded-sm h-10 w-[210px] flex items-center justify-center border border-black/10 shadow-[0_1px_1px_0px_rgba(0,0,0,0.03)]">
             Đặt hàng
           </Button>
         </div>

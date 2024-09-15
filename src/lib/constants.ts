@@ -4,17 +4,17 @@ export const API_V1 = import.meta.env.VITE_API_V1 || "";
 export const services = [
   {
     img: Service1Img,
-    title: "FREE AND FAST DELIVERY",
-    desc: "Free delivery for all orders over $140",
+    title: "GIAO HÀNG MIỄN PHÍ VÀ NHANH CHÓNG",
+    desc: "Miễn phí ship cho tất cả các đơn hàng",
   },
   {
     img: service2Img,
-    title: "24/7 CUSTOMER SERVICE",
-    desc: "Friendly 24/7 customer support",
+    title: "DỊCH VỤ CSKH GIỜ HÀNH CHÍNH",
+    desc: "Hỗ trợ khách hàng chuyên nghiệp",
   },
   {
     img: service3Img,
-    title: "MONEY BACK GUARANTEE",
-    desc: "We return money within 30 days",
+    title: "SẢN PHẨM CHÍNH HÃNG",
+    desc: "Bảo hành uy tín",
   },
 ];

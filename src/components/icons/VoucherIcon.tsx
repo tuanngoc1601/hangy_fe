@@ -1,6 +1,6 @@
 const VoucherIcon = () => (
   <svg
-    fill="#ee4e2e"
+    fill="#1c95c9"
     viewBox="0 -2 23 22"
     className="text-primary inline-block relative h-5 w-[21px]"
   >

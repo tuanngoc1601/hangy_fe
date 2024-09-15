@@ -4,7 +4,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        primary: "#ee4e2e",
+        primary: "#1c95c9",
       },
       backgroundImage: {
         authBg: "url('/src/assets/backgrounds/bgAuth.png')",

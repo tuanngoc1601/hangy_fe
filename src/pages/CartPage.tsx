@@ -82,7 +82,7 @@ export default function CartPage() {
               Có thể bạn cũng thích
             </h3>
           </div>
-          <Button className="bg-transparent text-primary font-light flex items-center justify-center py-[5px] px-[7px]">
+          <Button className="bg-transparent text-white text-sm font-light flex items-center justify-center py-[5px] px-[7px]">
             Xem tất cả
           </Button>
         </div>

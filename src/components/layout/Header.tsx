@@ -8,7 +8,7 @@ export default function Header() {
   const access_token = useHangyStore((state) => state.access_token);
   return (
     <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
-      <div onClick={() => navigate("/")}>
+      <div className="cursor-pointer" onClick={() => navigate("/")}>
         <img src={LogoHangy} alt="hangy-logo" className="w-[167px]" />
       </div>
       <nav className="h-full w-full py-[15px] flex items-center justify-center">
@@ -25,21 +25,6 @@ export default function Header() {
             >
               <div className="flex h-full items-center text-center px-4 bg-white">
                 Săn Deal
-              </div>
-            </NavLink>
-          </li>
-          <li className="h-full cursor-pointer">
-            <NavLink
-              to="/sale"
-              className={({ isActive }: { isActive: boolean }) =>
-                [
-                  "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
-                  isActive ? "bg-[#ed372d]" : "",
-                ].join(" ")
-              }
-            >
-              <div className="flex h-full items-center text-center px-4 bg-white">
-                Khoá học miễn phí
               </div>
             </NavLink>
           </li>
@@ -69,7 +54,22 @@ export default function Header() {
               }
             >
               <div className="flex h-full items-center text-center px-4 bg-white">
-                Về Rendemy
+                Về Hangy
+              </div>
+            </NavLink>
+          </li>
+          <li className="h-full cursor-pointer">
+            <NavLink
+              to="/sale"
+              className={({ isActive }: { isActive: boolean }) =>
+                [
+                  "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
+                  isActive ? "bg-[#ed372d]" : "",
+                ].join(" ")
+              }
+            >
+              <div className="flex h-full items-center text-center px-4 bg-white">
+                Hỏi đáp với Bác sĩ
               </div>
             </NavLink>
           </li>
@@ -81,7 +81,7 @@ export default function Header() {
           onClick={() => navigate("/cart")}
         >
           <HiOutlineShoppingBag className="text-3xl text-textColor" />
-          <div className="h-5 w-5 rounded-full bg-red-500 flex items-center justify-center absolute -top-1.5 -right-1">
+          <div className="h-5 w-5 rounded-full bg-[#1c95c9] flex items-center justify-center absolute -top-1.5 -right-1">
             <p className="text-white text-sm font-semibold">3</p>
           </div>
         </div>
