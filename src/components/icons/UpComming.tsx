@@ -7,7 +7,7 @@ const UpComming = () => (
     width="100%"
     height="177"
   >
-    <g clip-path="url(#no-data-icon_svg__a)">
+    <g clipPath="url(#no-data-icon_svg__a)">
       <path
         fill="url(#no-data-icon_svg__b)"
         d="M0 146.554s224.061-123.447 499-.581l-499 .581Z"

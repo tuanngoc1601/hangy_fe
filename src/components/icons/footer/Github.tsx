@@ -6,7 +6,7 @@ const Github = () => {
       viewBox="0 0 24 24"
       width="32"
     >
-      <g clip-path="url(#discord-rounded_svg__a)">
+      <g clipPath="url(#discord-rounded_svg__a)">
         <path
           fill="#fff"
           fill-rule="evenodd"
