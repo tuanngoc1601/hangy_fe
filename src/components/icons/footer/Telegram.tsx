@@ -6,7 +6,7 @@ const Telegram = () => {
       viewBox="0 0 32 32"
       width="32"
     >
-      <g clip-path="url(#icon-telegram-white_svg__a)">
+      <g clipPath="url(#icon-telegram-white_svg__a)">
         <path
           fill="#fff"
           fill-rule="evenodd"

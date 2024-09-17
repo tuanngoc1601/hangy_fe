@@ -8,7 +8,7 @@ const ArrowIcon = ({ className }: PropsWithClassName) => {
       viewBox="0 0 24 24"
       name="arrow-down"
       width="30"
-      color="black"
+      color="#667085"
       className={className}
     >
       <path
