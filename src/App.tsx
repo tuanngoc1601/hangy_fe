@@ -10,6 +10,7 @@ import AboutPage from "./pages/AboutPage";
 import ProductDetail from "./pages/ProductDetail";
 import CartPage from "./pages/CartPage";
 import PaymentPage from "./pages/PaymentPage";
+import ProductsPage from "./pages/ProductsPage";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,7 @@ const router = createBrowserRouter([
     children: [
       { path: "/", Component: HomePage, id: "index" },
       { path: "/hangy-about", Component: AboutPage, id: "about" },
+      { path: "/products", Component: ProductsPage, id: "products" },
       {
         path: "/products/:slug",
         Component: ProductDetail,
