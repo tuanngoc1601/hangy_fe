@@ -175,7 +175,7 @@ export default function RegisterPage() {
                       !!errorMessage.password ||
                       !!errorMessage.confirmPassword
                     }
-                    className="w-full rounded text-white bg-[#ee4e2e] uppercase text-center outline-none h-10 text-md disabled:bg-[#ee4e2e]/[0.7]"
+                    className="w-full rounded text-white bg-primary uppercase text-center outline-none h-10 text-md disabled:bg-primary/[0.7]"
                   >
                     Đăng ký
                   </button>
@@ -200,7 +200,7 @@ export default function RegisterPage() {
                 <div className="text-sm text-[#00000042] flex gap-1 justify-center items-center mt-4">
                   Bạn đã có tài khoản?{" "}
                   <span
-                    className="text-[#ee4e2e] font-semibold cursor-pointer hover:opacity-80"
+                    className="text-primary font-semibold cursor-pointer hover:opacity-80"
                     onClick={() => navigate("/auth/login")}
                   >
                     Đăng nhập

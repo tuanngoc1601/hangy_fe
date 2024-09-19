@@ -116,7 +116,7 @@ body {
 
 /* When the checkbox is checked, add a primary background */
 .checkbox-container input:checked ~ .checkmark {
-  background-color: #ee4e2e;
+  background-color: #1c95c9;
   color: white;
 }
 

@@ -91,7 +91,7 @@ export default function Header() {
           </div>
         ) : (
           <button
-            className="px-4 py-2 rounded-md border outline-none flex items-center text-center text-base bg-transparent shadow-sm bg-[#ee4e2e]"
+            className="px-4 py-2 rounded-md border outline-none flex items-center text-center text-base bg-transparent shadow-sm bg-primary"
             onClick={() => navigate("/auth/login")}
           >
             Đăng nhập
