@@ -77,7 +77,7 @@ export default function CartPage() {
       <div className="mt-12 mb-12 bg-white p-7 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
-            <div className="bg-[#ee4d2d] h-6 w-3 rounded-sm"></div>
+            <div className="bg-primary h-6 w-3 rounded-sm"></div>
             <h3 className="text-2xl font-semibold uppercase text-[#0000008a]">
               Có thể bạn cũng thích
             </h3>

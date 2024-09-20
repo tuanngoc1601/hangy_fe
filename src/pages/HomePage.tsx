@@ -48,7 +48,7 @@ export default function HomePage() {
             className="flex items-center justify-start gap-10"
           >
             <div className="flex items-center justify-start">
-              <div className="bg-[#ee4d2d] h-8 w-3 rounded-sm mr-4"></div>
+              <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
               <h3 className="text-4xl font-semibold">Flash Sales</h3>
             </div>
             <CountdownTime />
@@ -88,7 +88,7 @@ export default function HomePage() {
             variants={typographyVariant}
             className="flex items-center justify-start"
           >
-            <div className="bg-[#ee4d2d] h-8 w-3 rounded-sm mr-4"></div>
+            <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
             <h2 className="text-4xl font-semibold">Sản phẩm bán chạy nhất</h2>
           </motion.div>
           <motion.div
@@ -118,7 +118,7 @@ export default function HomePage() {
             variants={typographyVariant}
             className="flex items-center justify-start"
           >
-            <div className="bg-[#ee4d2d] h-8 w-3 rounded-sm mr-4"></div>
+            <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
             <h2 className="text-4xl font-semibold">Combo sản phẩm</h2>
           </motion.div>
           <motion.div

@@ -2,10 +2,14 @@ import useHangyStore from "../../lib/useStore";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Avatar, LogoHangy } from "../../assets";
+import { useRef, useState } from "react";
+import UserDropdown from "../dropdown/UserDropdown";
 
 export default function Header() {
   const navigate = useNavigate();
   const access_token = useHangyStore((state) => state.access_token);
+  const [isMenu, setIsMenu] = useState<boolean>(false);
+  const userRef = useRef<HTMLDivElement | null>(null);
   return (
     <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
       <div className="cursor-pointer" onClick={() => navigate("/")}>
@@ -86,8 +90,20 @@ export default function Header() {
           </div>
         </div>
         {access_token ? (
-          <div className="w-9 h-9 rounded-full cursor-pointer overflow-hidden flex items-center justify-center">
-            <img src={Avatar} alt="" className="w-full h-full object-cover" />
+          <div className="relative">
+            <div
+              ref={userRef}
+              id="dropdownDividerButton"
+              data-dropdown-toggle="dropdownDivider"
+              className="w-9 h-9 rounded-full cursor-pointer overflow-hidden flex items-center justify-center"
+              onMouseDown={(event: React.MouseEvent) => {
+                event.stopPropagation();
+                setIsMenu(!isMenu);
+              }}
+            >
+              <img src={Avatar} alt="" className="w-full h-full object-cover" />
+            </div>
+            {isMenu && <UserDropdown ref={userRef} setIsMenu={setIsMenu} />}
           </div>
         ) : (
           <button

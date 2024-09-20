@@ -10,7 +10,7 @@ const Feature = () => {
         viewport={{ once: true }}
         className="flex items-center justify-start"
       >
-        <div className="bg-[#ee4d2d] h-8 w-3 rounded-sm mr-4"></div>
+        <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
         <h2 className="text-4xl font-semibold">Hàng mới về</h2>
       </motion.div>
       <div className="grid grid-cols-2 gap-8 mt-8">
