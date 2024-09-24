@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
 import { Swiper as SwiperType } from "swiper";
-import { useNavigate } from "react-router-dom";
-import { useAuthLogout } from "../apis/auth";
-import useHangyStore from "../lib/useStore";
 import Container from "../components/layout/Container";
 import { Banner3 } from "../assets";
 import { useRef } from "react";
@@ -16,25 +13,9 @@ import SwiperSlider from "../components/SwiperSlider";
 import { buttonVariant, typographyVariant } from "../lib/variants";
 
 export default function HomePage() {
-  const { dispatch: useLogoutAction } = useAuthLogout();
-  const setToken = useHangyStore((state) => state.setToken);
-  const navigate = useNavigate();
   const swiperFlashSale = useRef<SwiperType>();
   const swiperBestSeller = useRef<SwiperType>();
   const swiperCombos = useRef<SwiperType>();
-  function onLogoutSubmit() {
-    useLogoutAction().then((resp) => {
-      if (!resp.data) {
-        console.log("Something went wrong!");
-        return;
-      }
-      setToken("");
-      useHangyStore.setState({
-        refresh_token: "",
-      });
-      navigate("/auth/login", { replace: true });
-    });
-  }
   return (
     <Container>
       <SwiperBanner />
@@ -140,12 +121,6 @@ export default function HomePage() {
       <div className="w-full flex justify-center">
         <Services />
       </div>
-      <button
-        className="px-4 py-2 bg-stone-500 text-lg rounded-md outline-none hidden"
-        onClick={() => onLogoutSubmit()}
-      >
-        Logout
-      </button>
     </Container>
   );
 }
