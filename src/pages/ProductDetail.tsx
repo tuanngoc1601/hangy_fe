@@ -32,7 +32,16 @@ export default function ProductDetail() {
   const swiperImgSlide = useRef<SwiperType>();
   const navigate = useNavigate();
   const [quantity, setQuantity] = useState<number>(1);
-  const [subId, setSubId] = useState<string>("");
+  const [subId, setSubId] = useState<string | null>(null);
+  const [imgPreview, setImgPreview] = useState<string>(
+    "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzect0xybkipaf"
+  );
+  function addToCart() {
+    if (product?.sub_products && !subId) {
+      return;
+    }
+    
+  }
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
@@ -50,9 +59,7 @@ export default function ProductDetail() {
         <section className="p-[15px] shrink-0">
           <div>
             <img
-              src={
-                "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzect0xybkipaf"
-              }
+              src={imgPreview}
               alt=""
               className="w-[450px] h-[450px] object-contain cursor-pointer"
             />
@@ -68,7 +75,14 @@ export default function ProductDetail() {
                 }}
               >
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lz002z74r4ul7e_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lz002z74r4ul7e_tn"
@@ -80,7 +94,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
@@ -92,7 +113,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
@@ -104,7 +132,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className=" w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className=" w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1ltzof2b_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1ltzof2b_tn"
@@ -116,7 +151,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lsl3z24_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lsl3z24_tn"
@@ -128,7 +170,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lve8vfd_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lve8vfd_tn"
@@ -140,7 +189,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838ikosm7f1_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838ikosm7f1_tn"
@@ -152,7 +208,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838iknduned_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838iknduned_tn"
@@ -164,7 +227,14 @@ export default function ProductDetail() {
                   </div>
                 </SwiperSlide>
                 <SwiperSlide>
-                  <div className="w-[92px] h-[92px] p-[5px]">
+                  <div
+                    className="w-[92px] h-[92px] p-[5px]"
+                    onMouseOver={() =>
+                      setImgPreview(
+                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838il2u3je8_tn"
+                      )
+                    }
+                  >
                     <div className="relative group w-full h-full cursor-pointer">
                       <img
                         src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838il2u3je8_tn"
@@ -402,6 +472,7 @@ export default function ProductDetail() {
                 src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/b96050554b3be4feea08.svg"
                 alt="icon-add-to-cart"
                 className="w-5 h-5"
+                onClick={() => addToCart()}
               />
               Thêm vào giỏ hàng
             </button>

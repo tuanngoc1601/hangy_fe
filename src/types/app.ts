@@ -62,3 +62,13 @@ export interface ProductItem {
   image_url: string;
   sub_products: SubProductType[];
 }
+
+export interface CartItem {
+  id: string;
+  cart_id: string;
+  product_id: string;
+  sub_product_id: string;
+  quantity: number;
+  price: number;
+  amount: number;
+}

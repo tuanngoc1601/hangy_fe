@@ -4,12 +4,14 @@ import { HiOutlineShoppingBag } from "react-icons/hi";
 import { Avatar, LogoHangy } from "../../assets";
 import { useRef, useState } from "react";
 import UserDropdown from "../dropdown/UserDropdown";
+import { useGetCart } from "../../apis/web";
 
 export default function Header() {
   const navigate = useNavigate();
   const access_token = useHangyStore((state) => state.access_token);
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const userRef = useRef<HTMLDivElement | null>(null);
+  const { data: cart } = useGetCart();
   return (
     <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
       <div className="cursor-pointer" onClick={() => navigate("/")}>
@@ -85,9 +87,11 @@ export default function Header() {
           onClick={() => navigate("/cart")}
         >
           <HiOutlineShoppingBag className="text-3xl text-textColor" />
-          <div className="h-5 w-5 rounded-full bg-[#1c95c9] flex items-center justify-center absolute -top-1.5 -right-1">
-            <p className="text-white text-sm font-semibold">3</p>
-          </div>
+          {!!cart?.length && (
+            <div className="h-5 w-5 rounded-full bg-[#1c95c9] flex items-center justify-center absolute -top-1.5 -right-1">
+              <p className="text-white text-sm font-semibold">{cart?.length}</p>
+            </div>
+          )}
         </div>
         {access_token ? (
           <div className="relative">
