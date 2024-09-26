@@ -28,7 +28,7 @@ export default function Header() {
               }
             >
               <div className="flex h-full items-center text-center px-4 bg-white">
-                Săn Deal
+                Trang chủ
               </div>
             </NavLink>
           </li>
@@ -43,7 +43,7 @@ export default function Header() {
               }
             >
               <div className="flex h-full items-center text-center px-4 bg-white">
-                Bài viết
+                Sản phẩm
               </div>
             </NavLink>
           </li>

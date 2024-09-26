@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { Swiper as SwiperType } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -19,13 +19,20 @@ import CertificateImg from "../components/icons/support/certification.png";
 import ShipImg from "../components/icons/support/ship.png";
 import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import ArrowImgIcon from "../components/icons/ArrowImgIcon";
 import HeartIcon from "../components/icons/HeartIcon";
+import { useGetProductDetail } from "../apis/web";
+import clsx from "clsx";
 
 export default function ProductDetail() {
+  const { slug } = useParams();
+  const { data: product } = useGetProductDetail(slug || "");
   const swiperRelated = useRef<SwiperType>();
   const swiperImgSlide = useRef<SwiperType>();
+  const navigate = useNavigate();
+  const [quantity, setQuantity] = useState<number>(1);
+  const [subId, setSubId] = useState<string>("");
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
@@ -37,10 +44,7 @@ export default function ProductDetail() {
           Sản phẩm
         </Link>
         <BreadcrumbIcon />
-        <span>
-          Nồi Chiên Không Dầu Lock&Lock Super Jumbo Air Fryer 7.2L Màu đen
-          EJF296BLK
-        </span>
+        <span>{product?.name}</span>
       </div>
       <div className="mt-5 w-full flex flex-row bg-white">
         <section className="p-[15px] shrink-0">
@@ -203,8 +207,7 @@ export default function ProductDetail() {
                 alt=""
                 className="w-[30px] h-[16px] mr-2 mb-0.5 inline-block"
               />
-              Máy tăm nước HANGY HG23 và HF-2 nâng cấp chống thấm nước [BẢO HÀNH
-              ĐỔI MỚI 12 THÁNG - KÈM CỦ SẠC]
+              {product?.name}
             </h3>
             <div className="flex w-full items-center mt-[10px]">
               <div className="text-[#d0011b] flex items-center gap-2 font-medium pe-[15px] border-e">
@@ -227,7 +230,7 @@ export default function ProductDetail() {
               </div>
               <div className="ps-[20px] flex items-center gap-2 font-medium">
                 <span className="text-[#222] me-[5px] border-b border-[#555] ">
-                  124,9k
+                  {product?.sold_quantity}
                 </span>
                 <span className="py-1 me-[5px] text-[#767676] text-sm capitalize">
                   Đã bán
@@ -254,10 +257,18 @@ export default function ProductDetail() {
             </div>
             <div className="h-[66px] bg-[#fafafa] px-5 py-[15px] flex items-center justify-start gap-4">
               <span className="text-[#929292] text-base line-through font-medium">
-                ₫1.550.000
+                ₫
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(product?.real_price || 0)}
               </span>
               <span className="text-[#d0011b] text-3xl font-bold">
-                ₫680.000
+                ₫
+                {new Intl.NumberFormat("vi-VN", {
+                  style: "currency",
+                  currency: "VND",
+                }).format(product?.daily_price || 0)}
               </span>
               <span className="bg-[#d0011b] rounded-sm text-white text-xs font-bold py-0.5 px-1 uppercase">
                 56% giảm
@@ -320,117 +331,32 @@ export default function ProductDetail() {
                   </div>
                 </div>
               </div>
-              <div className="my-6 flex items-start justify-start gap-6 text-sm">
-                <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
-                  Phân loại
-                </h3>
-                <div className="flex flex-wrap items-center max-h-[220px] overflow-y-scroll text-[#222] font-medium w-full gap-2 text-sm">
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 WhiteB Nâng Cấp</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 WhiteB Nâng Cấp</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 Black Nâng Cấp</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 Mix Nâng Cấp</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 WhiteB + BCĐ HY23</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HF9P - White Black</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HF9PWB + HY23 Pro</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 WB TẶNG QUẠT</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 BLACK TẶNG QUẠT</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG23 MIX TẶNG QUẠT</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG9P - White</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HG9P - Black</p>
-                  </div>
-                  <div className="p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-black/80 rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]">
-                    <img
-                      src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                      alt=""
-                      className="w-6 h-6"
-                    />
-                    <p>HF2 - Black</p>
+              {product?.sub_products && (
+                <div className="my-6 flex items-start justify-start gap-6 text-sm">
+                  <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
+                    Phân loại
+                  </h3>
+                  <div className="flex flex-wrap items-center max-h-[220px] overflow-y-scroll text-[#222] font-medium w-full gap-2 text-sm">
+                    {product.sub_products.map((sub) => (
+                      <div
+                        key={sub.id}
+                        className={clsx(
+                          "p-2 h-10 min-w-[80px] flex items-center justify-start border border-[#00000017] text-[#000000cc] rounded-sm cursor-pointer visible text-left gap-2 hover:border-[#d0011b] hover:text-[#d0011b]",
+                          subId === sub.id && "border-[#d0011b] text-[#d0011b]"
+                        )}
+                        onClick={() => setSubId(sub.id)}
+                      >
+                        <img
+                          src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
+                          alt=""
+                          className="w-6 h-6"
+                        />
+                        <p>{sub.name}</p>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              </div>
+              )}
               <div className="mt-4 flex items-center gap-6 text-sm">
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Số lượng
@@ -440,24 +366,28 @@ export default function ProductDetail() {
                     <button
                       type="button"
                       className="flex h-8 w-8 outline-none font-light cursor-pointer rounded-s-sm border border-black/10 justify-center items-center pb-0.5"
+                      onClick={() => {
+                        if (quantity > 1) setQuantity((prev) => prev - 1);
+                      }}
                     >
                       -
                     </button>
                     <input
                       type="text"
-                      value={1}
+                      value={quantity}
                       name="amount"
                       className="border border-black/10 border-s-0 border-e-0 text-base h-8 w-[50px] text-center cursor-text bg-transparent font-medium flex items-center outline-none"
                     />
                     <button
                       type="button"
                       className="flex h-8 w-8 outline-none font-light cursor-pointer rounded-e-sm border border-black/10 items-center justify-center pb-0.5"
+                      onClick={() => setQuantity((prev) => prev + 1)}
                     >
                       +
                     </button>
                   </div>
                   <span className="text-[#757575] text-sm">
-                    62 sản phẩm sẵn có
+                    {product?.stock_quantity} sản phẩm sẵn có
                   </span>
                 </div>
               </div>
@@ -507,7 +437,9 @@ export default function ProductDetail() {
             <div className="bg-primary h-8 w-3 rounded-sm"></div>
             <h3 className="text-4xl font-semibold">Sản phẩm liên quan</h3>
           </div>
-          <Button className="text-white">Xem tất cả</Button>
+          <Button className="text-white" action={() => navigate("/products")}>
+            Xem tất cả
+          </Button>
         </div>
         <SwiperSlider
           swiperRef={swiperRelated}

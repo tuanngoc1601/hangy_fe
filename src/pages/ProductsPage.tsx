@@ -1,9 +1,18 @@
+import { useState } from "react";
+import { useGetCategories, useGetProducts } from "../apis/web";
 import ArrowIcon from "../components/icons/ArrowIcon";
 import BarIcon from "../components/icons/BarIcon";
 import Container from "../components/layout/Container";
 import ProductItem from "../components/ProductItem";
+import clsx from "clsx";
+import useDebounce from "../hooks/useDebounce";
 
 export default function ProductsPage() {
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [type, setType] = useState<string>("");
+  const searchDebounce = useDebounce<string>(searchTerm.trim());
+  const { data: categories } = useGetCategories();
+  const { data: products } = useGetProducts(type, searchDebounce);
   return (
     <Container>
       <div className="w-full flex flex-row items-start my-8 gap-[22px]">
@@ -14,27 +23,27 @@ export default function ProductsPage() {
           </div>
           <div>
             <ul className="text-sm text-black/80 font-semibold leading-4 overflow-hidden">
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
+              <li
+                className={clsx(
+                  "px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase hover:opacity-70",
+                  type === "" && "text-primary"
+                )}
+                onClick={() => setType("")}
+              >
                 Sản phẩm
               </li>
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
-                Mua là có quà
-              </li>
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
-                Máy tăm nước
-              </li>
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
-                Bàn chải điện
-              </li>
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
-                COMBO 💥 SALE SIÊU CHẤT
-              </li>
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
-                💥 FLASH SALE
-              </li>
-              <li className="px-2 py-2.5 line-clamp-3 cursor-pointer max-h-12 uppercase">
-                Phụ kiện máy tăm nước
-              </li>
+              {categories?.map((category) => (
+                <li
+                  key={category.id}
+                  className={clsx(
+                    "px-2 py-2.5 line-clamp-3 cursor-pointer max-h-16 uppercase hover:opacity-70",
+                    type === category.id && "text-primary"
+                  )}
+                  onClick={() => setType(category.id)}
+                >
+                  {category.name}
+                </li>
+              ))}
             </ul>
           </div>
         </aside>
@@ -62,27 +71,22 @@ export default function ProductsPage() {
                 type="text"
                 placeholder="Tìm kiếm"
                 name="search"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-[200px] bg-white h-[34px] px-2 py-1 border rounded-sm outline-none text-xs text-[#000000aa]"
               />
             </div>
           </div>
           <div className="mt-5">
             <div className="grid grid-cols-5 gap-2">
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
-              <ProductItem />
+              {products?.map((product) => (
+                <ProductItem
+                  key={product.id}
+                  name={product.name}
+                  slug={product.slug}
+                  daily_price={product.daily_price}
+                />
+              ))}
             </div>
             {/* pagination */}
             <div className="flex items-center justify-center gap-3 text-black/40 text-lg mt-8">
