@@ -1,8 +1,9 @@
 import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 import { fetchTyped, useFetchTyped } from "./apiv1";
-import { CartItem, CategoryType, ProductItem } from "../types/app";
+import { CartPayload, CartItem, CategoryType, ProductItem } from "../types/app";
 import useHangyStore from "../lib/useStore";
+import useSWRMutation from "swr/mutation";
 
 export function useGetCategories() {
   const { data, error, isLoading } = useSWRImmutable(
@@ -60,4 +61,22 @@ export function useGetCart() {
   );
 
   return { data: data?.data, isLoading, error, mutate };
+}
+
+export function useAddToCart() {
+  const useFetch = useFetchTyped<string>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger } = useSWRMutation(
+    access_token ? "/api/v1/carts/add-cart" : null,
+    (url: string, { arg }: { arg: CartPayload }) =>
+      useFetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(arg),
+      })
+  );
+
+  return { dispatch: trigger };
 }

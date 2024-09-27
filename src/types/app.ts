@@ -65,7 +65,14 @@ export interface ProductItem {
 
 export interface CartItem {
   id: string;
-  cart_id: string;
+  quantity: number;
+  price: number;
+  amount: number;
+  product: ProductItem;
+  sub_product: SubProductType;
+}
+
+export interface CartPayload {
   product_id: string;
   sub_product_id: string;
   quantity: number;

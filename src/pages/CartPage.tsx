@@ -5,10 +5,12 @@ import Checkbox from "../components/common/Checkbox";
 import VoucherIcon from "../components/icons/VoucherIcon";
 import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
+import { useGetCart } from "../apis/web";
 
 export default function CartPage() {
+  const { data: carts } = useGetCart();
   const swiperProducts = useRef<SwiperType>();
   const navigate = useNavigate();
   return (
@@ -31,14 +33,20 @@ export default function CartPage() {
           <div className="w-[10.43557%] text-center">Số tiền</div>
           <div className="w-[12.70417%] text-center">Thao tác</div>
         </div>
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
-        <CartItem />
+        {!!carts?.length &&
+          carts?.map((item) => (
+            <CartItem
+              key={item.id}
+              name={item.product.name}
+              subProductName={item.sub_product?.name}
+              quantity={item.quantity}
+              real_price={
+                item.sub_product?.real_price || item.product.real_price
+              }
+              price={item.price}
+              amount={item.amount}
+            />
+          ))}
       </div>
       <section className="sticky z-30 bg-white text-base font-medium w-full mt-5 text-[#222222] bottom-0 shadow-[0_-1px_3px_-1px_rgba(0,0,0,0.3)]">
         <div className="flex items-center justify-end py-3 gap-52">
@@ -55,7 +63,9 @@ export default function CartPage() {
             <div className="flex min-w-[58px] ps-3 pe-5 items-center">
               <Checkbox />
             </div>
-            <span className="cursor-pointer">Chọn tất cả (8)</span>
+            <span className="cursor-pointer">
+              Chọn tất cả ({carts?.length})
+            </span>
             <span className="ms-8 cursor-pointer hover:text-primary">Xoá</span>
           </div>
           <div className="flex items-center justify-end gap-2">
@@ -96,7 +106,22 @@ export default function CartPage() {
   );
 }
 
-const CartItem = () => {
+const CartItem = ({
+  name,
+  subProductName,
+  quantity,
+  real_price,
+  price,
+  amount,
+}: {
+  name: string;
+  subProductName: string | null;
+  quantity: number;
+  real_price: number;
+  price: number;
+  amount: number;
+}) => {
+  const [num, setNum] = useState<number>(quantity);
   return (
     <section className="text-sm text-[#000000de] font-medium bg-white">
       <div className="pt-[15px] pb-5 px-5 mt-[15px] flex items-center">
@@ -111,7 +136,7 @@ const CartItem = () => {
           />
           <div className="flex overflow-hidden leading-4 pe-5 ps-2.5 flex-col items-start">
             <h3 className="mb-[5px] max-h-8 line-clamp-2 leading-4 cursor-pointer">
-              Áo Cardigan Nam Áo Khoác Ngoài Chất Liệu Dày Dặn Sang Trọng
+              {name}
             </h3>
             <span className=" text-primary border border-primary rounded-sm block text-[10px] leading-3 mb-[5px] py-0.5 px-1">
               Đổi trả miễn phí 7 ngày
@@ -124,38 +149,68 @@ const CartItem = () => {
           </div>
         </div>
         <div className="w-[17.24138%] flex flex-col cursor-pointer text-[#0000008a]">
-          <div className="flex text-left capitalize items-center gap-2">
-            Phân loại hàng
-            <div className="border-b-0 border-l-4 border-r-4 border-transparent border-t-[5px] border-t-[#0000008a] mr-2.5"></div>
-          </div>
-          <div className="overflow-hidden line-clamp-2 mt-[5px]">Xám, XL</div>
+          {subProductName && (
+            <>
+              <div className="flex text-left capitalize items-center gap-2">
+                Phân loại hàng
+                <div className="border-b-0 border-l-4 border-r-4 border-transparent border-t-[5px] border-t-[#0000008a] mr-2.5"></div>
+              </div>
+              <div className="overflow-hidden line-clamp-2 mt-[5px]">
+                {subProductName}
+              </div>
+            </>
+          )}
         </div>
         <div className="w-[15.88022%] flex items-center justify-center gap-2.5">
-          <span className="line-through text-[#0000008a]">₫235.000</span>
-          <span className="">₫119.000</span>
+          <span className="line-through text-[#0000008a]">
+            ₫
+            {new Intl.NumberFormat("vi-VN", {
+              // style: "currency",
+              currency: "VND",
+            }).format(real_price)}
+          </span>
+          <span className="">
+            ₫
+            {new Intl.NumberFormat("vi-VN", {
+              // style: "currency",
+              currency: "VND",
+            }).format(price)}
+          </span>
         </div>
         <div className="text-black/80 text-2xl font-light flex items-center justify-center w-[12.4265%]">
           <button
             type="button"
             className="flex h-8 w-8 outline-none font-light cursor-pointer rounded-s-sm border border-black/10 justify-center items-center pb-0.5"
+            onClick={() => {
+              if (num <= 1) return;
+              setNum((prev) => prev - 1);
+            }}
           >
             -
           </button>
           <input
             type="text"
-            value={1}
+            value={num}
             name="amount"
+            // onChange={(e) => setNum(e.target.value)}
             className="border border-black/10 border-s-0 border-e-0 text-base h-8 w-[50px] text-center cursor-text bg-transparent font-medium flex items-center outline-none"
           />
           <button
             type="button"
             className="flex h-8 w-8 outline-none font-light cursor-pointer rounded-e-sm border border-black/10 items-center justify-center pb-0.5"
+            onClick={() => setNum((prev) => prev + 1)}
           >
             +
           </button>
         </div>
         <div className="w-[10.43557%] flex items-center justify-center">
-          <span className="text-primary">₫119.000</span>
+          <span className="text-primary">
+            ₫
+            {new Intl.NumberFormat("vi-VN", {
+              // style: "currency",
+              currency: "VND",
+            }).format(amount)}
+          </span>
         </div>
         <div className="w-[12.70417%] flex items-center justify-center">
           <span className="hover:text-primary cursor-pointer">Xoá</span>

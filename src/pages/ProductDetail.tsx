@@ -22,12 +22,15 @@ import SwiperSlider from "../components/SwiperSlider";
 import { useRef, useState } from "react";
 import ArrowImgIcon from "../components/icons/ArrowImgIcon";
 import HeartIcon from "../components/icons/HeartIcon";
-import { useGetProductDetail } from "../apis/web";
+import { useAddToCart, useGetCart, useGetProductDetail } from "../apis/web";
 import clsx from "clsx";
+import { AppError } from "../apis/error";
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const { data: product } = useGetProductDetail(slug || "");
+  const { dispatch: useAddCart } = useAddToCart();
+  const { mutate } = useGetCart();
   const swiperRelated = useRef<SwiperType>();
   const swiperImgSlide = useRef<SwiperType>();
   const navigate = useNavigate();
@@ -38,9 +41,33 @@ export default function ProductDetail() {
   );
   function addToCart() {
     if (product?.sub_products && !subId) {
+      console.log("Choose sub product please!");
       return;
     }
-    
+    const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
+    const price = subProduct?.daily_price
+      ? subProduct.daily_price
+      : product?.daily_price || 0;
+    useAddCart({
+      product_id: product?.id || "",
+      sub_product_id: subId || "",
+      quantity: quantity,
+      price: price,
+      amount: price * quantity,
+    })
+      .then((resp) => {
+        if (!resp.data) {
+          console.log("something went wrong!");
+          return;
+        }
+        mutate();
+        navigate("/cart");
+      })
+      .catch((err) => {
+        if (err instanceof AppError) {
+          console.error(err);
+        }
+      });
   }
   return (
     <Container>
@@ -467,12 +494,12 @@ export default function ProductDetail() {
             <button
               type="button"
               className="flex items-center justify-center capitalize bg-[#d0011b14] border border-[#d0011b] px-5 h-12 gap-2 text-[#d0011b] rounded-sm hover:bg-[#f1b4bb2a]"
+              onClick={() => addToCart()}
             >
               <img
                 src="https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/productdetailspage/b96050554b3be4feea08.svg"
                 alt="icon-add-to-cart"
                 className="w-5 h-5"
-                onClick={() => addToCart()}
               />
               Thêm vào giỏ hàng
             </button>
