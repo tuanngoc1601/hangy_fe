@@ -66,7 +66,7 @@ export default function Header() {
           </li>
           <li className="h-full cursor-pointer">
             <NavLink
-              to="/sale"
+              to="/contact"
               className={({ isActive }: { isActive: boolean }) =>
                 [
                   "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
@@ -75,7 +75,7 @@ export default function Header() {
               }
             >
               <div className="flex h-full items-center text-center px-4 bg-white">
-                Hỏi đáp với Bác sĩ
+                Liên hệ
               </div>
             </NavLink>
           </li>

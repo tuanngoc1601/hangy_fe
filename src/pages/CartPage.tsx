@@ -5,9 +5,10 @@ import Checkbox from "../components/common/Checkbox";
 import VoucherIcon from "../components/icons/VoucherIcon";
 import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Swiper as SwiperType } from "swiper";
-import { useGetCart } from "../apis/web";
+import { useDeleteCartItem, useGetCart, useUpdateQuantity } from "../apis/web";
+import { AppError } from "../apis/error";
 
 export default function CartPage() {
   const { data: carts } = useGetCart();
@@ -37,7 +38,10 @@ export default function CartPage() {
           carts?.map((item) => (
             <CartItem
               key={item.id}
+              id={item.id}
+              productId={item.product.id}
               name={item.product.name}
+              subProductId={item.sub_product?.id}
               subProductName={item.sub_product?.name}
               quantity={item.quantity}
               real_price={
@@ -107,21 +111,54 @@ export default function CartPage() {
 }
 
 const CartItem = ({
+  id,
+  productId,
   name,
+  subProductId,
   subProductName,
   quantity,
   real_price,
   price,
   amount,
 }: {
+  id: string;
+  productId: string;
   name: string;
+  subProductId: string | null;
   subProductName: string | null;
   quantity: number;
   real_price: number;
   price: number;
   amount: number;
 }) => {
-  const [num, setNum] = useState<number>(quantity);
+  // const [num, setNum] = useState<number>(quantity);
+  const { mutate } = useGetCart();
+  const { dispatch: useDeleteItem } = useDeleteCartItem(id);
+  const { dispatch: increaseAction } = useUpdateQuantity(
+    "increase",
+    productId,
+    subProductId
+  );
+  const { dispatch: reduceAction } = useUpdateQuantity(
+    "reduce",
+    productId,
+    subProductId
+  );
+  function deleteCartItem() {
+    useDeleteItem()
+      .then((resp) => {
+        if (!resp.data) {
+          console.log("something went wrong!");
+          return;
+        }
+        mutate();
+      })
+      .catch((err) => {
+        if (err instanceof AppError) {
+          console.error(err);
+        }
+      });
+  }
   return (
     <section className="text-sm text-[#000000de] font-medium bg-white">
       <div className="pt-[15px] pb-5 px-5 mt-[15px] flex items-center">
@@ -182,15 +219,26 @@ const CartItem = ({
             type="button"
             className="flex h-8 w-8 outline-none font-light cursor-pointer rounded-s-sm border border-black/10 justify-center items-center pb-0.5"
             onClick={() => {
-              if (num <= 1) return;
-              setNum((prev) => prev - 1);
+              reduceAction()
+                .then((resp) => {
+                  if (!resp?.data) {
+                    console.log("something went wrong!");
+                    return;
+                  }
+                  mutate();
+                })
+                .catch((err) => {
+                  if (err instanceof AppError) {
+                    console.error(err);
+                  }
+                });
             }}
           >
             -
           </button>
           <input
             type="text"
-            value={num}
+            value={quantity}
             name="amount"
             // onChange={(e) => setNum(e.target.value)}
             className="border border-black/10 border-s-0 border-e-0 text-base h-8 w-[50px] text-center cursor-text bg-transparent font-medium flex items-center outline-none"
@@ -198,7 +246,21 @@ const CartItem = ({
           <button
             type="button"
             className="flex h-8 w-8 outline-none font-light cursor-pointer rounded-e-sm border border-black/10 items-center justify-center pb-0.5"
-            onClick={() => setNum((prev) => prev + 1)}
+            onClick={() => {
+              increaseAction()
+                .then((resp) => {
+                  if (!resp?.data) {
+                    console.log("something went wrong!");
+                    return;
+                  }
+                  mutate();
+                })
+                .catch((err) => {
+                  if (err instanceof AppError) {
+                    console.error(err);
+                  }
+                });
+            }}
           >
             +
           </button>
@@ -213,7 +275,12 @@ const CartItem = ({
           </span>
         </div>
         <div className="w-[12.70417%] flex items-center justify-center">
-          <span className="hover:text-primary cursor-pointer">Xoá</span>
+          <span
+            className="hover:text-primary cursor-pointer"
+            onClick={() => deleteCartItem()}
+          >
+            Xoá
+          </span>
         </div>
       </div>
     </section>

@@ -80,3 +80,63 @@ export function useAddToCart() {
 
   return { dispatch: trigger };
 }
+
+export function useUpdateQuantity(
+  type: string,
+  productId: string,
+  subProductId: string | null
+) {
+  const useFetch = useFetchTyped<string>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger } = useSWRMutation(
+    access_token
+      ? `/api/v1/carts/update/${type}/${productId}/${subProductId}`
+      : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+  );
+
+  return { dispatch: trigger };
+}
+
+export function useUpdateSubProductItem(
+  productId: string,
+  subProductId: string | null
+) {
+  const useFetch = useFetchTyped<string>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger } = useSWRMutation(
+    access_token ? `/api/v1/carts/update/${productId}/${subProductId}` : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+  );
+
+  return { dispatch: trigger };
+}
+
+export function useDeleteCartItem(cartItemId: string) {
+  const useFetch = useFetchTyped<string>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger } = useSWRMutation(
+    access_token ? `/api/v1/carts/delete/${cartItemId}` : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+  );
+
+  return { dispatch: trigger };
+}
