@@ -107,7 +107,7 @@ export default function Header() {
             >
               <img src={Avatar} alt="" className="w-full h-full object-cover" />
             </div>
-            {isMenu && <UserDropdown ref={userRef} setIsMenu={setIsMenu} />}
+            {isMenu && <UserDropdown setIsOpenDropdown={setIsMenu} />}
           </div>
         ) : (
           <button

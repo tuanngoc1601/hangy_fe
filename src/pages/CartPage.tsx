@@ -5,10 +5,13 @@ import Checkbox from "../components/common/Checkbox";
 import VoucherIcon from "../components/icons/VoucherIcon";
 import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { useDeleteCartItem, useGetCart, useUpdateQuantity } from "../apis/web";
 import { AppError } from "../apis/error";
+import { EmptyCart } from "../assets";
+import { ProductItem, SubProductType } from "../types/app";
+import VariantDropdown from "../components/dropdown/VariantDropdown";
 
 export default function CartPage() {
   const { data: carts } = useGetCart();
@@ -23,71 +26,88 @@ export default function CartPage() {
         <BreadcrumbIcon />
         <span>Giỏ hàng</span>
       </div>
-      <div className="mt-5 w-full">
-        <div className="capitalize flex items-center px-5 text-sm bg-white h-[55px] rounded text-[#888888] font-medium mb-3">
-          <div className="flex min-w-[58px] ps-3 pe-5 items-center">
-            <Checkbox />
-          </div>
-          <div className="w-[46.27949%] text-[#000000cc]">Sản phẩm</div>
-          <div className="w-[15.88022%] text-center">Đơn giá</div>
-          <div className="w-[12.4265%] text-center">Số lượng</div>
-          <div className="w-[10.43557%] text-center">Số tiền</div>
-          <div className="w-[12.70417%] text-center">Thao tác</div>
-        </div>
-        {!!carts?.length &&
-          carts?.map((item) => (
-            <CartItem
-              key={item.id}
-              id={item.id}
-              productId={item.product.id}
-              name={item.product.name}
-              subProductId={item.sub_product?.id}
-              subProductName={item.sub_product?.name}
-              quantity={item.quantity}
-              real_price={
-                item.sub_product?.real_price || item.product.real_price
-              }
-              price={item.price}
-              amount={item.amount}
-            />
-          ))}
-      </div>
-      <section className="sticky z-30 bg-white text-base font-medium w-full mt-5 text-[#222222] bottom-0 shadow-[0_-1px_3px_-1px_rgba(0,0,0,0.3)]">
-        <div className="flex items-center justify-end py-3 gap-52">
-          <div className="flex items-center gap-2">
-            <VoucherIcon />
-            <span>Hangy Voucher</span>
-          </div>
-          <span className="text-[#05a] cursor-pointer text-sm mr-7">
-            Chọn hoặc nhập mã
-          </span>
-        </div>
-        <div className="w-full flex flex-row items-center justify-between ps-5 py-3 pr-7 border-t border-dashed">
-          <div className="flex items-center justify-start">
-            <div className="flex min-w-[58px] ps-3 pe-5 items-center">
-              <Checkbox />
+      {carts && carts.length > 0 ? (
+        <>
+          <div className="mt-5 w-full">
+            <div className="capitalize flex items-center px-5 text-sm bg-white h-[55px] rounded text-[#888888] font-medium mb-3">
+              <div className="flex min-w-[58px] ps-3 pe-5 items-center">
+                <Checkbox />
+              </div>
+              <div className="w-[46.27949%] text-[#000000cc]">Sản phẩm</div>
+              <div className="w-[15.88022%] text-center">Đơn giá</div>
+              <div className="w-[12.4265%] text-center">Số lượng</div>
+              <div className="w-[10.43557%] text-center">Số tiền</div>
+              <div className="w-[12.70417%] text-center">Thao tác</div>
             </div>
-            <span className="cursor-pointer">
-              Chọn tất cả ({carts?.length})
-            </span>
-            <span className="ms-8 cursor-pointer hover:text-primary">Xoá</span>
+            {!!carts?.length &&
+              carts?.map((item) => (
+                <CartItem
+                  key={item.id}
+                  id={item.id}
+                  product={item.product}
+                  subProduct={item.sub_product}
+                  quantity={item.quantity}
+                  real_price={
+                    item.sub_product?.real_price || item.product.real_price
+                  }
+                  price={item.price}
+                  amount={item.amount}
+                />
+              ))}
           </div>
-          <div className="flex items-center justify-end gap-2">
-            <div className="flex items-center">
-              <span>Tổng thanh toán (0 Sản phẩm):</span>
-              <span className="text-primary text-2xl ms-[5px]">₫0</span>
+          <section className="sticky z-30 bg-white text-base font-medium w-full mt-5 text-[#222222] bottom-0 shadow-[0_-1px_3px_-1px_rgba(0,0,0,0.3)]">
+            <div className="flex items-center justify-end py-3 gap-52">
+              <div className="flex items-center gap-2">
+                <VoucherIcon />
+                <span>Hangy Voucher</span>
+              </div>
+              <span className="text-[#05a] cursor-pointer text-sm mr-7">
+                Chọn hoặc nhập mã
+              </span>
             </div>
-            <div>
-              <Button
-                className="capitalize font-light h-10 text-sm rounded-sm w-[210px] text-white"
-                action={() => navigate("/checkout")}
-              >
-                Mua hàng
-              </Button>
+            <div className="w-full flex flex-row items-center justify-between ps-5 py-3 pr-7 border-t border-dashed">
+              <div className="flex items-center justify-start">
+                <div className="flex min-w-[58px] ps-3 pe-5 items-center">
+                  <Checkbox />
+                </div>
+                <span className="cursor-pointer">
+                  Chọn tất cả ({carts?.length})
+                </span>
+                <span className="ms-8 cursor-pointer hover:text-primary">
+                  Xoá
+                </span>
+              </div>
+              <div className="flex items-center justify-end gap-2">
+                <div className="flex items-center">
+                  <span>Tổng thanh toán (0 Sản phẩm):</span>
+                  <span className="text-primary text-2xl ms-[5px]">₫0</span>
+                </div>
+                <div>
+                  <Button
+                    className="capitalize font-light h-10 text-sm rounded-sm w-[210px] text-white"
+                    action={() => navigate("/checkout")}
+                  >
+                    Mua hàng
+                  </Button>
+                </div>
+              </div>
             </div>
+          </section>
+        </>
+      ) : (
+        <div className="w-full bg-white mt-5 flex flex-col items-center py-8">
+          <img src={EmptyCart} alt="" className="w-[300px]" />
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-sm font-semibold">Giỏ hàng của bạn còn trống</p>
+            <Button
+              className="uppercase text-white rounded-sm"
+              action={() => navigate("/products")}
+            >
+              Mua ngay
+            </Button>
           </div>
         </div>
-      </section>
+      )}
       <div className="mt-12 mb-12 bg-white p-7 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
@@ -112,20 +132,16 @@ export default function CartPage() {
 
 const CartItem = ({
   id,
-  productId,
-  name,
-  subProductId,
-  subProductName,
+  product,
+  subProduct,
   quantity,
   real_price,
   price,
   amount,
 }: {
   id: string;
-  productId: string;
-  name: string;
-  subProductId: string | null;
-  subProductName: string | null;
+  product: ProductItem;
+  subProduct: SubProductType | null;
   quantity: number;
   real_price: number;
   price: number;
@@ -133,16 +149,17 @@ const CartItem = ({
 }) => {
   // const [num, setNum] = useState<number>(quantity);
   const { mutate } = useGetCart();
+  const [isOpenVariant, setIsOpenVariant] = useState<boolean>(false);
   const { dispatch: useDeleteItem } = useDeleteCartItem(id);
   const { dispatch: increaseAction } = useUpdateQuantity(
     "increase",
-    productId,
-    subProductId
+    product.id,
+    subProduct ? subProduct.id : null
   );
   const { dispatch: reduceAction } = useUpdateQuantity(
     "reduce",
-    productId,
-    subProductId
+    product.id,
+    subProduct ? subProduct.id : null
   );
   function deleteCartItem() {
     useDeleteItem()
@@ -173,7 +190,7 @@ const CartItem = ({
           />
           <div className="flex overflow-hidden leading-4 pe-5 ps-2.5 flex-col items-start">
             <h3 className="mb-[5px] max-h-8 line-clamp-2 leading-4 cursor-pointer">
-              {name}
+              {product.name}
             </h3>
             <span className=" text-primary border border-primary rounded-sm block text-[10px] leading-3 mb-[5px] py-0.5 px-1">
               Đổi trả miễn phí 7 ngày
@@ -185,16 +202,31 @@ const CartItem = ({
             />
           </div>
         </div>
-        <div className="w-[17.24138%] flex flex-col cursor-pointer text-[#0000008a]">
-          {subProductName && (
+        <div
+          className="w-[17.24138%] flex flex-col cursor-pointer text-[#0000008a] relative"
+          onMouseDown={(event: React.MouseEvent) => {
+            if (subProduct) {
+              event.stopPropagation();
+              setIsOpenVariant(!isOpenVariant);
+            }
+          }}
+        >
+          {subProduct && (
             <>
               <div className="flex text-left capitalize items-center gap-2">
                 Phân loại hàng
                 <div className="border-b-0 border-l-4 border-r-4 border-transparent border-t-[5px] border-t-[#0000008a] mr-2.5"></div>
               </div>
               <div className="overflow-hidden line-clamp-2 mt-[5px]">
-                {subProductName}
+                {subProduct.name}
               </div>
+              {isOpenVariant && (
+                <VariantDropdown
+                  product={product}
+                  subProduct={subProduct}
+                  setIsOpen={setIsOpenVariant}
+                />
+              )}
             </>
           )}
         </div>

@@ -69,12 +69,12 @@ export interface CartItem {
   price: number;
   amount: number;
   product: ProductItem;
-  sub_product: SubProductType;
+  sub_product: SubProductType | null;
 }
 
 export interface CartPayload {
   product_id: string;
-  sub_product_id: string;
+  sub_product_id: string | null;
   quantity: number;
   price: number;
   amount: number;

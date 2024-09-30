@@ -50,7 +50,7 @@ export default function ProductDetail() {
       : product?.daily_price || 0;
     useAddCart({
       product_id: product?.id || "",
-      sub_product_id: subId || "",
+      sub_product_id: subId,
       quantity: quantity,
       price: price,
       amount: price * quantity,
