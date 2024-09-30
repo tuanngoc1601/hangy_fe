@@ -2,9 +2,11 @@ import { ReactNode, useEffect, useRef } from "react";
 
 const Dropdown = ({
   children,
+  className,
   setIsOpenDropdown,
 }: {
   children: ReactNode;
+  className?: string;
   setIsOpenDropdown: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   const dropdownRef = useRef<HTMLDivElement | null>(null);
@@ -22,7 +24,11 @@ const Dropdown = ({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-  return <div ref={dropdownRef}>{children}</div>;
+  return (
+    <div ref={dropdownRef} className={className}>
+      {children}
+    </div>
+  );
 };
 
 export default Dropdown;

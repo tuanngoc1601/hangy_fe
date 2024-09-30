@@ -26,10 +26,13 @@ const UserDropdown = ({
     });
   }
   return (
-    <Dropdown setIsOpenDropdown={setIsOpenDropdown}>
+    <Dropdown
+      setIsOpenDropdown={setIsOpenDropdown}
+      className="z-50 rounded-lg shadow w-44 bg-white absolute right-0 top-12"
+    >
       <motion.div
-        id="dropdownDivider"
-        className="z-50 divide-y divide-gray-100 rounded-lg shadow w-44 bg-white absolute right-0 top-12"
+        id="dropdownVariant"
+        className="divide-y divide-gray-100"
         initial={{ opacity: 0, y: 30 }}
         animate={{
           opacity: 1,

@@ -202,23 +202,24 @@ const CartItem = ({
             />
           </div>
         </div>
-        <div
-          className="w-[17.24138%] flex flex-col cursor-pointer text-[#0000008a] relative"
-          onMouseDown={(event: React.MouseEvent) => {
-            if (subProduct) {
-              event.stopPropagation();
-              setIsOpenVariant(!isOpenVariant);
-            }
-          }}
-        >
+        <div className="w-[17.24138%] flex flex-col cursor-pointer text-[#0000008a]">
           {subProduct && (
-            <>
-              <div className="flex text-left capitalize items-center gap-2">
-                Phân loại hàng
-                <div className="border-b-0 border-l-4 border-r-4 border-transparent border-t-[5px] border-t-[#0000008a] mr-2.5"></div>
-              </div>
-              <div className="overflow-hidden line-clamp-2 mt-[5px]">
-                {subProduct.name}
+            <div className="relative" data-dropdown-toggle="dropdownVariant">
+              <div
+                onMouseDown={(event: React.MouseEvent) => {
+                  if (subProduct) {
+                    event.stopPropagation();
+                    setIsOpenVariant(!isOpenVariant);
+                  }
+                }}
+              >
+                <div className="flex text-left capitalize items-center gap-2">
+                  Phân loại hàng
+                  <div className="border-b-0 border-l-4 border-r-4 border-transparent border-t-[5px] border-t-[#0000008a] mr-2.5"></div>
+                </div>
+                <div className="overflow-hidden line-clamp-2 mt-[5px]">
+                  {subProduct.name}
+                </div>
               </div>
               {isOpenVariant && (
                 <VariantDropdown
@@ -227,7 +228,7 @@ const CartItem = ({
                   setIsOpen={setIsOpenVariant}
                 />
               )}
-            </>
+            </div>
           )}
         </div>
         <div className="w-[15.88022%] flex items-center justify-center gap-2.5">

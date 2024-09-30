@@ -112,12 +112,13 @@ export function useUpdateSubProductItem(
   const access_token = useHangyStore((state) => state.access_token);
   const { trigger } = useSWRMutation(
     access_token ? `/api/v1/carts/update/${productId}/${subProductId}` : null,
-    (url: string) =>
+    (url: string, { arg }: { arg: { sub: string } }) =>
       useFetch(url, {
         method: "PUT",
         headers: {
           Authorization: `Bearer ${access_token}`,
         },
+        body: JSON.stringify(arg),
       })
   );
 
