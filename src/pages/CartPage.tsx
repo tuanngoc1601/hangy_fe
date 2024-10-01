@@ -5,7 +5,7 @@ import Checkbox from "../components/common/Checkbox";
 import VoucherIcon from "../components/icons/VoucherIcon";
 import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
 import { useDeleteCartItem, useGetCart, useUpdateQuantity } from "../apis/web";
 import { AppError } from "../apis/error";
@@ -13,14 +13,76 @@ import { EmptyCart } from "../assets";
 import { ProductItem, SubProductType } from "../types/app";
 import VariantDropdown from "../components/dropdown/VariantDropdown";
 import LoadingPage from "./LoadingPage";
+import useHangyStore from "../lib/useStore";
 
 export default function CartPage() {
   const { data: carts, isLoading } = useGetCart();
   const swiperProducts = useRef<SwiperType>();
   const navigate = useNavigate();
+  const isSelectedAllCart = useHangyStore((state) => state.isSelectedAllCart);
+  const setIsSeletedAllCart = useHangyStore(
+    (state) => state.setIsSeletedAllCart
+  );
+  const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
+  const setSelectedItemCarts = useHangyStore(
+    (state) => state.setSelectedItemCarts
+  );
+  const totalPaymentCarts = useHangyStore((state) => state.totalPaymentCarts);
+  const setTotalPaymentCarts = useHangyStore(
+    (state) => state.setTotalPaymentCarts
+  );
+
+  const handleCheckboxChange = (id: string) => {
+    let newSelectedItems = [...selectedItemCarts];
+    if (selectedItemCarts.includes(id)) {
+      newSelectedItems = newSelectedItems.filter((itemId) => itemId !== id);
+      setSelectedItemCarts(newSelectedItems);
+    } else {
+      newSelectedItems = [...newSelectedItems, id].sort(
+        (a, b) =>
+          (carts?.findIndex((item) => item.id === a) || 0) -
+          (carts?.findIndex((item) => item.id === b) || 0)
+      );
+      setSelectedItemCarts(newSelectedItems);
+    }
+
+    setIsSeletedAllCart(newSelectedItems.length === carts?.length);
+
+    setTotalPaymentCarts(
+      newSelectedItems.reduce((acc, itemId) => {
+        const selected = carts?.find((item) => item.id === itemId);
+        return acc + (selected?.amount || 0);
+      }, 0)
+    );
+  };
+
+  const handleSelectedAll = () => {
+    const newSelectedAllState = !isSelectedAllCart;
+
+    if (newSelectedAllState) {
+      setSelectedItemCarts(carts?.map((item) => item.id) || []);
+      setTotalPaymentCarts(
+        carts?.reduce((total, item) => total + item.amount, 0) || 0
+      );
+    } else {
+      setSelectedItemCarts([]);
+      setTotalPaymentCarts(0);
+    }
+
+    setIsSeletedAllCart(newSelectedAllState);
+  };
+
+  useEffect(() => {
+    setTotalPaymentCarts(
+      selectedItemCarts.reduce((acc, itemId) => {
+        const selected = carts?.find((item) => item.id === itemId);
+        return acc + (selected?.amount || 0);
+      }, 0)
+    );
+  }, [carts, setTotalPaymentCarts]);
 
   if (isLoading) return <LoadingPage />;
-  
+
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
@@ -35,7 +97,10 @@ export default function CartPage() {
           <div className="mt-5 w-full">
             <div className="capitalize flex items-center px-5 text-sm bg-white h-[55px] rounded text-[#888888] font-medium mb-3">
               <div className="flex min-w-[58px] ps-3 pe-5 items-center">
-                <Checkbox />
+                <Checkbox
+                  checked={isSelectedAllCart}
+                  onChange={() => handleSelectedAll()}
+                />
               </div>
               <div className="w-[46.27949%] text-[#000000cc]">Sản phẩm</div>
               <div className="w-[15.88022%] text-center">Đơn giá</div>
@@ -56,6 +121,8 @@ export default function CartPage() {
                   }
                   price={item.price}
                   amount={item.amount}
+                  checked={selectedItemCarts.includes(item.id)}
+                  onChange={() => handleCheckboxChange(item.id)}
                 />
               ))}
           </div>
@@ -72,7 +139,10 @@ export default function CartPage() {
             <div className="w-full flex flex-row items-center justify-between ps-5 py-3 pr-7 border-t border-dashed">
               <div className="flex items-center justify-start">
                 <div className="flex min-w-[58px] ps-3 pe-5 items-center">
-                  <Checkbox />
+                  <Checkbox
+                    checked={isSelectedAllCart}
+                    onChange={() => handleSelectedAll()}
+                  />
                 </div>
                 <span className="cursor-pointer">
                   Chọn tất cả ({carts?.length})
@@ -83,8 +153,16 @@ export default function CartPage() {
               </div>
               <div className="flex items-center justify-end gap-2">
                 <div className="flex items-center">
-                  <span>Tổng thanh toán (0 Sản phẩm):</span>
-                  <span className="text-primary text-2xl ms-[5px]">₫0</span>
+                  <span>
+                    Tổng thanh toán ({selectedItemCarts.length} Sản phẩm):
+                  </span>
+                  <span className="text-primary text-2xl ms-[5px]">
+                    ₫&nbsp;
+                    {new Intl.NumberFormat("vi-VN", {
+                      // style: "currency",
+                      currency: "VND",
+                    }).format(totalPaymentCarts)}
+                  </span>
                 </div>
                 <div>
                   <Button
@@ -142,6 +220,8 @@ const CartItem = ({
   real_price,
   price,
   amount,
+  checked,
+  onChange,
 }: {
   id: string;
   product: ProductItem;
@@ -150,6 +230,8 @@ const CartItem = ({
   real_price: number;
   price: number;
   amount: number;
+  checked: boolean;
+  onChange: () => void;
 }) => {
   // const [num, setNum] = useState<number>(quantity);
   const { mutate } = useGetCart();
@@ -184,7 +266,7 @@ const CartItem = ({
     <section className="text-sm text-[#000000de] font-medium bg-white">
       <div className="pt-[15px] pb-5 px-5 mt-[15px] flex items-center">
         <div className="flex min-w-[58px] ps-3 pe-5 items-center">
-          <Checkbox />
+          <Checkbox checked={checked} onChange={onChange} />
         </div>
         <div className="w-[29.03811%] flex items-start">
           <img
