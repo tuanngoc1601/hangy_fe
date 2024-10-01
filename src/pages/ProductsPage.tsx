@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetCategories, useGetProducts } from "../apis/web";
 import ArrowIcon from "../components/icons/ArrowIcon";
 import BarIcon from "../components/icons/BarIcon";
@@ -6,13 +6,27 @@ import Container from "../components/layout/Container";
 import ProductItem from "../components/ProductItem";
 import clsx from "clsx";
 import useDebounce from "../hooks/useDebounce";
+import LoadingPage from "./LoadingPage";
+import { ProductItem as ProductItemType } from "../types/app";
 
 export default function ProductsPage() {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [type, setType] = useState<string>("");
   const searchDebounce = useDebounce<string>(searchTerm.trim());
-  const { data: categories } = useGetCategories();
-  const { data: products } = useGetProducts(type, searchDebounce);
+  const { data: categories, isLoading: cateLoading } = useGetCategories();
+  const { data: products, isLoading: productLoading } = useGetProducts(
+    type,
+    searchDebounce
+  );
+  const [results, setResults] = useState<ProductItemType[] | undefined>(
+    products
+  );
+
+  useEffect(() => {
+    if (products) setResults(products);
+  }, [productLoading, products]);
+
+  if (cateLoading) return <LoadingPage />;
   return (
     <Container>
       <div className="w-full flex flex-row items-start my-8 gap-[22px]">
@@ -79,7 +93,7 @@ export default function ProductsPage() {
           </div>
           <div className="mt-5">
             <div className="grid grid-cols-5 gap-2">
-              {products?.map((product) => (
+              {results?.map((product) => (
                 <ProductItem
                   key={product.id}
                   name={product.name}
@@ -89,23 +103,30 @@ export default function ProductsPage() {
               ))}
             </div>
             {/* pagination */}
-            <div className="flex items-center justify-center gap-3 text-black/40 text-lg mt-8">
-              <button className="h-[40px] w-[40px] flex items-center justify-center bg-white rounded-full">
-                <ArrowIcon className="rotate-180 text-black/40 w-6" />
-              </button>
-              <button className="bg-primary text-white w-[40px] h-[40px] flex items-center justify-center rounded-full">
-                1
-              </button>
-              <button className="bg-white w-[40px] h-[40px] flex items-center justify-center rounded-full">
-                2
-              </button>
-              <button className="h-[40px] w-[40px] flex items-center justify-center bg-white rounded-full">
-                <ArrowIcon className="text-black/40 w-6" />
-              </button>
-            </div>
+            {!productLoading && (
+              <div className="flex items-center justify-center gap-3 text-black/40 text-lg mt-8">
+                <button className="h-[40px] w-[40px] flex items-center justify-center bg-white rounded-full">
+                  <ArrowIcon className="rotate-180 text-black/40 w-6" />
+                </button>
+                <button className="bg-primary text-white w-[40px] h-[40px] flex items-center justify-center rounded-full">
+                  1
+                </button>
+                {/* <button className="bg-white w-[40px] h-[40px] flex items-center justify-center rounded-full">
+                  2
+                </button> */}
+                <button className="h-[40px] w-[40px] flex items-center justify-center bg-white rounded-full">
+                  <ArrowIcon className="text-black/40 w-6" />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </div>
+      {productLoading && (
+        <div className="bg-white opacity-50 fixed top-0 left-0 w-screen h-screen z-50">
+          <LoadingPage />
+        </div>
+      )}
     </Container>
   );
 }

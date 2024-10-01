@@ -12,11 +12,15 @@ import { AppError } from "../apis/error";
 import { EmptyCart } from "../assets";
 import { ProductItem, SubProductType } from "../types/app";
 import VariantDropdown from "../components/dropdown/VariantDropdown";
+import LoadingPage from "./LoadingPage";
 
 export default function CartPage() {
-  const { data: carts } = useGetCart();
+  const { data: carts, isLoading } = useGetCart();
   const swiperProducts = useRef<SwiperType>();
   const navigate = useNavigate();
+
+  if (isLoading) return <LoadingPage />;
+  
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">

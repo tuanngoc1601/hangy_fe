@@ -25,10 +25,11 @@ import HeartIcon from "../components/icons/HeartIcon";
 import { useAddToCart, useGetCart, useGetProductDetail } from "../apis/web";
 import clsx from "clsx";
 import { AppError } from "../apis/error";
+import LoadingPage from "./LoadingPage";
 
 export default function ProductDetail() {
   const { slug } = useParams();
-  const { data: product } = useGetProductDetail(slug || "");
+  const { data: product, isLoading } = useGetProductDetail(slug || "");
   const { dispatch: useAddCart } = useAddToCart();
   const { mutate } = useGetCart();
   const swiperRelated = useRef<SwiperType>();
@@ -69,6 +70,9 @@ export default function ProductDetail() {
         }
       });
   }
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
@@ -356,14 +360,14 @@ export default function ProductDetail() {
               <span className="text-[#929292] text-base line-through font-medium">
                 ₫
                 {new Intl.NumberFormat("vi-VN", {
-                  style: "currency",
+                  // style: "currency",
                   currency: "VND",
                 }).format(product?.real_price || 0)}
               </span>
               <span className="text-[#d0011b] text-3xl font-bold">
                 ₫
                 {new Intl.NumberFormat("vi-VN", {
-                  style: "currency",
+                  // style: "currency",
                   currency: "VND",
                 }).format(product?.daily_price || 0)}
               </span>

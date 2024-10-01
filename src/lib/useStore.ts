@@ -6,11 +6,14 @@ interface HangyStore {
   access_token?: string;
   refresh_token?: string;
   setToken(v: string | undefined): void;
+
+  welcomePopup: boolean;
 }
 
 const useHangyStore = createWithEqualityFn<HangyStore>()(
   persist(
     (set) => ({
+      welcomePopup: true,
       setToken(v) {
         set({ access_token: v });
       },

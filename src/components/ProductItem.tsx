@@ -39,7 +39,7 @@ export default function ProductItem({
               <span className="text-sm mr-px">₫</span>
               <span className="text-lg truncate font-bold">
                 {new Intl.NumberFormat("vi-VN", {
-                  style: "currency",
+                  // style: "currency",
                   currency: "VND",
                 }).format(daily_price) || 730000}
               </span>
