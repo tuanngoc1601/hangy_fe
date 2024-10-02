@@ -46,7 +46,12 @@ export interface SubProductType {
   stock_quantity: number;
   sold_quantity: number;
   product_id: string;
-  image_url: string | null;
+  image_url: string;
+}
+
+export interface ImageItem {
+  id: string;
+  url: string;
 }
 
 export interface ProductItem {
@@ -61,6 +66,7 @@ export interface ProductItem {
   sold_quantity: number;
   image_url: string;
   sub_products: SubProductType[];
+  images: ImageItem[];
 }
 
 export interface CartItem {

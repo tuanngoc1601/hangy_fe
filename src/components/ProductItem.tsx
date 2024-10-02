@@ -7,10 +7,12 @@ export default function ProductItem({
   name,
   slug,
   daily_price,
+  image,
 }: {
   name: string;
   slug: string;
   daily_price: number;
+  image: string;
 }) {
   const navigate = useNavigate();
   return (
@@ -19,9 +21,12 @@ export default function ProductItem({
       onClick={() => navigate(`/products/${slug}`)}
     >
       <img
-        src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzm89uqf9jmpb2_tn.webp"
+        src={
+          image ||
+          "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzm89uqf9jmpb2_tn.webp"
+        }
         alt=""
-        className="w-full"
+        className="w-full aspect-square object-contain"
       />
       <div className="p-2">
         <h3 className="text-base text-[#000000cc] font-medium min-h-12 line-clamp-2">

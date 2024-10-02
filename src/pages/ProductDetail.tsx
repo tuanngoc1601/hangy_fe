@@ -19,7 +19,7 @@ import CertificateImg from "../components/icons/support/certification.png";
 import ShipImg from "../components/icons/support/ship.png";
 import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import ArrowImgIcon from "../components/icons/ArrowImgIcon";
 import HeartIcon from "../components/icons/HeartIcon";
 import { useAddToCart, useGetCart, useGetProductDetail } from "../apis/web";
@@ -38,7 +38,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity] = useState<number>(1);
   const [subId, setSubId] = useState<string | null>(null);
   const [imgPreview, setImgPreview] = useState<string>(
-    "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzect0xybkipaf"
+    product?.images[0].url || ""
   );
   function addToCart() {
     if (product?.sub_products && !subId) {
@@ -70,6 +70,10 @@ export default function ProductDetail() {
         }
       });
   }
+
+  useEffect(() => {
+    setImgPreview(product?.images[0].url || "");
+  }, [product, setImgPreview]);
 
   if (isLoading) return <LoadingPage />;
 
@@ -105,177 +109,23 @@ export default function ProductDetail() {
                   swiperImgSlide.current = swiper;
                 }}
               >
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lz002z74r4ul7e_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lz002z74r4ul7e_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
+                {product?.images.map((item) => (
+                  <SwiperSlide key={item.id}>
+                    <div
+                      className="w-[92px] h-[92px] p-[5px]"
+                      onMouseOver={() => setImgPreview(item.url)}
+                    >
+                      <div className="relative group w-full h-full cursor-pointer">
+                        <img
+                          src={item.url}
+                          alt=""
+                          className="w-full h-full object-contain"
+                        />
+                        <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
+                      </div>
                     </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lxknu3s8d52157_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className=" w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1ltzof2b_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1ltzof2b_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lsl3z24_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lsl3z24_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lve8vfd_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd7zx1lve8vfd_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838ikosm7f1_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838ikosm7f1_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838iknduned_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838iknduned_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div
-                    className="w-[92px] h-[92px] p-[5px]"
-                    onMouseOver={() =>
-                      setImgPreview(
-                        "https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838il2u3je8_tn"
-                      )
-                    }
-                  >
-                    <div className="relative group w-full h-full cursor-pointer">
-                      <img
-                        src="https://down-vn.img.susercontent.com/file/vn-11134207-7r98o-lmd838il2u3je8_tn"
-                        alt=""
-                        className="w-full h-full object-contain"
-                      />
-                      <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
-                    </div>
-                  </div>
-                </SwiperSlide>
+                  </SwiperSlide>
+                ))}
               </Swiper>
               <div>
                 <button
@@ -447,11 +297,7 @@ export default function ProductDetail() {
                         )}
                         onClick={() => setSubId(sub.id)}
                       >
-                        <img
-                          src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzxl44ickmg124"
-                          alt=""
-                          className="w-6 h-6"
-                        />
+                        <img src={sub.image_url} alt="" className="w-6 h-6" />
                         <p>{sub.name}</p>
                       </div>
                     ))}

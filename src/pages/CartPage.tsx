@@ -143,6 +143,7 @@ export default function CartPage() {
                   amount={item.amount}
                   checked={selectedItemCarts.includes(item.id)}
                   onChange={() => handleCheckboxChange(item.id)}
+                  image={item.product.images[0].url}
                 />
               ))}
           </div>
@@ -251,6 +252,7 @@ const CartItem = ({
   amount,
   checked,
   onChange,
+  image,
 }: {
   id: string;
   product: ProductItem;
@@ -261,6 +263,7 @@ const CartItem = ({
   amount: number;
   checked: boolean;
   onChange: () => void;
+  image: string;
 }) => {
   // const [num, setNum] = useState<number>(quantity);
   const { mutate } = useGetCart();
@@ -299,9 +302,9 @@ const CartItem = ({
         </div>
         <div className="w-[29.03811%] flex items-start">
           <img
-            src="https://down-vn.img.susercontent.com/file/bd43d8449c91a5af4a7f5af8b71e04d3"
+            src={image}
             alt=""
-            className="w-20 h-20 object-contain cursor-pointer"
+            className="w-20 h-20 flex-none object-contain cursor-pointer"
           />
           <div className="flex overflow-hidden leading-4 pe-5 ps-2.5 flex-col items-start">
             <h3 className="mb-[5px] max-h-8 line-clamp-2 leading-4 cursor-pointer">

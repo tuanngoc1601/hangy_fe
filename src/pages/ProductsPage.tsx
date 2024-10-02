@@ -99,6 +99,7 @@ export default function ProductsPage() {
                   name={product.name}
                   slug={product.slug}
                   daily_price={product.daily_price}
+                  image={product.images[0].url}
                 />
               ))}
             </div>
