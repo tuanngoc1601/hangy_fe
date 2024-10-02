@@ -159,3 +159,21 @@ export function useDeleteAllCarts() {
 
   return { dispatch: trigger };
 }
+
+export function useGetSelectedItems(cart_item_ids: string[]) {
+  const useFetch = useFetchTyped<CartItem[]>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { data, isLoading, error } = useSWR(
+    access_token ? "/api/v1/carts/get-selected-items" : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify({ cart_item_ids: cart_item_ids }),
+      })
+  );
+
+  return { data: data?.data, isLoading, error };
+}

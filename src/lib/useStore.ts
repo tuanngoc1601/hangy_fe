@@ -41,6 +41,9 @@ const useHangyStore = createWithEqualityFn<HangyStore>()(
       partialize: (state) => ({
         access_token: state.access_token,
         refresh_token: state.refresh_token,
+        isSelectedAllCart: state.isSelectedAllCart,
+        selectedItemCarts: state.selectedItemCarts,
+        totalPaymentCarts: state.totalPaymentCarts,
       }),
     }
   ),

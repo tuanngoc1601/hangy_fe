@@ -4,8 +4,18 @@ import ShipIcon from "../components/icons/ShipIcon";
 import VoucherIcon from "../components/icons/VoucherIcon";
 import Container from "../components/layout/Container";
 import Button from "../components/common/Button";
+import useHangyStore from "../lib/useStore";
+import { useGetSelectedItems } from "../apis/web";
+import LoadingPage from "./LoadingPage";
 
 export default function PaymentPage() {
+  const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
+  const totalPaymentCarts = useHangyStore((state) => state.totalPaymentCarts);
+  const { data: paymentData, isLoading } =
+    useGetSelectedItems(selectedItemCarts);
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <Container className="mb-6">
       <div className="bg-white w-full shadow-[0_1px_1px_0px_rgba(0,0,0,0.05)] mt-3">
@@ -54,41 +64,59 @@ export default function PaymentPage() {
             Thành tiền
           </span>
         </div>
-        <div className="w-full flex flex-col">
-          <div className="grid grid-cols-6 min-h-[55px] text-sm px-[30px] text-[#222222] overflow-hidden font-medium mt-[15px]">
-            <div className="col-span-3 grid grid-cols-3">
-              <div className="flex items-center col-span-2">
-                <img
-                  src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-m017zhok4jt974@resize_w80_nl.webp"
-                  alt=""
-                  className="w-[55px] h-[55px] cursor-pointer"
-                />
-                <div className="flex flex-col mx-[15px]">
-                  <h3 className="line-clamp-1 cursor-pointer">
-                    Máy tăm nước HANGY HG23 và HF- 2 nâng cấp chống thấm nước
-                    [BẢO HÀNH ĐỔI MỚI 12 THÁNG - KÈM CỦ SẠC]
-                  </h3>
-                  <span className="mt-0.5 text-[#1c95c9] leading-3 border border-[#1c95c9] rounded-sm text-[10px] px-0.5 w-fit">
-                    Đổi trả miễn phí 7 ngày
-                  </span>
+        <div className="w-full flex flex-col gap-6">
+          {paymentData?.map((data) => (
+            <div
+              key={data.id}
+              className="grid grid-cols-6 min-h-[55px] text-sm px-[30px] text-[#222222] overflow-hidden font-medium mt-[15px]"
+            >
+              <div className="col-span-3 grid grid-cols-3">
+                <div className="flex items-center col-span-2">
+                  <img
+                    src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-m017zhok4jt974@resize_w80_nl.webp"
+                    alt=""
+                    className="w-[55px] h-[55px] cursor-pointer"
+                  />
+                  <div className="flex flex-col mx-[15px]">
+                    <h3 className="line-clamp-1 cursor-pointer">
+                      {data.product.name}
+                    </h3>
+                    <span className="mt-0.5 text-[#1c95c9] leading-3 border border-[#1c95c9] rounded-sm text-[10px] px-0.5 w-fit">
+                      Đổi trả miễn phí 7 ngày
+                    </span>
+                  </div>
+                </div>
+                <div className="text-[#929292] flex items-center justify-center col-span-1 font-medium text-sm">
+                  {data.sub_product && (
+                    <span className="line-clamp-1 ps-[13px] overflow-hidden">
+                      Loại: {data.sub_product.name}
+                    </span>
+                  )}
                 </div>
               </div>
-              <div className="text-[#929292] flex items-center justify-center col-span-1 font-medium text-sm">
-                <span className="line-clamp-1 ps-[13px] overflow-hidden">
-                  Loại: HG23 WhiteB Nâng Cấp
+              <div className="col-span-1 flex items-center justify-end">
+                <span>
+                  ₫
+                  {new Intl.NumberFormat("vi-VN", {
+                    // style: "currency",
+                    currency: "VND",
+                  }).format(data.price)}
+                </span>
+              </div>
+              <div className="col-span-1 flex items-center justify-end">
+                <span>{data.quantity}</span>
+              </div>
+              <div className="col-span-1 flex items-center justify-end">
+                <span className="font-semibold">
+                  ₫
+                  {new Intl.NumberFormat("vi-VN", {
+                    // style: "currency",
+                    currency: "VND",
+                  }).format(data.amount)}
                 </span>
               </div>
             </div>
-            <div className="col-span-1 flex items-center justify-end">
-              <span>₫699.000</span>
-            </div>
-            <div className="col-span-1 flex items-center justify-end">
-              <span>1</span>
-            </div>
-            <div className="col-span-1 flex items-center justify-end">
-              <span className="font-semibold">₫699.000</span>
-            </div>
-          </div>
+          ))}
           <div className="border-y border-dashed flex px-[30px] py-[18px] items-center justify-end text-sm font-medium gap-20 mt-4">
             <div className="flex items-center gap-1">
               <VoucherIcon />
@@ -128,9 +156,15 @@ export default function PaymentPage() {
           </div>
           <div className="bg-[#fafdff] py-[15px] flex items-center justify-end px-[30px] gap-5">
             <span className="text-sm text-[#0000008a]">
-              Tổng số tiền (2 sản phẩm):
+              Tổng số tiền ({selectedItemCarts.length} sản phẩm):
             </span>
-            <span className="text-[#1c95c9] font-semibold text-xl">₫715.500</span>
+            <span className="text-[#1c95c9] font-semibold text-xl">
+              ₫
+              {new Intl.NumberFormat("vi-VN", {
+                // style: "currency",
+                currency: "VND",
+              }).format(totalPaymentCarts)}
+            </span>
           </div>
         </div>
       </div>
@@ -151,17 +185,29 @@ export default function PaymentPage() {
             <span className="leading-[50px]">Tổng thanh toán</span>
           </div>
           <div className="text-[#000000cc] flex flex-col">
-            <span className="text-end leading-10">₫699.000</span>
+            <span className="text-end leading-10">
+              ₫
+              {new Intl.NumberFormat("vi-VN", {
+                // style: "currency",
+                currency: "VND",
+              }).format(totalPaymentCarts)}
+            </span>
             <span className="text-end leading-10">₫16.500</span>
             <span className="text-[28px] text-[#1c95c9] text-end leading-[50px]">
-              ₫715.500
+              ₫
+              {new Intl.NumberFormat("vi-VN", {
+                // style: "currency",
+                currency: "VND",
+              }).format(totalPaymentCarts + 16500)}
             </span>
           </div>
         </div>
         <div className="px-[30px] flex items-center justify-between text-sm font-medium py-6">
           <p className="font-normal">
             Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo{" "}
-            <span className="text-[#4080ee] font-medium cursor-pointer">Điều khoản Hangy</span>
+            <span className="text-[#4080ee] font-medium cursor-pointer">
+              Điều khoản Hangy
+            </span>
           </p>
           <Button className="bg-[#1c95c9] text-white outline-none py-3 px-[14px] rounded-sm h-10 w-[210px] flex items-center justify-center border border-black/10 shadow-[0_1px_1px_0px_rgba(0,0,0,0.03)]">
             Đặt hàng
