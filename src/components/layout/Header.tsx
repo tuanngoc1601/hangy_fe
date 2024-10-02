@@ -5,12 +5,16 @@ import { Avatar, LogoHangy } from "../../assets";
 import { useState } from "react";
 import UserDropdown from "../dropdown/UserDropdown";
 import { useGetCart } from "../../apis/web";
+import LoadingPage from "../../pages/LoadingPage";
 
 export default function Header() {
   const navigate = useNavigate();
   const access_token = useHangyStore((state) => state.access_token);
   const [isMenu, setIsMenu] = useState<boolean>(false);
-  const { data: cart } = useGetCart();
+  const { data: cart, isLoading } = useGetCart();
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
       <div className="cursor-pointer" onClick={() => navigate("/")}>

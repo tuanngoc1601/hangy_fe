@@ -7,7 +7,12 @@ import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
 import { useEffect, useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
-import { useDeleteCartItem, useGetCart, useUpdateQuantity } from "../apis/web";
+import {
+  useDeleteAllCarts,
+  useDeleteCartItem,
+  useGetCart,
+  useUpdateQuantity,
+} from "../apis/web";
 import { AppError } from "../apis/error";
 import { EmptyCart } from "../assets";
 import { ProductItem, SubProductType } from "../types/app";
@@ -16,7 +21,8 @@ import LoadingPage from "./LoadingPage";
 import useHangyStore from "../lib/useStore";
 
 export default function CartPage() {
-  const { data: carts, isLoading } = useGetCart();
+  const { data: carts, isLoading, mutate } = useGetCart();
+  const { dispatch: useDeleteAllCartItems } = useDeleteAllCarts();
   const swiperProducts = useRef<SwiperType>();
   const navigate = useNavigate();
   const isSelectedAllCart = useHangyStore((state) => state.isSelectedAllCart);
@@ -70,6 +76,20 @@ export default function CartPage() {
     }
 
     setIsSeletedAllCart(newSelectedAllState);
+  };
+
+  const deleteAllCarts = () => {
+    if (!selectedItemCarts.length) {
+      console.log("Please select cart items!");
+      return;
+    }
+    useDeleteAllCartItems({ cart_item_ids: selectedItemCarts }).then((resp) => {
+      if (!resp?.data) {
+        console.log("Something went wrong!");
+        return;
+      }
+      mutate();
+    });
   };
 
   useEffect(() => {
@@ -147,7 +167,10 @@ export default function CartPage() {
                 <span className="cursor-pointer">
                   Chọn tất cả ({carts?.length})
                 </span>
-                <span className="ms-8 cursor-pointer hover:text-primary">
+                <span
+                  className="ms-8 cursor-pointer hover:text-primary"
+                  onClick={() => deleteAllCarts()}
+                >
                   Xoá
                 </span>
               </div>
@@ -167,7 +190,13 @@ export default function CartPage() {
                 <div>
                   <Button
                     className="capitalize font-light h-10 text-sm rounded-sm w-[210px] text-white"
-                    action={() => navigate("/checkout")}
+                    action={() => {
+                      if (!selectedItemCarts.length) {
+                        console.log("Please select cart items");
+                        return;
+                      }
+                      navigate("/checkout");
+                    }}
                   >
                     Mua hàng
                   </Button>

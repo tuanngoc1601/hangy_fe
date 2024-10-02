@@ -141,3 +141,21 @@ export function useDeleteCartItem(cartItemId: string) {
 
   return { dispatch: trigger };
 }
+
+export function useDeleteAllCarts() {
+  const useFetch = useFetchTyped<string>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger } = useSWRMutation(
+    access_token ? "/api/v1/carts/delete/all-carts" : null,
+    (url: string, { arg }: { arg: { cart_item_ids: string[] } }) =>
+      useFetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(arg),
+      })
+  );
+
+  return { dispatch: trigger };
+}
