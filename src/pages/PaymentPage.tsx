@@ -73,9 +73,9 @@ export default function PaymentPage() {
               <div className="col-span-3 grid grid-cols-3">
                 <div className="flex items-center col-span-2">
                   <img
-                    src="https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-m017zhok4jt974@resize_w80_nl.webp"
+                    src={data.product.images[0].url}
                     alt=""
-                    className="w-[55px] h-[55px] cursor-pointer"
+                    className="w-[55px] h-[55px] cursor-pointer flex-none object-contain"
                   />
                   <div className="flex flex-col mx-[15px]">
                     <h3 className="line-clamp-1 cursor-pointer">
