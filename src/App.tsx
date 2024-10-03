@@ -11,6 +11,8 @@ import ProductDetail from "./pages/ProductDetail";
 import CartPage from "./pages/CartPage";
 import PaymentPage from "./pages/PaymentPage";
 import ProductsPage from "./pages/ProductsPage";
+import ProfilePage from "./pages/ProfilePage";
+import ContactPage from "./pages/ContactPage";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,12 @@ const router = createBrowserRouter([
         Component: PaymentPage,
         id: "payment",
       },
+      {
+        path: "/profile",
+        Component: ProfilePage,
+        id: "profile",
+      },
+      { path: "/contact", Component: ContactPage, id: "contact" },
     ],
   },
   {
