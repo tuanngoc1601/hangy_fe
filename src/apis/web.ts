@@ -1,7 +1,13 @@
 import useSWR from "swr";
 import useSWRImmutable from "swr/immutable";
 import { fetchTyped, useFetchTyped } from "./apiv1";
-import { CartPayload, CartItem, CategoryType, ProductItem } from "../types/app";
+import {
+  CartPayload,
+  CartItem,
+  CategoryType,
+  ProductItem,
+  ContactPayload,
+} from "../types/app";
 import useHangyStore from "../lib/useStore";
 import useSWRMutation from "swr/mutation";
 
@@ -176,4 +182,17 @@ export function useGetSelectedItems(cart_item_ids: string[]) {
   );
 
   return { data: data?.data, isLoading, error };
+}
+
+export function useCreateContact() {
+  const { trigger, isMutating } = useSWRMutation(
+    "/api/v1/contact/create",
+    (url: string, { arg }: { arg: ContactPayload }) =>
+      fetchTyped<string>(url, {
+        method: "POST",
+        body: JSON.stringify(arg),
+      })
+  );
+
+  return { dispatch: trigger, isMutating };
 }

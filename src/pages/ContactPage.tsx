@@ -4,15 +4,32 @@ import BreadcrumbIcon from "../components/icons/BreadcrumbIcon";
 import PhoneContactIcon from "../components/icons/PhoneContactIcon";
 import MailContactIcon from "../components/icons/MailContactIcon";
 import { useState } from "react";
+import { useCreateContact } from "../apis/web";
+import Spinner from "../components/common/Spinner";
+import clsx from "clsx";
 
 export default function ContactPage() {
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
+  const { dispatch: useContact, isMutating } = useCreateContact();
   const [textMessage, setTextMessage] = useState<string>("");
   function handleSubmit(e: any) {
     e.preventDefault();
-    console.log(name, email, phone, textMessage);
+    if (!name || !email || !phone || !textMessage) {
+      console.log("Form data is not valid");
+      return;
+    }
+    useContact({ name, email, phone, message: textMessage }).then((resp) => {
+      if (!resp?.data) {
+        console.log("Something went wrong!");
+        return;
+      }
+      setName("");
+      setEmail("");
+      setPhone("");
+      setTextMessage("");
+    });
   }
   return (
     <Container>
@@ -69,7 +86,7 @@ export default function ContactPage() {
               />
               <input
                 type="text"
-                name="email"
+                name="phone"
                 placeholder="Your Phone *"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
@@ -89,9 +106,12 @@ export default function ContactPage() {
             <div className="flex items-center justify-end">
               <button
                 type="submit"
-                className="rounded-sm capitalize px-4 py-2 outline-none text-white bg-primary hover:opacity-70 transition"
+                className={clsx(
+                  "rounded-sm capitalize px-4 py-2 outline-none text-white bg-primary hover:opacity-70 transition w-[145px] h-10 flex items-center justify-center",
+                  isMutating && "opacity-70"
+                )}
               >
-                Send Message
+                {isMutating ? <Spinner /> : "Send Message"}
               </button>
             </div>
           </form>
