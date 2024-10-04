@@ -251,6 +251,19 @@ export default function CartPage() {
   );
 }
 
+interface CartItemProps {
+  id: string;
+  product: ProductItem;
+  subProduct: SubProductType | null;
+  quantity: number;
+  real_price: number;
+  price: number;
+  amount: number;
+  checked: boolean;
+  onChange: () => void;
+  image: string;
+}
+
 const CartItem = ({
   id,
   product,
@@ -262,18 +275,7 @@ const CartItem = ({
   checked,
   onChange,
   image,
-}: {
-  id: string;
-  product: ProductItem;
-  subProduct: SubProductType | null;
-  quantity: number;
-  real_price: number;
-  price: number;
-  amount: number;
-  checked: boolean;
-  onChange: () => void;
-  image: string;
-}) => {
+}: CartItemProps) => {
   // const [num, setNum] = useState<number>(quantity);
   const { mutate } = useGetCart();
   const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
