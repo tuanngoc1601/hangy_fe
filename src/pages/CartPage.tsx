@@ -93,6 +93,15 @@ export default function CartPage() {
   };
 
   useEffect(() => {
+    if (
+      carts &&
+      carts.length > 0 &&
+      carts.length === selectedItemCarts.length
+    ) {
+      setIsSeletedAllCart(true);
+    } else {
+      setIsSeletedAllCart(false);
+    }
     setTotalPaymentCarts(
       selectedItemCarts.reduce((acc, itemId) => {
         const selected = carts?.find((item) => item.id === itemId);
@@ -267,6 +276,10 @@ const CartItem = ({
 }) => {
   // const [num, setNum] = useState<number>(quantity);
   const { mutate } = useGetCart();
+  const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
+  const setSelectedItemCarts = useHangyStore(
+    (state) => state.setSelectedItemCarts
+  );
   const [isOpenVariant, setIsOpenVariant] = useState<boolean>(false);
   const { dispatch: useDeleteItem } = useDeleteCartItem(id);
   const { dispatch: increaseAction } = useUpdateQuantity(
@@ -286,6 +299,8 @@ const CartItem = ({
           console.log("something went wrong!");
           return;
         }
+        if (checked)
+          setSelectedItemCarts(selectedItemCarts.filter((item) => item !== id));
         mutate();
       })
       .catch((err) => {

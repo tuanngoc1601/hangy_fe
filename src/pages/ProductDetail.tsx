@@ -31,7 +31,7 @@ export default function ProductDetail() {
   const { slug } = useParams();
   const { data: product, isLoading } = useGetProductDetail(slug || "");
   const { dispatch: useAddCart } = useAddToCart();
-  const { mutate } = useGetCart();
+  const { mutate, isLoading: cartLoading } = useGetCart();
   const swiperRelated = useRef<SwiperType>();
   const swiperImgSlide = useRef<SwiperType>();
   const navigate = useNavigate();
@@ -62,7 +62,7 @@ export default function ProductDetail() {
           return;
         }
         mutate();
-        navigate("/cart");
+        if (!cartLoading) navigate("/cart");
       })
       .catch((err) => {
         if (err instanceof AppError) {
