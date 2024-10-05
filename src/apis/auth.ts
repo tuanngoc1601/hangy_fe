@@ -1,5 +1,5 @@
 // import useSWR from "swr";
-import { AuthResponse, RegisterForm } from "../types/app";
+import { AuthResponse, RegisterForm, UserInfoPayload } from "../types/app";
 import { fetchTyped, useFetchTyped } from "./apiv1";
 import useSWRMutation from "swr/mutation";
 import useSWRImmutable from "swr/immutable";
@@ -87,4 +87,40 @@ export function useRefreshToken() {
   });
 
   return { dispatch: trigger };
+}
+
+export function useMe() {
+  const useFetch = useFetchTyped<AuthResponse>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { data, isLoading, mutate } = useSWRImmutable(
+    access_token ? "/api/v1/auth/me" : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+  );
+
+  return { data: data?.data, isLoading, mutate };
+}
+
+export function useUpdateMe() {
+  const useFetch = useFetchTyped<string>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger, isMutating } = useSWRMutation(
+    access_token ? "/api/v1/auth/update" : null,
+    (url: string, { arg }: { arg: UserInfoPayload }) => {
+      return useFetch(url, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(arg),
+      });
+    }
+  );
+
+  return { dispatch: trigger, isMutating };
 }

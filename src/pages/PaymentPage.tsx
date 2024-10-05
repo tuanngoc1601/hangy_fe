@@ -7,12 +7,14 @@ import Button from "../components/common/Button";
 import useHangyStore from "../lib/useStore";
 import { useGetSelectedItems } from "../apis/web";
 import LoadingPage from "./LoadingPage";
+import { useMe } from "../apis/auth";
 
 export default function PaymentPage() {
   const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
   const totalPaymentCarts = useHangyStore((state) => state.totalPaymentCarts);
   const { data: paymentData, isLoading } =
     useGetSelectedItems(selectedItemCarts);
+  const { data: me } = useMe();
 
   if (isLoading) return <LoadingPage />;
 
@@ -35,10 +37,10 @@ export default function PaymentPage() {
           </div>
           <div className="flex items-center text-base">
             <span className="font-bold text-[#222222]">
-              Tuấn Ngọc (+84) 338597737
+              {me?.name} (+84) {me?.phone?.slice(1, 10)}
             </span>
             <span className="text-[#000000cc] font-medium ms-5">
-              Số 19, Ngõ 123 Yên Xá, Xã Tân Triều, Huyện Thanh Trì, Hà Nội
+              {me?.address}
             </span>
             <span className="text-[#1c95c9] flex items-center justify-center border-[0.5px] rounded-[1px] text-[10px] py-0.5 px-[5px] capitalize ms-[15px] font-medium border-[#1c95c9] h-[17px]">
               Mặc định

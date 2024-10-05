@@ -17,6 +17,10 @@ export interface AuthResponse {
   email: string;
   username: string;
   name: string | null;
+  address: string | null;
+  phone: string | null;
+  gender: string | null;
+  birth_date: string | null;
   access_token: string;
   refresh_token: string;
   social_provider: string;
@@ -91,4 +95,11 @@ export interface ContactPayload {
   email: string;
   phone: string;
   message: string;
+}
+
+export interface UserInfoPayload {
+  name: string;
+  phone: string;
+  address: string;
+  gender: string;
 }
