@@ -11,6 +11,7 @@ const UserDropdown = ({
 }) => {
   const navigate = useNavigate();
   const setToken = useHangyStore((state) => state.setToken);
+  const resetState = useHangyStore((state) => state.reset);
   const { dispatch: useLogoutAction } = useAuthLogout();
   function onLogoutSubmit() {
     useLogoutAction().then((resp) => {
@@ -22,6 +23,7 @@ const UserDropdown = ({
       useHangyStore.setState({
         refresh_token: "",
       });
+      resetState();
       navigate("/auth/login", { replace: true });
     });
   }

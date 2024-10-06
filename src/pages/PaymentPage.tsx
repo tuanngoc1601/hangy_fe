@@ -5,16 +5,40 @@ import VoucherIcon from "../components/icons/VoucherIcon";
 import Container from "../components/layout/Container";
 import Button from "../components/common/Button";
 import useHangyStore from "../lib/useStore";
-import { useGetSelectedItems } from "../apis/web";
+import { useGetCart, useGetSelectedItems, usePlaceOrder } from "../apis/web";
 import LoadingPage from "./LoadingPage";
 import { useMe } from "../apis/auth";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PaymentPage() {
   const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
   const totalPaymentCarts = useHangyStore((state) => state.totalPaymentCarts);
+  const navigate = useNavigate();
+  const resetState = useHangyStore((state) => state.reset);
+  const { dispatch: useOrderAction } = usePlaceOrder();
   const { data: paymentData, isLoading } =
     useGetSelectedItems(selectedItemCarts);
   const { data: me } = useMe();
+  const { mutate } = useGetCart();
+  const [noteMessage, setNoteMessage] = useState<string>("");
+
+  function placeOrder() {
+    if (!me?.address || !me?.phone) return;
+    useOrderAction({
+      cart_item_ids: selectedItemCarts,
+      total_amount: totalPaymentCarts,
+      note_message: noteMessage,
+    }).then((resp) => {
+      if (!resp?.data) {
+        console.log("Something went wrong!");
+        return;
+      }
+      mutate();
+      resetState();
+      navigate("/order/complete", { replace: true });
+    });
+  }
 
   if (isLoading) return <LoadingPage />;
 
@@ -134,6 +158,8 @@ export default function PaymentPage() {
               <input
                 type="text"
                 placeholder="Lưu ý cho Người bán..."
+                value={noteMessage}
+                onChange={(e) => setNoteMessage(e.target.value)}
                 className="h-10 py-1 px-3 w-full text-[#222] outline-none ms-[15px] flex-1 bg-transparent border"
               />
             </div>
@@ -211,7 +237,10 @@ export default function PaymentPage() {
               Điều khoản Hangy
             </span>
           </p>
-          <Button className="bg-[#1c95c9] text-white outline-none py-3 px-[14px] rounded-sm h-10 w-[210px] flex items-center justify-center border border-black/10 shadow-[0_1px_1px_0px_rgba(0,0,0,0.03)]">
+          <Button
+            className="bg-[#1c95c9] text-white outline-none py-3 px-[14px] rounded-sm h-10 w-[210px] flex items-center justify-center border border-black/10 shadow-[0_1px_1px_0px_rgba(0,0,0,0.03)]"
+            action={placeOrder}
+          >
             Đặt hàng
           </Button>
         </div>

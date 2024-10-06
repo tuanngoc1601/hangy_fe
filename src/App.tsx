@@ -13,6 +13,7 @@ import PaymentPage from "./pages/PaymentPage";
 import ProductsPage from "./pages/ProductsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ContactPage from "./pages/ContactPage";
+import CompleteOrder from "./pages/CompleteOrder";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,11 @@ const router = createBrowserRouter([
         path: "/checkout",
         Component: PaymentPage,
         id: "payment",
+      },
+      {
+        path: "/order/complete",
+        Component: CompleteOrder,
+        id: "orderComplete",
       },
       {
         path: "/profile",

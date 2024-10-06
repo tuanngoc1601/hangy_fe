@@ -14,15 +14,21 @@ interface HangyStore {
   setSelectedItemCarts(v: string[]): void;
   totalPaymentCarts: number;
   setTotalPaymentCarts(v: number): void;
+
+  reset(): void;
 }
+
+const initialState = {
+  welcomePopup: true,
+  isSelectedAllCart: false,
+  selectedItemCarts: [],
+  totalPaymentCarts: 0,
+};
 
 const useHangyStore = createWithEqualityFn<HangyStore>()(
   persist(
     (set) => ({
-      welcomePopup: true,
-      isSelectedAllCart: false,
-      selectedItemCarts: [],
-      totalPaymentCarts: 0,
+      ...initialState,
       setToken(v) {
         set({ access_token: v });
       },
@@ -34,6 +40,10 @@ const useHangyStore = createWithEqualityFn<HangyStore>()(
       },
       setTotalPaymentCarts(v) {
         set({ totalPaymentCarts: v });
+      },
+
+      reset: () => {
+        set(initialState);
       },
     }),
     {

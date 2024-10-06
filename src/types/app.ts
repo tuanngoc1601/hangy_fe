@@ -103,3 +103,9 @@ export interface UserInfoPayload {
   address: string;
   gender: string;
 }
+
+export interface OrderPayload {
+  cart_item_ids: string[];
+  total_amount: number;
+  note_message: string;
+}
