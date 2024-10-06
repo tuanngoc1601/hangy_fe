@@ -11,11 +11,17 @@ import SwiperBanner from "../components/HomePage/Swiper/SwiperBanner";
 import CountdownTime from "../components/HomePage/CountdownTime";
 import SwiperSlider from "../components/SwiperSlider";
 import { buttonVariant, typographyVariant } from "../lib/variants";
+import { useBestSellingProducts } from "../apis/web";
+import LoadingPage from "./LoadingPage";
 
 export default function HomePage() {
   const swiperFlashSale = useRef<SwiperType>();
   const swiperBestSeller = useRef<SwiperType>();
   const swiperCombos = useRef<SwiperType>();
+  const { data: bestSellingProducts, isLoading } = useBestSellingProducts();
+
+  if (isLoading) return <LoadingPage />;
+
   return (
     <Container>
       <SwiperBanner />
@@ -57,7 +63,7 @@ export default function HomePage() {
             </button>
           </motion.div>
         </div>
-        <SwiperSlider swiperRef={swiperFlashSale} />
+        <SwiperSlider swiperRef={swiperFlashSale} data={bestSellingProducts} />
       </div>
       {/* <div className="w-full h-[0.5px] bg-black mb-6"></div> */}
       <div className="w-full mt-24">
@@ -83,6 +89,7 @@ export default function HomePage() {
         </div>
         <SwiperSlider
           swiperRef={swiperBestSeller}
+          data={bestSellingProducts}
           className="mt-8 relative"
           slideNav
         />
@@ -113,6 +120,7 @@ export default function HomePage() {
         </div>
         <SwiperSlider
           swiperRef={swiperCombos}
+          data={bestSellingProducts}
           className="mt-8 relative"
           slideNav
         />

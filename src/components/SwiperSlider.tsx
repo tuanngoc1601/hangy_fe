@@ -9,13 +9,16 @@ import { Navigation } from "swiper/modules";
 import ProductItem from "./ProductItem";
 import clsx from "clsx";
 import SliderButton from "./SliderButton";
+import { ProductItem as ProductItemType } from "../types/app";
 
 export default function SwiperSlider({
   swiperRef,
+  data,
   className,
   slideNav,
 }: {
   swiperRef: React.MutableRefObject<SwiperType | undefined>;
+  data: ProductItemType[] | undefined;
   className?: string;
   slideNav?: boolean;
 }) {
@@ -39,26 +42,18 @@ export default function SwiperSlider({
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}
-        className="overflow-visible overflow-x-hidden"
+        className="overflow-visible"
       >
-        <SwiperSlide>
-          <ProductItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductItem />
-        </SwiperSlide>
-        <SwiperSlide>
-          <ProductItem />
-        </SwiperSlide>
+        {data?.map((product) => (
+          <SwiperSlide key={product.id}>
+            <ProductItem
+              name={product.name}
+              slug={product.slug}
+              daily_price={product.daily_price}
+              image={product.images[0].url}
+            />
+          </SwiperSlide>
+        ))}
       </Swiper>
       {slideNav && <SliderButton swiperRef={swiperRef} />}
     </motion.div>

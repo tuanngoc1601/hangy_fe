@@ -27,6 +27,7 @@ export default function ProductsPage() {
   }, [productLoading, products]);
 
   if (cateLoading) return <LoadingPage />;
+
   return (
     <Container>
       <div className="w-full flex flex-row items-start my-8 gap-[22px]">
@@ -100,6 +101,7 @@ export default function ProductsPage() {
                   slug={product.slug}
                   daily_price={product.daily_price}
                   image={product.images[0].url}
+                  className="hover:-translate-y-[1px] overflow-visible"
                 />
               ))}
             </div>

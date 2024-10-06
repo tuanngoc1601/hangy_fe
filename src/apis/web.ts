@@ -30,7 +30,7 @@ export function useGetProducts(type?: string, search?: string) {
   if (search) queryParams.push(`search=${search}`);
   const queryString = queryParams.length ? `?${queryParams.join("&")}` : "";
   const { data, isLoading, error } = useSWR(
-    `/api/v1/products${queryString}`,
+    `/api/v1/products/get-products${queryString}`,
     (url: string) =>
       fetchTyped<ProductItem[]>(url, {
         method: "GET",
@@ -214,4 +214,17 @@ export function usePlaceOrder() {
   );
 
   return { dispatch: trigger };
+}
+
+export function useBestSellingProducts() {
+  const { data, isLoading, error, mutate } = useSWRImmutable(
+    "/api/v1/products/get-best-sellings",
+    (url: string) => {
+      return fetchTyped<ProductItem[]>(url, {
+        method: "GET",
+      });
+    }
+  );
+
+  return { data: data?.data, isLoading, error, mutate };
 }

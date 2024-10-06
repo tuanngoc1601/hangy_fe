@@ -2,22 +2,28 @@ import { useNavigate } from "react-router-dom";
 import { MallBrand } from "../assets";
 import FreeShip from "./icons/FreeShip";
 import StarRating from "./icons/StarRating";
+import clsx from "clsx";
 
 export default function ProductItem({
   name,
   slug,
   daily_price,
   image,
+  className,
 }: {
   name: string;
   slug: string;
   daily_price: number;
   image: string;
+  className?: string;
 }) {
   const navigate = useNavigate();
   return (
     <div
-      className="border hover:border-[#ee4d2d] transition ease-in-out duration-300 cursor-pointer hover:-translate-y-[1px] overflow-visible hover:shadow-[0_0_15px_0_#ee4d2d66]"
+      className={clsx(
+        "border hover:border-[#ee4d2d] transition ease-in-out duration-300 cursor-pointer hover:shadow-[0_0_15px_0_#ee4d2d66]",
+        className
+      )}
       onClick={() => navigate(`/products/${slug}`)}
     >
       <img
