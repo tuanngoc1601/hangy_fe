@@ -1,4 +1,5 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import HomePage from "./pages/HomePage";
 import { LayoutFull } from "./pages/Layout";
 import LoginPage from "./pages/auth/LoginPage";
@@ -69,6 +70,30 @@ function App() {
   return (
     <div className="min-h-screen w-full h-full flex flex-col items-center justify-start bg-white text-[#222222]">
       <RouterProvider router={router} />
+      <Toaster
+        position="bottom-center"
+        reverseOrder={false}
+        gutter={8}
+        containerStyle={{ bottom: "80px" }}
+        toastOptions={{
+          className: "",
+          duration: 4000,
+          // style: {
+          //   background: "#363636",
+          //   color: "#fff",
+          // },
+          success: {
+            style: {
+              border: "1px solid green",
+            },
+          },
+          error: {
+            style: {
+              border: "1px solid red",
+            },
+          },
+        }}
+      />
     </div>
   );
 }

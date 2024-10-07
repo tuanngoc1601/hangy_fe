@@ -8,6 +8,8 @@ import { AppError } from "../../apis/error";
 import clsx from "clsx";
 import { checkValidFormRegister } from "../../lib/utils";
 import useHangyStore from "../../lib/useStore";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../../lib/constants";
 
 export default function RegisterPage() {
   const [email, setEmail] = useState<string>("");
@@ -40,7 +42,7 @@ export default function RegisterPage() {
     })
       .then((resp) => {
         if (!resp.data) {
-          console.log("something went wrong!");
+          toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
           return;
         }
         setToken(resp.data?.access_token);

@@ -9,6 +9,8 @@ import { AppError } from "../../apis/error";
 import { checkValidFormLogin } from "../../lib/utils";
 import clsx from "clsx";
 import useHangyStore from "../../lib/useStore";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../../lib/constants";
 
 export default function LoginPage() {
   const [email, setEmail] = useState<string>("");
@@ -36,7 +38,7 @@ export default function LoginPage() {
     useLogin({ email, password })
       .then((resp) => {
         if (!resp.data) {
-          console.log("something went wrong!");
+          toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
           return;
         }
         setToken(resp.data?.access_token);

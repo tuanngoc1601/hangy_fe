@@ -8,6 +8,7 @@ import SwiperSlider from "../components/SwiperSlider";
 import { useEffect, useRef, useState } from "react";
 import { Swiper as SwiperType } from "swiper";
 import {
+  useBestSellingProducts,
   useDeleteAllCarts,
   useDeleteCartItem,
   useGetCart,
@@ -19,9 +20,12 @@ import { ProductItem, SubProductType } from "../types/app";
 import VariantDropdown from "../components/dropdown/VariantDropdown";
 import LoadingPage from "./LoadingPage";
 import useHangyStore from "../lib/useStore";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../lib/constants";
 
 export default function CartPage() {
   const { data: carts, isLoading, mutate } = useGetCart();
+  const { data: bestSellingProducts } = useBestSellingProducts();
   const { dispatch: useDeleteAllCartItems } = useDeleteAllCarts();
   const swiperProducts = useRef<SwiperType>();
   const navigate = useNavigate();
@@ -80,15 +84,21 @@ export default function CartPage() {
 
   const deleteAllCarts = () => {
     if (!selectedItemCarts.length) {
-      console.log("Please select cart items!");
+      toast.error("Vui lòng chọn sản phẩm!", { id: TOAST_IDS.CHOOSE_PRODUCT });
       return;
     }
     useDeleteAllCartItems({ cart_item_ids: selectedItemCarts }).then((resp) => {
       if (!resp?.data) {
-        console.log("Something went wrong!");
+        toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
         return;
       }
+      setSelectedItemCarts([]);
+      setTotalPaymentCarts(0);
+      setIsSeletedAllCart(false);
       mutate();
+      toast.success("Xoá sản phẩm thành công!", {
+        id: TOAST_IDS.DELETE_ALL_CART,
+      });
     });
   };
 
@@ -202,7 +212,9 @@ export default function CartPage() {
                     className="capitalize font-light h-10 text-sm rounded-sm w-[210px] text-white"
                     action={() => {
                       if (!selectedItemCarts.length) {
-                        console.log("Please select cart items");
+                        toast.error("Vui lòng chọn sản phẩm thanh toán!", {
+                          id: TOAST_IDS.CHOOSE_PRODUCT,
+                        });
                         return;
                       }
                       navigate("/checkout");
@@ -243,6 +255,7 @@ export default function CartPage() {
         </div>
         <SwiperSlider
           swiperRef={swiperProducts}
+          data={bestSellingProducts}
           className="relative mt-6"
           slideNav
         />
@@ -298,12 +311,15 @@ const CartItem = ({
     useDeleteItem()
       .then((resp) => {
         if (!resp.data) {
-          console.log("something went wrong!");
+          toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
           return;
         }
         if (checked)
           setSelectedItemCarts(selectedItemCarts.filter((item) => item !== id));
         mutate();
+        toast.success("Xoá sản phẩm thành công!", {
+          id: TOAST_IDS.DELETE_CART_SUCCESS,
+        });
       })
       .catch((err) => {
         if (err instanceof AppError) {
@@ -390,10 +406,15 @@ const CartItem = ({
               reduceAction()
                 .then((resp) => {
                   if (!resp?.data) {
-                    console.log("something went wrong!");
+                    toast.error("Something went wrong!", {
+                      id: TOAST_IDS.FETCH_ERROR,
+                    });
                     return;
                   }
                   mutate();
+                  toast.success("Cập nhật thành công!", {
+                    id: TOAST_IDS.UPDATE_CART,
+                  });
                 })
                 .catch((err) => {
                   if (err instanceof AppError) {
@@ -418,10 +439,15 @@ const CartItem = ({
               increaseAction()
                 .then((resp) => {
                   if (!resp?.data) {
-                    console.log("something went wrong!");
+                    toast.error("Something went wrong!", {
+                      id: TOAST_IDS.FETCH_ERROR,
+                    });
                     return;
                   }
                   mutate();
+                  toast.success("Cập nhật thành công!", {
+                    id: TOAST_IDS.UPDATE_CART,
+                  });
                 })
                 .catch((err) => {
                   if (err instanceof AppError) {

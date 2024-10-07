@@ -3,6 +3,8 @@ import { ProductItem, SubProductType } from "../../types/app";
 import Dropdown from "../common/Dropdown";
 import { useGetCart, useUpdateSubProductItem } from "../../apis/web";
 import { AppError } from "../../apis/error";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../../lib/constants";
 
 const VariantDropdown = ({
   product,
@@ -22,10 +24,13 @@ const VariantDropdown = ({
     updateSubProduct({ sub: subId })
       .then((resp) => {
         if (!resp?.data) {
-          console.log("Something went wrong!");
+          toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
           return;
         }
         mutate();
+        toast.success("Cập nhật thành công!", {
+          id: TOAST_IDS.UPDATE_CART,
+        });
       })
       .catch((err) => {
         if (err instanceof AppError) {

@@ -8,6 +8,8 @@ import LoadingPage from "./LoadingPage";
 import { useEffect, useState } from "react";
 import Spinner from "../components/common/Spinner";
 import clsx from "clsx";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../lib/constants";
 
 export default function ProfilePage() {
   const { data: me, isLoading, mutate } = useMe();
@@ -20,10 +22,11 @@ export default function ProfilePage() {
     e.preventDefault();
     updateUser({ name, phone, address, gender }).then((resp) => {
       if (!resp?.data) {
-        console.log("Something went wrong!");
+        toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
         return;
       }
       mutate();
+      toast.success("Cập nhật thông tin thành công!", { id: TOAST_IDS.UPDATE_PROFILE });
     });
   }
 

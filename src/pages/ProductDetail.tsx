@@ -22,14 +22,22 @@ import SwiperSlider from "../components/SwiperSlider";
 import { useEffect, useRef, useState } from "react";
 import ArrowImgIcon from "../components/icons/ArrowImgIcon";
 import HeartIcon from "../components/icons/HeartIcon";
-import { useAddToCart, useGetCart, useGetProductDetail } from "../apis/web";
+import {
+  useAddToCart,
+  useBestSellingProducts,
+  useGetCart,
+  useGetProductDetail,
+} from "../apis/web";
 import clsx from "clsx";
 import { AppError } from "../apis/error";
 import LoadingPage from "./LoadingPage";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../lib/constants";
 
 export default function ProductDetail() {
   const { slug } = useParams();
   const { data: product, isLoading } = useGetProductDetail(slug || "");
+  const { data: bestSellingProducts } = useBestSellingProducts();
   const { dispatch: useAddCart } = useAddToCart();
   const { mutate, isLoading: cartLoading } = useGetCart();
   const swiperRelated = useRef<SwiperType>();
@@ -41,8 +49,8 @@ export default function ProductDetail() {
     product?.images[0].url || ""
   );
   function addToCart() {
-    if (product?.sub_products && !subId) {
-      console.log("Choose sub product please!");
+    if (product?.sub_products && product.sub_products.length && !subId) {
+      toast.error("Vui lòng chọn loại sản phẩm!", { id: TOAST_IDS.CHOOSE_VARIANT });
       return;
     }
     const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
@@ -58,10 +66,11 @@ export default function ProductDetail() {
     })
       .then((resp) => {
         if (!resp.data) {
-          console.log("something went wrong!");
+          toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
           return;
         }
         mutate();
+        toast.success("Thêm vào giỏ hàng thành công!", { id: TOAST_IDS.ADD_TO_CART });
         if (!cartLoading) navigate("/cart");
       })
       .catch((err) => {
@@ -282,7 +291,7 @@ export default function ProductDetail() {
                   </div>
                 </div>
               </div>
-              {product?.sub_products && (
+              {product?.sub_products && !!product.sub_products.length && (
                 <div className="my-6 flex items-start justify-start gap-6 text-sm">
                   <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                     Phân loại
@@ -391,6 +400,7 @@ export default function ProductDetail() {
         </div>
         <SwiperSlider
           swiperRef={swiperRelated}
+          data={bestSellingProducts}
           className="relative mt-6"
           slideNav
         />

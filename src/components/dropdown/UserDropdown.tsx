@@ -3,6 +3,8 @@ import useHangyStore from "../../lib/useStore";
 import { useAuthLogout } from "../../apis/auth";
 import { motion } from "framer-motion";
 import Dropdown from "../common/Dropdown";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../../lib/constants";
 
 const UserDropdown = ({
   setIsOpenDropdown,
@@ -16,7 +18,7 @@ const UserDropdown = ({
   function onLogoutSubmit() {
     useLogoutAction().then((resp) => {
       if (!resp.data) {
-        console.log("Something went wrong!");
+        toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
         return;
       }
       setToken("");

@@ -18,3 +18,18 @@ export const services = [
     desc: "Bảo hành uy tín",
   },
 ];
+export const TOAST_IDS = {
+  FETCH_ERROR: "fetch-error",
+  CHOOSE_VARIANT: "choose-variant",
+  CHOOSE_PRODUCT: "choose-product",
+  ADD_TO_CART: "add-to-cart",
+  ORDER: "order",
+  UPDATE_CART: "update-cart",
+  UPDATE_PROFILE: "update-profile",
+  SEND_CONTACT: "send-contact",
+  LOGIN_SUCCESS: "login-success",
+  REGISTER_SUCCESS: "register-success",
+  DELETE_CART_SUCCESS: "delete-cart-success",
+  DELETE_ALL_CART: "delete-all-carts",
+  INVALID_DATA: "invalid-data",
+};

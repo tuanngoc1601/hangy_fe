@@ -10,6 +10,8 @@ import LoadingPage from "./LoadingPage";
 import { useMe } from "../apis/auth";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../lib/constants";
 
 export default function PaymentPage() {
   const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
@@ -31,9 +33,10 @@ export default function PaymentPage() {
       note_message: noteMessage,
     }).then((resp) => {
       if (!resp?.data) {
-        console.log("Something went wrong!");
+        toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
         return;
       }
+      toast.success("Đặt hàng thành công!", { id: TOAST_IDS.ORDER });
       mutate();
       resetState();
       navigate("/order/complete", { replace: true });

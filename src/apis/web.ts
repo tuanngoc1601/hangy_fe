@@ -56,7 +56,7 @@ export function useGetCart() {
   const useFetch = useFetchTyped<CartItem[]>();
   const access_token = useHangyStore((state) => state.access_token);
   const { data, isLoading, error, mutate } = useSWRImmutable(
-    "/api/v1/carts/get-cart",
+    access_token ? "/api/v1/carts/get-cart" : null,
     (url: string) => {
       return useFetch(url, {
         method: "GET",

@@ -7,6 +7,8 @@ import { useState } from "react";
 import { useCreateContact } from "../apis/web";
 import Spinner from "../components/common/Spinner";
 import clsx from "clsx";
+import toast from "react-hot-toast";
+import { TOAST_IDS } from "../lib/constants";
 
 export default function ContactPage() {
   const [name, setName] = useState<string>("");
@@ -17,18 +19,21 @@ export default function ContactPage() {
   function handleSubmit(e: any) {
     e.preventDefault();
     if (!name || !email || !phone || !textMessage) {
-      console.log("Form data is not valid");
+      toast.error("Dữ liệu không hợp lệ!", { id: TOAST_IDS.INVALID_DATA });
       return;
     }
     useContact({ name, email, phone, message: textMessage }).then((resp) => {
       if (!resp?.data) {
-        console.log("Something went wrong!");
+        toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
         return;
       }
       setName("");
       setEmail("");
       setPhone("");
       setTextMessage("");
+      toast.success("Đã gửi thông tin thành công!", {
+        id: TOAST_IDS.SEND_CONTACT,
+      });
     });
   }
   return (
