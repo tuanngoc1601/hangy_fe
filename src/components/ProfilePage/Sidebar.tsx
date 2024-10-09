@@ -4,6 +4,7 @@ import { HiUser, HiBellAlert } from "react-icons/hi2";
 import { FaBitcoin } from "react-icons/fa";
 import { PiNotepadFill } from "react-icons/pi";
 import { BiSolidDiscount } from "react-icons/bi";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
@@ -75,13 +76,13 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <a
-              href="#"
+            <Link
+              to={"/user/orders"}
               className="flex items-center px-2 py-1 text-gray-900 rounded-lg group"
             >
               <PiNotepadFill className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" />
               <span className="ms-3">Đơn mua</span>
-            </a>
+            </Link>
           </li>
           <li>
             <a

@@ -8,6 +8,7 @@ import {
   ProductItem,
   ContactPayload,
   OrderPayload,
+  OrderType,
 } from "../types/app";
 import useHangyStore from "../lib/useStore";
 import useSWRMutation from "swr/mutation";
@@ -227,4 +228,21 @@ export function useBestSellingProducts() {
   );
 
   return { data: data?.data, isLoading, error, mutate };
+}
+
+export function useGetOrders() {
+  const useFetch = useFetchTyped<OrderType[]>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { data, isLoading, mutate } = useSWRImmutable(
+    access_token ? "/api/v1/orders/get-orders" : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+  );
+
+  return { data: data?.data, isLoading, mutate };
 }

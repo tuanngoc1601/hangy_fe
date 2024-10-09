@@ -15,6 +15,8 @@ import ProductsPage from "./pages/ProductsPage";
 import ProfilePage from "./pages/ProfilePage";
 import ContactPage from "./pages/ContactPage";
 import CompleteOrder from "./pages/CompleteOrder";
+import OrderDetailPage from "./pages/OrderDetailPage";
+import OrdersPage from "./pages/OrdersPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,12 @@ const router = createBrowserRouter([
         Component: CompleteOrder,
         id: "orderComplete",
       },
+      {
+        path: "/order/detail",
+        Component: OrderDetailPage,
+        id: "order-detail",
+      },
+      { path: "/user/orders", Component: OrdersPage, id: "orders" },
       {
         path: "/profile",
         Component: ProfilePage,

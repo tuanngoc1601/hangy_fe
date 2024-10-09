@@ -109,3 +109,23 @@ export interface OrderPayload {
   total_amount: number;
   note_message: string;
 }
+
+export interface OrderItem {
+  id: string;
+  slug: string;
+  price: number;
+  product_name: string;
+  product_image: string;
+  quantity: number;
+  sub_product_name: string | null;
+  sub_total_price: number;
+}
+
+export interface OrderType {
+  id: string;
+  order_date: string;
+  status: string;
+  total_amount: number;
+  note_message: string;
+  order_items: OrderItem[];
+}

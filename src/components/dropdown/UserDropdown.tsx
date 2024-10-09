@@ -46,12 +46,25 @@ const UserDropdown = ({
         exit={{ opacity: 0, y: 30, transition: { delay: 0.1, duration: 0.2 } }}
       >
         <ul
-          className="py-2 text-sm text-gray-700"
+          className="py-2 text-sm text-gray-700 space-y-2"
           aria-labelledby="dropdownDividerButton"
         >
           <li>
-            <Link to={"/profile"} className="block px-4 py-2 hover:bg-gray-100">
+            <Link
+              to={"/profile"}
+              className="block px-4 py-2 hover:bg-gray-100"
+              onClick={() => setIsOpenDropdown(false)}
+            >
               Thông tin tài khoản
+            </Link>
+          </li>
+          <li>
+            <Link
+              to={"/user/orders"}
+              className="block px-4 py-2 hover:bg-gray-100"
+              onClick={() => setIsOpenDropdown(false)}
+            >
+              Đơn hàng
             </Link>
           </li>
         </ul>

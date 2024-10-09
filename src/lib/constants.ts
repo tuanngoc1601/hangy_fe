@@ -33,3 +33,12 @@ export const TOAST_IDS = {
   DELETE_ALL_CART: "delete-all-carts",
   INVALID_DATA: "invalid-data",
 };
+export const TABS = [
+  "Tất cả",
+  "Chờ thanh toán",
+  "Vận chuyển",
+  "Chờ giao hàng",
+  "Hoàn thành",
+  "Đã huỷ",
+  "Trả hàng/Hoàn tiền",
+];
