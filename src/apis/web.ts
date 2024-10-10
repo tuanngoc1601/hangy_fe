@@ -9,6 +9,7 @@ import {
   ContactPayload,
   OrderPayload,
   OrderType,
+  ReOrderPayloadItem,
 } from "../types/app";
 import useHangyStore from "../lib/useStore";
 import useSWRMutation from "swr/mutation";
@@ -230,11 +231,14 @@ export function useBestSellingProducts() {
   return { data: data?.data, isLoading, error, mutate };
 }
 
-export function useGetOrders() {
+export function useGetOrders(status?: string) {
   const useFetch = useFetchTyped<OrderType[]>();
   const access_token = useHangyStore((state) => state.access_token);
+  const queryParams: string[] = [];
+  if (status) queryParams.push(`status=${status}`);
+  const queryString = queryParams.length ? `?${queryParams.join("&")}` : "";
   const { data, isLoading, mutate } = useSWRImmutable(
-    access_token ? "/api/v1/orders/get-orders" : null,
+    access_token ? `/api/v1/orders/get-orders${queryString}` : null,
     (url: string) =>
       useFetch(url, {
         method: "GET",
@@ -245,4 +249,39 @@ export function useGetOrders() {
   );
 
   return { data: data?.data, isLoading, mutate };
+}
+
+export function useReOrderItem() {
+  const useFetch = useFetchTyped<string[]>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { trigger } = useSWRMutation(
+    access_token ? "/api/v1/orders/re-order" : null,
+    (url: string, { arg }: { arg: { order_items: ReOrderPayloadItem[] } }) =>
+      useFetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+        body: JSON.stringify(arg),
+      })
+  );
+
+  return { dispatch: trigger };
+}
+
+export function useGetStatusOrders() {
+  const useFetch = useFetchTyped<{ id: string; name: string }[]>();
+  const access_token = useHangyStore((state) => state.access_token);
+  const { data, isLoading } = useSWRImmutable(
+    access_token ? "/api/v1/orders/get-status" : null,
+    (url: string) =>
+      useFetch(url, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${access_token}`,
+        },
+      })
+  );
+
+  return { data: data?.data, isLoading };
 }

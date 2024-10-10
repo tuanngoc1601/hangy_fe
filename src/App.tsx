@@ -85,7 +85,7 @@ function App() {
         containerStyle={{ bottom: "80px" }}
         toastOptions={{
           className: "",
-          duration: 4000,
+          duration: 2000,
           // style: {
           //   background: "#363636",
           //   color: "#fff",

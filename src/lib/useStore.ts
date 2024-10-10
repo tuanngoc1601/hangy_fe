@@ -16,6 +16,7 @@ interface HangyStore {
   setTotalPaymentCarts(v: number): void;
 
   reset(): void;
+  resetToken(): void;
 }
 
 const initialState = {
@@ -44,6 +45,9 @@ const useHangyStore = createWithEqualityFn<HangyStore>()(
 
       reset: () => {
         set(initialState);
+      },
+      resetToken: () => {
+        set({ access_token: "", refresh_token: "" });
       },
     }),
     {

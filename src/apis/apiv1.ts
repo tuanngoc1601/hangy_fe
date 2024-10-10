@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import { useAuthToken } from "../hooks/useAuthToken";
 import { API_V1 } from "../lib/constants";
+import useHangyStore from "../lib/useStore";
 import { checkIfTokenExpired } from "../lib/utils";
 import { APIResponse } from "../types/app";
 
 export function useFetchTyped<T, K = APIResponse<T>>() {
   const { access_token, refresh_token, setToken } = useAuthToken();
+  const resetToken = useHangyStore((state) => state.resetToken);
+  const navigate = useNavigate();
 
   const fetchTyped = (
     input: RequestInfo | URL,
@@ -49,7 +53,12 @@ export function useFetchTyped<T, K = APIResponse<T>>() {
                 "Content-Type": "application/json",
                 Authorization: `Bearer ${data?.data?.access_token}`,
               },
-            }).then((resp) => resp.json());
+            })
+              .then((resp) => resp.json())
+              .then(async () => {
+                resetToken();
+                navigate("auth/login");
+              });
           }
 
           return fetch(_input, init).then(async (response) => {

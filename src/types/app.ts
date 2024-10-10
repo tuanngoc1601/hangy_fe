@@ -114,10 +114,12 @@ export interface OrderItem {
   id: string;
   slug: string;
   price: number;
+  product_id: string;
   product_name: string;
   product_image: string;
   quantity: number;
   sub_product_name: string | null;
+  sub_product_id: string | null;
   sub_total_price: number;
 }
 
@@ -128,4 +130,12 @@ export interface OrderType {
   total_amount: number;
   note_message: string;
   order_items: OrderItem[];
+}
+
+export interface ReOrderPayloadItem {
+  product_id: string;
+  sub_product_id: string | null;
+  quantity: number;
+  price: number;
+  sub_total_price: number;
 }

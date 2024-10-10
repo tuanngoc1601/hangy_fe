@@ -3,19 +3,56 @@ import BreadcrumbIcon from "../components/icons/BreadcrumbIcon";
 import Container from "../components/layout/Container";
 import Sidebar from "../components/ProfilePage/Sidebar";
 import { useState } from "react";
-import { TABS } from "../lib/constants";
+import { TOAST_IDS } from "../lib/constants";
 import clsx from "clsx";
-import { useGetOrders } from "../apis/web";
+import {
+  useGetCart,
+  useGetOrders,
+  useGetStatusOrders,
+  useReOrderItem,
+} from "../apis/web";
 import LoadingPage from "./LoadingPage";
 import toast from "react-hot-toast";
+import { OrderItem } from "../types/app";
+import useHangyStore from "../lib/useStore";
 
 export default function OrdersPage() {
-  const { data: orders, isLoading } = useGetOrders();
+  const [status, setStatus] = useState<string>("");
+  const { data: statuses, isLoading: statusLoading } = useGetStatusOrders();
+  const { data: orders } = useGetOrders(status);
+  const { dispatch: useReOrder } = useReOrderItem();
+  const { mutate } = useGetCart();
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [tab, setTab] = useState<number>(0);
+  const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
+  const setSelectedItemCarts = useHangyStore(
+    (state) => state.setSelectedItemCarts
+  );
   const navigate = useNavigate();
-  function reOrderCart() {}
-  if (isLoading) return <LoadingPage />;
+  function reOrderCart(orderItems: OrderItem[]) {
+    const reOrderPayload = orderItems.map((item) => {
+      return {
+        product_id: item.product_id,
+        sub_product_id: item.sub_product_id,
+        quantity: item.quantity,
+        price: item.price,
+        sub_total_price: item.sub_total_price,
+      };
+    });
+    useReOrder({ order_items: reOrderPayload }).then((resp) => {
+      if (!resp?.data) {
+        toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
+        return;
+      }
+      mutate();
+      setSelectedItemCarts(
+        selectedItemCarts
+          .concat(resp.data)
+          .filter((item, index, array) => array.indexOf(item) === index)
+      );
+      navigate("/cart");
+    });
+  }
+  if (statusLoading) return <LoadingPage />;
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
@@ -31,16 +68,26 @@ export default function OrdersPage() {
           <div className="">
             <div className="mb-4">
               <div className="grid grid-cols-7 bg-white text-sm">
-                {TABS.map((tabItem, index) => (
+                <button
+                  className={clsx(
+                    "border-b-2 hover:text-primary py-4",
+                    status === "" && "border-primary font-medium text-primary"
+                  )}
+                  onClick={() => setStatus("")}
+                >
+                  Tất cả
+                </button>
+                {statuses?.map((item) => (
                   <button
-                    key={index}
+                    key={item.id}
                     className={clsx(
                       "border-b-2 hover:text-primary py-4",
-                      tab === index && "border-primary font-medium text-primary"
+                      item.id === status &&
+                        "border-primary font-medium text-primary"
                     )}
-                    onClick={() => setTab(index)}
+                    onClick={() => setStatus(item.id)}
                   >
-                    {tabItem}
+                    {item.name}
                   </button>
                 ))}
               </div>
@@ -127,7 +174,7 @@ export default function OrdersPage() {
                       <div className="text-sm flex items-center justify-end pt-3 px-6 pb-6">
                         <button
                           className="bg-primary text-white rounded-sm h-10 w-[150px] hover:opacity-70 transition"
-                          onClick={() => reOrderCart()}
+                          onClick={() => reOrderCart(order.order_items)}
                         >
                           Mua Lại
                         </button>
