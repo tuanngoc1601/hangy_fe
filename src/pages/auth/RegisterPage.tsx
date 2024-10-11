@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Logo from "../../assets/Logo";
+import { LogoHangy } from "../../assets";
 import FacebookIcon from "../../components/icons/FacebookIcon";
 import GoogleIcon from "../../components/icons/GoogleIcon";
 import { useNavigate } from "react-router-dom";
@@ -69,8 +69,8 @@ export default function RegisterPage() {
     <main className="h-full w-full flex flex-col justify-start">
       <header className="flex w-full flex-row items-center justify-between h-[84px] max-w-[1200px] mx-auto">
         <div className="flex flex-row gap-4 items-center">
-          <Logo />
-          <span className="text-2xl text-gray-700 whitespace-nowrap mt-2 font-medium">
+          <img src={LogoHangy} alt="hangy-logo" className="w-[167px]" />
+          <span className="text-2xl text-gray-700 whitespace-nowrap font-medium">
             Đăng ký
           </span>
         </div>
