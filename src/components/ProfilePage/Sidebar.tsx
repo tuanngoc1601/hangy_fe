@@ -29,17 +29,19 @@ export default function Sidebar() {
               id="dropdown-example"
               className={clsx(
                 "py-2 space-y-2 transition duration-150 font-normal text-[#000000a6]",
-                isOpenMenu && "block translate-y-0 ease-linear",
-                !isOpenMenu && "hidden -translate-y-full ease-linear"
+                // isOpenMenu && "block translate-y-0 ease-linear",
+                // !isOpenMenu && "hidden -translate-y-full ease-linear"
+                isOpenMenu && "block",
+                !isOpenMenu && "hidden"
               )}
             >
               <li>
-                <a
-                  href="#"
+                <Link
+                  to={"/user/account"}
                   className="flex items-center w-full text-primary transition duration-75 rounded-lg pl-11 group"
                 >
                   Hồ sơ
-                </a>
+                </Link>
               </li>
               <li>
                 <a

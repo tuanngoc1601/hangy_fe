@@ -12,11 +12,12 @@ import ProductDetail from "./pages/ProductDetail";
 import CartPage from "./pages/CartPage";
 import PaymentPage from "./pages/PaymentPage";
 import ProductsPage from "./pages/ProductsPage";
-import ProfilePage from "./pages/ProfilePage";
+import ProfilePage from "./pages/profiles/ProfilePage";
 import ContactPage from "./pages/ContactPage";
 import CompleteOrder from "./pages/CompleteOrder";
-import OrderDetailPage from "./pages/OrderDetailPage";
-import OrdersPage from "./pages/OrdersPage";
+import OrderDetailPage from "./pages/profiles/OrderDetailPage";
+import OrdersPage from "./pages/profiles/OrdersPage";
+import { LayoutProfile } from "./components/ProfilePage/Layout";
 
 const router = createBrowserRouter([
   {
@@ -42,15 +43,17 @@ const router = createBrowserRouter([
         id: "orderComplete",
       },
       {
-        path: "/order/detail",
-        Component: OrderDetailPage,
-        id: "order-detail",
-      },
-      { path: "/user/orders", Component: OrdersPage, id: "orders" },
-      {
-        path: "/profile",
-        Component: ProfilePage,
-        id: "profile",
+        path: "/user",
+        Component: LayoutProfile,
+        children: [
+          { path: "account", Component: ProfilePage, id: "account" },
+          { path: "orders", Component: OrdersPage, id: "orders" },
+          {
+            path: "orders/detail/:orderId",
+            Component: OrderDetailPage,
+            id: "order-detail",
+          },
+        ],
       },
       { path: "/contact", Component: ContactPage, id: "contact" },
     ],
