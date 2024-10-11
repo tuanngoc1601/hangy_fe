@@ -27,8 +27,8 @@ export default function Header() {
               to="/"
               className={({ isActive }: { isActive: boolean }) =>
                 [
-                  "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
-                  isActive ? "bg-[#ed372d]" : "",
+                  "flex items-center text-center h-full pb-[3px] hover:bg-primary hover:text-primary transition ease-linear duration-300",
+                  isActive ? "bg-primary" : "",
                 ].join(" ")
               }
             >
@@ -42,8 +42,8 @@ export default function Header() {
               to="/products"
               className={({ isActive }: { isActive: boolean }) =>
                 [
-                  "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
-                  isActive ? "bg-[#ed372d]" : "",
+                  "flex items-center text-center h-full pb-[3px] hover:bg-primary hover:text-primary transition ease-linear duration-300",
+                  isActive ? "bg-primary" : "",
                 ].join(" ")
               }
             >
@@ -57,8 +57,8 @@ export default function Header() {
               to="/hangy-about"
               className={({ isActive }: { isActive: boolean }) =>
                 [
-                  "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
-                  isActive ? "bg-[#ed372d]" : "",
+                  "flex items-center text-center h-full pb-[3px] hover:bg-primary hover:text-primary transition ease-linear duration-300",
+                  isActive ? "bg-primary" : "",
                 ].join(" ")
               }
             >
@@ -72,8 +72,8 @@ export default function Header() {
               to="/contact"
               className={({ isActive }: { isActive: boolean }) =>
                 [
-                  "flex items-center text-center h-full pb-[3px] hover:bg-[#ed372d] hover:text-[#ed372d] transition ease-linear duration-300",
-                  isActive ? "bg-[#ed372d]" : "",
+                  "flex items-center text-center h-full pb-[3px] hover:bg-primary hover:text-primary transition ease-linear duration-300",
+                  isActive ? "bg-primary" : "",
                 ].join(" ")
               }
             >
