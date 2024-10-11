@@ -45,6 +45,15 @@ export default function ProductsPage() {
                 )}
                 onClick={() => setType("")}
               >
+                {type === "" && (
+                  <svg
+                    viewBox="0 0 4 7"
+                    className="inline-block w-[7px] h-[7px] absolute -left-1 mt-1"
+                    fill="#1c95c9"
+                  >
+                    <polygon points="4 3.5 0 0 0 7"></polygon>
+                  </svg>
+                )}
                 Sản phẩm
               </li>
               {categories?.map((category) => (
@@ -56,6 +65,15 @@ export default function ProductsPage() {
                   )}
                   onClick={() => setType(category.id)}
                 >
+                  {type === category.id && (
+                    <svg
+                      viewBox="0 0 4 7"
+                      className="inline-block w-[7px] h-[7px] absolute -left-1 mt-1"
+                      fill="#1c95c9"
+                    >
+                      <polygon points="4 3.5 0 0 0 7"></polygon>
+                    </svg>
+                  )}
                   {category.name}
                 </li>
               ))}

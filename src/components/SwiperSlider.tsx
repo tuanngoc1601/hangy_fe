@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import ProductItem from "./ProductItem";
 import clsx from "clsx";
 import SliderButton from "./SliderButton";
@@ -16,11 +16,13 @@ export default function SwiperSlider({
   data,
   className,
   slideNav,
+  autoLoop,
 }: {
   swiperRef: React.MutableRefObject<SwiperType | undefined>;
   data: ProductItemType[] | undefined;
   className?: string;
   slideNav?: boolean;
+  autoLoop?: boolean;
 }) {
   return (
     <motion.div
@@ -35,10 +37,16 @@ export default function SwiperSlider({
     >
       <Swiper
         spaceBetween={60}
-        loop={false}
+        loop={autoLoop ? true : false}
         slidesPerView={4}
         navigation={false}
-        modules={[Navigation]}
+        modules={[Navigation, Autoplay]}
+        autoplay={
+          autoLoop && {
+            delay: 3000,
+            disableOnInteraction: false,
+          }
+        }
         onBeforeInit={(swiper) => {
           swiperRef.current = swiper;
         }}

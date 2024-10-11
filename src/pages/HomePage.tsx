@@ -63,7 +63,11 @@ export default function HomePage() {
             </button>
           </motion.div>
         </div>
-        <SwiperSlider swiperRef={swiperFlashSale} data={bestSellingProducts} />
+        <SwiperSlider
+          swiperRef={swiperFlashSale}
+          data={bestSellingProducts}
+          autoLoop
+        />
       </div>
       {/* <div className="w-full h-[0.5px] bg-black mb-6"></div> */}
       <div className="w-full mt-24">
