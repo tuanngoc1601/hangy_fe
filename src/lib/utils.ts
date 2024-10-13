@@ -56,3 +56,29 @@ export function checkIfTokenExpired(token: string): boolean {
   // if (expiration date is greater than current date)
   return now > tokenExpiration;
 }
+
+export function getTimeDifference(time?: string | null): string | null {
+  if (!time) return null;
+
+  const currentTime = new Date();
+  const targetDate = new Date(time);
+  const difference = targetDate.getTime() - currentTime.getTime();
+
+  if (difference <= 0) {
+    return "";
+  }
+
+  const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+  const hours = Math.floor(
+    (difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+  );
+  const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+  const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+  const formattedDays = days < 10 ? `0${days}` : days;
+  const formattedHours = hours < 10 ? `0${hours}` : hours;
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+  const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
+
+  return `${formattedDays}d ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+}

@@ -46,7 +46,7 @@ export default function ProductItem({
         </h3>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 mt-1">
-            <p className="font-semibold truncate text-[#ee4d2d]">
+            <p className="font-semibold truncate text-primary">
               <span className="text-sm mr-px">₫</span>
               <span className="text-lg truncate font-bold">
                 {new Intl.NumberFormat("vi-VN", {

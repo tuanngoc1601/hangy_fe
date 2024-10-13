@@ -14,3 +14,4 @@ export { default as ProductImg } from "./images/product.jpeg";
 export { default as AddCartImg } from "./images/addcart.png";
 export { default as LogoHangy } from "./logo.png";
 export { default as EmptyCart } from "./images/empty-cart.jpg";
+export { default as Doctor } from "./doctor.png";

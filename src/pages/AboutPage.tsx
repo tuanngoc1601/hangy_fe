@@ -1,15 +1,16 @@
 // import Container from "../components/layout/Container";
 
+import { Doctor } from "../assets";
 import ArrowIcon from "../components/icons/ArrowIcon";
 import CheckIcon from "../components/icons/CheckIcon";
 
 export default function AboutPage() {
   return (
     <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1300px]">
-      <section className="py-20 bg-gradient-to-b from-[#fdebea] to-[#fde9e800] overflow-hidden">
+      <section className="bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] overflow-hidden">
         <div className="px-4 flex flex-row items-center">
-          <div className="p-3 w-1/2">
-            <h1 className="text-left leading-[50px] font-semibold text-[40px] text-[#30374f] mt-[37px] mb-[50px] tracking-wide">
+          <div className="p-3 w-1/2 text-[#162355]">
+            <h1 className="text-left leading-[50px] font-semibold text-[40px] mt-[37px] mb-[50px] tracking-wide">
               Rendemy: Nền tảng Web3 về giáo dục hàng đầu tại RENEC Blockchain
             </h1>
             <p className="pr-[150px] leading-7 text-lg">
@@ -18,57 +19,13 @@ export default function AboutPage() {
             </p>
           </div>
           <div className="w-1/2 p-3 flex items-center relative">
-            <img
-              src="https://rendemy.org/_next/image?url=%2Fassets%2Fimages%2Favatar-aboutus.webp&w=2048&q=100"
-              alt=""
-              className="h-full mx-auto z-30"
-            />
-            <img
-              src="https://rendemy.org/assets/images/smile.webp"
-              alt=""
-              className="absolute left-9 -top-3"
-            />
-            <img
-              src="https://rendemy.org/assets/images/star.webp"
-              alt=""
-              className="absolute left-14 top-32 z-20"
-            />
-            <img
-              src="https://rendemy.org/assets/images/coin-left-aboutus.webp"
-              alt=""
-              className="absolute -left-12 bottom-24 z-40"
-            />
-            <img
-              src="https://rendemy.org/assets/images/coin-right-aboutus.webp"
-              alt=""
-              className="absolute top-4 right-4 w-24 z-40"
-            />
-            <img
-              src="https://rendemy.org/assets/images/schedule.webp"
-              alt=""
-              className="absolute right-5 -bottom-16 z-20"
-            />
-            <img
-              src="https://rendemy.org/assets/images/chart-about-us.webp"
-              alt=""
-              className="absolute -left-12 -bottom-10 z-30"
-            />
-            <img
-              src="https://rendemy.org/assets/images/person-about-us.webp"
-              alt=""
-              className="absolute top-7 -right-1 z-20"
-            />
-            <img
-              src="https://rendemy.org/assets/images/home-content-aboutus.svg"
-              alt=""
-              className="absolute h-full inset-0 z-10 mx-auto"
-            />
+            <img src={Doctor} alt="" className="h-full mx-auto z-30" />
           </div>
         </div>
       </section>
       <section className="pt-20 w-full">
-        <div className="px-4 flex flex-col items-center gap-5">
-          <h2 className="max-w-[770px] text-4xl text-[#30374f] font-semibold text-center leading-[1.265]">
+        <div className="px-4 flex flex-col items-center gap-5 text-[#162355]">
+          <h2 className="max-w-[770px] text-4xl font-semibold text-center leading-[1.265]">
             Xây dựng một cộng đồng Crypto giàu toàn diện trên hệ sinh thái RENEC
             Blockchain
           </h2>
@@ -79,7 +36,7 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
-      <section className="relative overflow-hidden my-[100px] bg-gradient-to-b from-[#fc7d36] to-[#ed372d] w-full about-page">
+      <section className="relative overflow-hidden my-[100px] bg-gradient-to-b to-[#d0ebfb] from-[#dbeef8] w-full about-page">
         <div className="px-4 relative w-full z-20">
           <img
             src="https://rendemy.org/assets/images/learn-baner-aboutus.webp"
@@ -93,26 +50,26 @@ export default function AboutPage() {
       <section className="w-full pb-[100px]">
         <div className="px-4 flex items-center justify-around">
           <div className="flex flex-col items-center gap-2">
-            <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#ed372d]/90 to-[#fc7d36] leading-[1.265]">
+            <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               80,000+
             </h3>
-            <p className="text-[#101828] font-medium leading-7 text-lg">
+            <p className="text-[#162355] font-medium leading-7 text-lg">
               Học viên đã tham gia
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#ed372d]/90 to-[#fc7d36] leading-[1.265]">
+            <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               1,000,000+
             </h3>
-            <p className="text-[#101828] font-medium leading-7 text-lg">
+            <p className="text-[#162355] font-medium leading-7 text-lg">
               Giờ học đã diễn ra
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
-            <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#ed372d]/90 to-[#fc7d36] leading-[1.265]">
+            <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               60,000+
             </h3>
-            <p className="text-[#101828] font-medium leading-7 text-lg">
+            <p className="text-[#162355] font-medium leading-7 text-lg">
               RENEC đã được phát
             </p>
           </div>
@@ -128,8 +85,8 @@ export default function AboutPage() {
               height={566}
             />
           </div>
-          <div className="px-3 w-1/2 text-sm flex flex-col justify-center">
-            <h2 className="text-start text-[32px] font-semibold text-[#30374F]">
+          <div className="px-3 w-1/2 text-sm flex flex-col justify-center text-[#162355]">
+            <h2 className="text-start text-[32px] font-semibold">
               Giá trị cốt lõi
             </h2>
             <p className="text-base leading-6 py-[18px]">
@@ -159,13 +116,13 @@ export default function AboutPage() {
       </section>
       <section className="w-full py-[100px] overflow-hidden bg-white">
         <div className="flex flex-col px-4">
-          <h2 className="text-center text-[32px] font-semibold text-[#30374F]">
+          <h2 className="text-center text-[32px] font-semibold text-[#162355]">
             Câu chuyện của học viên
           </h2>
           <div className="mt-[100px] flex flex-row flex-wrap">
             <div className="px-2 w-1/2 flex items-center">
               <div className="flex flex-col items-start justify-center w-full relative">
-                <p className="line-clamp-[7] text-2xl leading-[38.5px] text-[#1d2939] font-medium italic overflow-hidden">
+                <p className="line-clamp-[7] text-2xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
                   Câu 1: Khóa học “Thấu hiểu nội tâm - kiến tạo an vui" đã hệ
                   thống và mang lại nhiều thông tin hữu ích đối với bản thân em.
                   Trong đó, vấn đề em tâm đắc nhất và dành nhiều thời gian suy

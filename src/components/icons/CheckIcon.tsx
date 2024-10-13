@@ -6,7 +6,7 @@ const CheckIcon = () => (
     width="24"
   >
     <path
-      stroke="#002E25"
+      stroke="#162355"
       stroke-linecap="round"
       stroke-linejoin="round"
       stroke-width="1.5"
