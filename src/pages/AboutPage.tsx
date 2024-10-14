@@ -79,7 +79,7 @@ export default function AboutPage() {
         <div className="px-4 flex flex-row flex-wrap ">
           <div className="px-3 w-1/2">
             <img
-              src="https://rendemy.org/assets/images/our-values.webp"
+              src={Doctor}
               alt=""
               width={566}
               height={566}
@@ -261,7 +261,7 @@ export default function AboutPage() {
             </div>
             <div className="px-2 w-1/2 flex items-center justify-end relative">
               <img
-                src="https://rendemy.org/_next/image?url=%2Fassets%2Fimages%2Fabout-us-listen-section-user.webp&w=2048&q=100"
+                src={Doctor}
                 alt=""
                 width={463}
                 height={482}
@@ -273,7 +273,7 @@ export default function AboutPage() {
                 viewBox="0 0 464 488"
                 name="rendemy-light-textless"
                 width="463"
-                className="absolute right-0 -top-9 h-full"
+                className="absolute right-0 h-full"
               >
                 <path
                   fill="url(#rendemy-light-textless_svg__a)"
