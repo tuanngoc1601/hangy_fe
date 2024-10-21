@@ -68,7 +68,7 @@ export default function LoginPage() {
             Đăng nhập
           </span>
         </div>
-        <span className="text-[#ee4d2d] text-base cursor-pointer">
+        <span className="text-primary text-base cursor-pointer">
           Bạn cần giúp đỡ?
         </span>
       </header>

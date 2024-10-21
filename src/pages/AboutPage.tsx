@@ -1,6 +1,6 @@
 // import Container from "../components/layout/Container";
 
-import { Doctor } from "../assets";
+import { Avatar, Doctor } from "../assets";
 import ArrowIcon from "../components/icons/ArrowIcon";
 import CheckIcon from "../components/icons/CheckIcon";
 
@@ -228,11 +228,9 @@ export default function AboutPage() {
                 </p>
                 <div className="flex items-center justify-start gap-4 mt-12">
                   <img
-                    src="https://rendemy.org/_next/image?url=%2Fassets%2Fimages%2Fdefault-thumbnail.webp&w=128&q=100"
+                    src={Avatar}
                     alt="thumb-nail"
-                    width={56}
-                    height={56}
-                    className="rounded-full"
+                    className="rounded-full object-cover w-14 h-14"
                   />
                   <div>
                     <p className="text-xl font-medium text-[#202d40]">
