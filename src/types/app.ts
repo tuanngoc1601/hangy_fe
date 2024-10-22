@@ -139,3 +139,10 @@ export interface ReOrderPayloadItem {
   price: number;
   sub_total_price: number;
 }
+
+export interface FlashSaleResponse {
+  is_flash_sales: boolean;
+  time_start: string | null;
+  time_end: string | null;
+  product_sales: ProductItem[] | null;
+}

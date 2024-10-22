@@ -1,24 +1,32 @@
-export default function CountdownTime() {
+import { useCountDown } from "../../hooks/useCountDown";
+
+export default function CountdownTime({
+  time_end,
+}: {
+  time_start?: string | null;
+  time_end?: string | null;
+}) {
+  const { countdown } = useCountDown({ duration: time_end });
   return (
-    <div className="flex items-center justify-center gap-4">
+    <div className="flex items-center justify-center gap-4 text-primary">
       <p className="flex flex-col">
         <span className="text-[10px]">Days</span>
-        <span className="text-2xl font-bold tracking-wider">03</span>
+        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[0]}</span>
       </p>
       <span className="text-red-400">:</span>
       <p className="flex flex-col">
         <span className="text-[10px]">Hours</span>
-        <span className="text-2xl font-bold tracking-wider">23</span>
+        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[1]}</span>
       </p>
       <span className="text-red-400">:</span>
       <p className="flex flex-col">
         <span className="text-[10px]">Minutes</span>
-        <span className="text-2xl font-bold tracking-wider">19</span>
+        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[2]}</span>
       </p>
       <span className="text-red-400">:</span>
       <p className="flex flex-col">
         <span className="text-[10px]">Seconds</span>
-        <span className="text-2xl font-bold tracking-wider">56</span>
+        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[3]}</span>
       </p>
     </div>
   );

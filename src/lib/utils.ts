@@ -80,5 +80,5 @@ export function getTimeDifference(time?: string | null): string | null {
   const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
   const formattedSeconds = seconds < 10 ? `0${seconds}` : seconds;
 
-  return `${formattedDays}d ${formattedHours}h ${formattedMinutes}m ${formattedSeconds}s`;
+  return `${formattedDays}:${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
 }

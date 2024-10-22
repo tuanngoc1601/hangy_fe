@@ -7,7 +7,7 @@ export function useCountDown({ duration }: { duration?: string | null }) {
   useEffect(() => {
     const interval = setInterval(() => {
       setTimeRemain(getTimeDifference(duration));
-    }, 6000);
+    }, 1000);
 
     return () => clearInterval(interval);
   }, [duration]);

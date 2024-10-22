@@ -10,6 +10,7 @@ import {
   OrderPayload,
   OrderType,
   ReOrderPayloadItem,
+  FlashSaleResponse,
 } from "../types/app";
 import useHangyStore from "../lib/useStore";
 import useSWRMutation from "swr/mutation";
@@ -281,6 +282,19 @@ export function useGetStatusOrders() {
           Authorization: `Bearer ${access_token}`,
         },
       })
+  );
+
+  return { data: data?.data, isLoading };
+}
+
+export function useGetFlashSales() {
+  const { data, isLoading } = useSWRImmutable(
+    "/api/v1/sales/get-flash-sales",
+    (url: string) => {
+      return fetchTyped<FlashSaleResponse>(url, {
+        method: "GET",
+      });
+    }
   );
 
   return { data: data?.data, isLoading };

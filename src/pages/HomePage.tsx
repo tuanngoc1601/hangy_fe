@@ -11,7 +11,7 @@ import SwiperBanner from "../components/HomePage/Swiper/SwiperBanner";
 import CountdownTime from "../components/HomePage/CountdownTime";
 import SwiperSlider from "../components/SwiperSlider";
 import { buttonVariant, typographyVariant } from "../lib/variants";
-import { useBestSellingProducts } from "../apis/web";
+import { useBestSellingProducts, useGetFlashSales } from "../apis/web";
 import LoadingPage from "./LoadingPage";
 
 export default function HomePage() {
@@ -19,56 +19,59 @@ export default function HomePage() {
   const swiperBestSeller = useRef<SwiperType>();
   const swiperCombos = useRef<SwiperType>();
   const { data: bestSellingProducts, isLoading } = useBestSellingProducts();
+  const { data: flashSales, isLoading: flashSaleLoading } = useGetFlashSales();
 
-  if (isLoading) return <LoadingPage />;
+  if (isLoading || flashSaleLoading) return <LoadingPage />;
 
   return (
     <Container>
       <SwiperBanner />
-      <div className="w-full mt-12">
-        <div className="flex flex-row items-center justify-between">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={typographyVariant}
-            className="flex items-center justify-start gap-10"
-          >
-            <div className="flex items-center justify-start">
-              <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
-              <h3 className="text-4xl font-semibold">Flash Sales</h3>
-            </div>
-            <CountdownTime />
-          </motion.div>
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={buttonVariant}
-            className="flex items-center justify-end gap-4"
-          >
-            <button
-              type="button"
-              className="w-[46px] h-[46px] rounded-full flex items-center justify-center bg-[#f5f5f5]"
-              onClick={() => swiperFlashSale.current?.slidePrev()}
+      {flashSales?.is_flash_sales && (
+        <div className="w-full mt-12">
+          <div className="flex flex-row items-center justify-between">
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={typographyVariant}
+              className="flex items-center justify-start gap-10"
             >
-              <ArrowIcon className="rotate-180" />
-            </button>
-            <button
-              type="button"
-              className="w-[46px] h-[46px] rounded-full flex items-center justify-center bg-[#f5f5f5]"
-              onClick={() => swiperFlashSale.current?.slideNext()}
+              <div className="flex items-center justify-start">
+                <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
+                <h3 className="text-4xl font-semibold">Flash Sales</h3>
+              </div>
+              <CountdownTime time_end={flashSales?.time_end} />
+            </motion.div>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={buttonVariant}
+              className="flex items-center justify-end gap-4"
             >
-              <ArrowIcon />
-            </button>
-          </motion.div>
+              <button
+                type="button"
+                className="w-[46px] h-[46px] rounded-full flex items-center justify-center bg-[#f5f5f5]"
+                onClick={() => swiperFlashSale.current?.slidePrev()}
+              >
+                <ArrowIcon className="rotate-180" />
+              </button>
+              <button
+                type="button"
+                className="w-[46px] h-[46px] rounded-full flex items-center justify-center bg-[#f5f5f5]"
+                onClick={() => swiperFlashSale.current?.slideNext()}
+              >
+                <ArrowIcon />
+              </button>
+            </motion.div>
+          </div>
+          <SwiperSlider
+            swiperRef={swiperFlashSale}
+            data={flashSales?.product_sales || []}
+            autoLoop
+          />
         </div>
-        <SwiperSlider
-          swiperRef={swiperFlashSale}
-          data={bestSellingProducts}
-          autoLoop
-        />
-      </div>
+      )}
       {/* <div className="w-full h-[0.5px] bg-black mb-6"></div> */}
       <div className="w-full mt-24">
         <div className="flex items-center justify-between">
