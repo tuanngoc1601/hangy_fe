@@ -33,6 +33,7 @@ import { AppError } from "../apis/error";
 import LoadingPage from "./LoadingPage";
 import toast from "react-hot-toast";
 import { TOAST_IDS } from "../lib/constants";
+import { useCountDown } from "../hooks/useCountDown";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -48,9 +49,14 @@ export default function ProductDetail() {
   const [imgPreview, setImgPreview] = useState<string>(
     product?.images[0].url || ""
   );
+  const { countdown } = useCountDown({
+    duration: product?.flash_sale_end_time,
+  });
   function addToCart() {
     if (product?.sub_products && product.sub_products.length && !subId) {
-      toast.error("Vui lòng chọn loại sản phẩm!", { id: TOAST_IDS.CHOOSE_VARIANT });
+      toast.error("Vui lòng chọn loại sản phẩm!", {
+        id: TOAST_IDS.CHOOSE_VARIANT,
+      });
       return;
     }
     const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
@@ -70,7 +76,9 @@ export default function ProductDetail() {
           return;
         }
         mutate();
-        toast.success("Thêm vào giỏ hàng thành công!", { id: TOAST_IDS.ADD_TO_CART });
+        toast.success("Thêm vào giỏ hàng thành công!", {
+          id: TOAST_IDS.ADD_TO_CART,
+        });
         if (!cartLoading) navigate("/cart");
       })
       .catch((err) => {
@@ -197,42 +205,54 @@ export default function ProductDetail() {
                 </span>
               </div>
             </div>
-            <div className="h-9 text-white flex items-center justify-between px-5 bg-flashSaleBg bg-center bg-no-repeat bg-cover w-full mt-[10px]">
-              <FlashSaleIcon />
-              <div className="flex items-center justify-end gap-2">
-                <TimerIcon />
-                <span className="uppercase font-light ">Kết thúc trong</span>
-                <div className="flex items-center gap-1">
-                  <span className="bg-black text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
-                    01
-                  </span>
-                  <span className="bg-black text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
-                    01
-                  </span>
-                  <span className="bg-black text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
-                    01
-                  </span>
+            <div className="mt-2.5 w-full">
+              {product?.is_flash_sales && (
+                <div className="h-9 text-primary flex items-center justify-between px-5 bg-flashSaleBg bg-center bg-no-repeat bg-cover">
+                  <FlashSaleIcon />
+                  <div className="flex items-center justify-end gap-2">
+                    <TimerIcon />
+                    <span className="uppercase font-light text-white">
+                      Kết thúc trong
+                    </span>
+                    <div className="flex items-center gap-1">
+                      <span className="bg-white text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
+                        {countdown?.split(":")[0]}
+                      </span>
+                      <span className="text-white font-semibold">:</span>
+                      <span className="bg-white text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
+                        {countdown?.split(":")[1]}
+                      </span>
+                      <span className="text-white font-semibold">:</span>
+                      <span className="bg-white text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
+                        {countdown?.split(":")[2]}
+                      </span>
+                      <span className="text-white font-semibold">:</span>
+                      <span className="bg-white text-[17px] font-semibold h-5 w-[28px] flex items-center justify-center rounded-sm">
+                        {countdown?.split(":")[3]}
+                      </span>
+                    </div>
+                  </div>
                 </div>
+              )}
+              <div className="h-[66px] bg-[#fafafa] px-5 py-[15px] flex items-center justify-start gap-4">
+                <span className="text-[#929292] text-base line-through font-medium">
+                  ₫
+                  {new Intl.NumberFormat("vi-VN", {
+                    // style: "currency",
+                    currency: "VND",
+                  }).format(product?.real_price || 0)}
+                </span>
+                <span className="text-[#d0011b] text-3xl font-bold">
+                  ₫
+                  {new Intl.NumberFormat("vi-VN", {
+                    // style: "currency",
+                    currency: "VND",
+                  }).format(product?.daily_price || 0)}
+                </span>
+                <span className="bg-[#d0011b] rounded-sm text-white text-xs font-bold py-0.5 px-1 uppercase">
+                  56% giảm
+                </span>
               </div>
-            </div>
-            <div className="h-[66px] bg-[#fafafa] px-5 py-[15px] flex items-center justify-start gap-4">
-              <span className="text-[#929292] text-base line-through font-medium">
-                ₫
-                {new Intl.NumberFormat("vi-VN", {
-                  // style: "currency",
-                  currency: "VND",
-                }).format(product?.real_price || 0)}
-              </span>
-              <span className="text-[#d0011b] text-3xl font-bold">
-                ₫
-                {new Intl.NumberFormat("vi-VN", {
-                  // style: "currency",
-                  currency: "VND",
-                }).format(product?.daily_price || 0)}
-              </span>
-              <span className="bg-[#d0011b] rounded-sm text-white text-xs font-bold py-0.5 px-1 uppercase">
-                56% giảm
-              </span>
             </div>
             <div className="mt-6 px-5 flex flex-col">
               <div className="flex items-center justify-start gap-6 text-sm">

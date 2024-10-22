@@ -14,7 +14,7 @@ const UpComming = () => (
       ></path>
       <path
         stroke="#C1C3CA"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         strokeWidth="5"
         d="M170.362 101.458v12.193"
       ></path>
@@ -24,7 +24,7 @@ const UpComming = () => (
       ></path>
       <path
         stroke="#C1C3CA"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         strokeWidth="5"
         d="M304.563 92.391v12.626"
       ></path>
@@ -34,7 +34,7 @@ const UpComming = () => (
       ></path>
       <path
         stroke="#C1C3CA"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         strokeWidth="5"
         d="M323.576 101.489v9.593"
       ></path>
@@ -60,7 +60,7 @@ const UpComming = () => (
       ></path>
       <path
         stroke="#CDCFD4"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         strokeWidth="3"
         d="M231.192 36.474 198.22 60.178m33.711-23.209-31.339 42.89m17.657-1.702 13.59-39.64m-19.722 11.758s6.687-1.825 6.656 3.806c0 0 6.441-1.454 6.071 5.014m-21.602-2.29s8.475-1.826 8.629 7.086c0 0 6.779-2.506 9.398 4.704"
       ></path>
@@ -90,7 +90,7 @@ const UpComming = () => (
       ></path>
       <path
         stroke="#C1C3CA"
-        stroke-miterlimit="10"
+        strokeMiterlimit="10"
         strokeWidth="5"
         d="M237.602 75.929 200.5 80.168l-3.759-31.44c-1.264-10.46 6.317-19.929 16.763-20.919 10.138-.99 19.198 6.344 20.369 16.494l3.729 31.626Z"
       ></path>

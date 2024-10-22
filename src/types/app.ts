@@ -68,6 +68,8 @@ export interface ProductItem {
   flash_sale_price: number;
   stock_quantity: number;
   sold_quantity: number;
+  is_flash_sales: boolean;
+  flash_sale_end_time: string | null;
   image_url: string;
   sub_products: SubProductType[];
   images: ImageItem[];

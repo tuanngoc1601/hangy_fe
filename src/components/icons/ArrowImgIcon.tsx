@@ -3,7 +3,7 @@ import { PropsWithClassName } from "../../types/app";
 const ArrowImgIcon = ({ className }: PropsWithClassName) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    enable-background="new 0 0 13 20"
+    enableBackground="new 0 0 13 20"
     view-box="0 0 13 20"
     x="0"
     y="0"
