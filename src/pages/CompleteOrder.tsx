@@ -19,10 +19,10 @@ export default function CompleteOrder() {
               <path
                 d="M85 100l10 10l20 -20"
                 stroke="white"
-                stroke-width="10"
+                strokeWidth="10"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               />
 
               <circle cx="40" cy="20" r="2" fill="#1c95c9" />

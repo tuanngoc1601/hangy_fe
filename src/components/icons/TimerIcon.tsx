@@ -7,16 +7,16 @@ const TimerIcon = () => (
   >
     <g
       fill="none"
-      fill-rule="evenodd"
+      fillRule="evenodd"
       stroke="#fff"
-      stroke-width="1.8"
+      strokeWidth="1.8"
       transform="translate(1 1)"
     >
       <circle cx="9" cy="9" r="9"></circle>
       <path
         d="m11.5639648 5.05283203v4.71571528l-2.72832027 1.57129639"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeLinecap="round"
+        strokeLinejoin="round"
         transform="matrix(-1 0 0 1 20.39961 0)"
       ></path>
     </g>

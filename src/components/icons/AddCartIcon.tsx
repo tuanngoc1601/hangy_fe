@@ -15,7 +15,7 @@ const AddCartIcon = () => (
         <polyline
           fill="none"
           points=".5 .5 2.7 .5 5.2 11 12.4 11 14.5 3.5 3.7 3.5"
-          stroke-linecap="round"
+          strokeLinecap="round"
           strokeLinejoin="round"
           stroke-miterlimit="10"
         ></polyline>
@@ -24,7 +24,7 @@ const AddCartIcon = () => (
       </g>
       <line
         fill="none"
-        stroke-linecap="round"
+        strokeLinecap="round"
         stroke-miterlimit="10"
         x1="7.5"
         x2="10.5"
@@ -33,7 +33,7 @@ const AddCartIcon = () => (
       ></line>
       <line
         fill="none"
-        stroke-linecap="round"
+        strokeLinecap="round"
         stroke-miterlimit="10"
         x1="9"
         x2="9"

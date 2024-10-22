@@ -7,8 +7,8 @@ const VoucherIcon = () => (
     <g filter="url(#voucher-filter0_d)">
       <mask id="a" fill="#fff">
         <path
-          fill-rule="evenodd"
-          clip-rule="evenodd"
+          fillRule="evenodd"
+          clipRule="evenodd"
           d="M1 2h18v2.32a1.5 1.5 0 000 2.75v.65a1.5 1.5 0 000 2.75v.65a1.5 1.5 0 000 2.75V16H1v-2.12a1.5 1.5 0 000-2.75v-.65a1.5 1.5 0 000-2.75v-.65a1.5 1.5 0 000-2.75V2z"
         ></path>
       </mask>
@@ -18,7 +18,7 @@ const VoucherIcon = () => (
       ></path>
     </g>
     <path
-      clip-rule="evenodd"
+      clipRule="evenodd"
       d="M6.49 14.18h.86v-1.6h-.86v1.6zM6.49 11.18h.86v-1.6h-.86v1.6zM6.49 8.18h.86v-1.6h-.86v1.6zM6.49 5.18h.86v-1.6h-.86v1.6z"
     ></path>
     <defs>
