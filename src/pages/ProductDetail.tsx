@@ -60,7 +60,11 @@ export default function ProductDetail() {
       return;
     }
     const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
-    const price = subProduct?.daily_price
+    const price = product?.is_flash_sales
+      ? subProduct?.flash_sale_price
+        ? subProduct.flash_sale_price
+        : product?.flash_sale_price || 0
+      : subProduct?.daily_price
       ? subProduct.daily_price
       : product?.daily_price || 0;
     useAddCart({
@@ -257,8 +261,11 @@ export default function ProductDetail() {
                   {product &&
                     Math.ceil(
                       product.is_flash_sales
-                        ? ((product.real_price - product.flash_sale_price) * 100) / product.real_price
-                        : ((product.real_price - product.daily_price) * 100) / product.real_price
+                        ? ((product.real_price - product.flash_sale_price) *
+                            100) /
+                            product.real_price
+                        : ((product.real_price - product.daily_price) * 100) /
+                            product.real_price
                     )}
                   % giảm
                 </span>

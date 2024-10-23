@@ -148,23 +148,32 @@ export default function CartPage() {
               <div className="w-[12.70417%] text-center">Thao tác</div>
             </div>
             {!!carts?.length &&
-              carts?.map((item) => (
-                <CartItem
-                  key={item.id}
-                  id={item.id}
-                  product={item.product}
-                  subProduct={item.sub_product}
-                  quantity={item.quantity}
-                  real_price={
-                    item.sub_product?.real_price || item.product.real_price
-                  }
-                  price={item.price}
-                  amount={item.amount}
-                  checked={selectedItemCarts.includes(item.id)}
-                  onChange={() => handleCheckboxChange(item.id)}
-                  image={item.product.images[0].url}
-                />
-              ))}
+              carts?.map((item) => {
+                const price = item.product.is_flash_sales
+                  ? item.sub_product?.flash_sale_price
+                    ? item.sub_product.flash_sale_price
+                    : item.product.flash_sale_price
+                  : item.sub_product?.daily_price
+                  ? item.sub_product.daily_price
+                  : item.product.daily_price;
+                return (
+                  <CartItem
+                    key={item.id}
+                    id={item.id}
+                    product={item.product}
+                    subProduct={item.sub_product}
+                    quantity={item.quantity}
+                    real_price={
+                      item.sub_product?.real_price || item.product.real_price
+                    }
+                    price={price}
+                    amount={price * item.quantity}
+                    checked={selectedItemCarts.includes(item.id)}
+                    onChange={() => handleCheckboxChange(item.id)}
+                    image={item.product.images[0].url}
+                  />
+                );
+              })}
           </div>
           <section className="sticky z-30 bg-white text-base font-medium w-full mt-5 text-[#222222] bottom-0 shadow-[0_-1px_3px_-1px_rgba(0,0,0,0.3)]">
             <div className="flex items-center justify-end py-3 gap-52">
