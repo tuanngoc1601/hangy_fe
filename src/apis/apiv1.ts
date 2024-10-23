@@ -57,7 +57,7 @@ export function useFetchTyped<T, K = APIResponse<T>>() {
               .then((resp) => resp.json())
               .then(async () => {
                 resetToken();
-                navigate("auth/login");
+                navigate("/auth/login");
               });
           }
 

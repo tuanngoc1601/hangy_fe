@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export default function Sidebar() {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
   return (
-    <aside className="w-64 transition-transform text-sm">
+    <aside className="w-64 transition-transform text-sm h-fit sticky bottom-0 top-[95px]">
       <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50">
         <ul className="space-y-2 font-medium">
           <li>

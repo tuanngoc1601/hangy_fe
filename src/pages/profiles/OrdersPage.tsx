@@ -93,7 +93,11 @@ export default function OrdersPage() {
               <div className="flex flex-col w-full" key={order.id}>
                 <div className="bg-white px-6 pt-6 pb-3 rounded-sm shadow-md w-full border-b border-dashed">
                   <div className="flex items-center justify-end pb-3">
-                    <span className="font-semibold text-[#26aa99] uppercase text-xs">
+                    <span className="uppercase px-4 border-r text-sm font-medium">
+                      Mã đơn hàng:{" "}
+                      {order.order_date.split("-").join("").concat(order.id)}
+                    </span>
+                    <span className="font-semibold text-[#26aa99] uppercase text-xs ps-4">
                       {order.status}
                     </span>
                   </div>

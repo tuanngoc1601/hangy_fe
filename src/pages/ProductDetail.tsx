@@ -247,10 +247,20 @@ export default function ProductDetail() {
                   {new Intl.NumberFormat("vi-VN", {
                     // style: "currency",
                     currency: "VND",
-                  }).format(product?.daily_price || 0)}
+                  }).format(
+                    product?.is_flash_sales
+                      ? product?.flash_sale_price
+                      : product?.daily_price || 0
+                  )}
                 </span>
                 <span className="bg-[#d0011b] rounded-sm text-white text-xs font-bold py-0.5 px-1 uppercase">
-                  56% giảm
+                  {product &&
+                    Math.ceil(
+                      product.is_flash_sales
+                        ? ((product.real_price - product.flash_sale_price) * 100) / product.real_price
+                        : ((product.real_price - product.daily_price) * 100) / product.real_price
+                    )}
+                  % giảm
                 </span>
               </div>
             </div>
