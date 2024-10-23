@@ -2,20 +2,23 @@
 
 import { Avatar, Doctor } from "../assets";
 import ArrowIcon from "../components/icons/ArrowIcon";
-import CheckIcon from "../components/icons/CheckIcon";
+// import CheckIcon from "../components/icons/CheckIcon";
 
 export default function AboutPage() {
   return (
     <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1300px]">
       <section className="bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] overflow-hidden">
         <div className="px-4 flex flex-row items-center">
-          <div className="p-3 w-1/2 text-[#162355]">
+          <div className="p-3 w-2/3 text-[#162355]">
             <h1 className="text-left leading-[50px] font-semibold text-[40px] mt-[37px] mb-[50px] tracking-wide">
-              Rendemy: Nền tảng Web3 về giáo dục hàng đầu tại RENEC Blockchain
+              Bác sĩ/ Nha sĩ Nguyễn Kim Cúc - Nhà sáng lập thương hiệu Hangy
             </h1>
-            <p className="pr-[150px] leading-7 text-lg">
-              Nơi bạn vừa có thể làm giàu tri thức và tự mình sở hữu Crypto sau
-              khi hoàn thành các khóa học.
+            <p className="pr-20 leading-7 text-lg">
+              Năm 2020, bác sĩ Cúc chính thức sáng lập thương hiệu Hangy, cùng
+              sự ra đời của sản phẩm máy tăm nước đầu tiên. Không chỉ là một sản
+              phẩm, máy tăm nước Hangy còn mang trong mình tâm huyết và sự am
+              hiểu của bác sĩ về nhu cầu chăm sóc sức khỏe răng miệng của cộng
+              đồng.
             </p>
           </div>
           <div className="w-1/2 p-3 flex items-center relative">
@@ -26,13 +29,17 @@ export default function AboutPage() {
       <section className="pt-20 w-full">
         <div className="px-4 flex flex-col items-center gap-5 text-[#162355]">
           <h2 className="max-w-[770px] text-4xl font-semibold text-center leading-[1.265]">
-            Xây dựng một cộng đồng Crypto giàu toàn diện trên hệ sinh thái RENEC
-            Blockchain
+            Xây dựng một đội ngũ chuyên viên có trình độ cao trong lĩnh vực nha
+            khoa
           </h2>
-          <p className="w-1/2 text-center text-lg leading-[1.4] text-[#404968]">
-            Thay đổi nhận thức về cuộc sống, từ đó xây dựng một cộng đồng RENEC
-            lành mạnh, tử tế, giàu phẩm chất và nhân cách. Hướng đến giàu toàn
-            diện về nội tâm, sức khoẻ, mối quan hệ và tài chính.
+          <p className="w-3/4 text-center text-lg leading-[1.4] text-[#404968]">
+            Với tâm huyết của mình, Bác sĩ Cúc đã đào tạo 1 đội ngũ chuyên viên
+            có trình độ cao, có đầy đủ kiến thức và kỹ năng chuyên môn trong
+            lĩnh vực nha khoa để đáp ứng nhu cầu đa dạng và phục vụ tận tâm cho
+            khách hàng. Mục tiêu của Hangy không chỉ là mang đến những sản phẩm
+            chăm sóc răng miệng tốt nhất, mà còn là mang đến những giá trị đích
+            thực qua đội ngũ chuyên nghiệp và tâm huyết. Sự đồng hành với khách
+            hàng là giá trị mà Hangy đang hướng tới.
           </p>
         </div>
       </section>
@@ -51,26 +58,26 @@ export default function AboutPage() {
         <div className="px-4 flex items-center justify-around">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
-              80,000+
+              267,300,000+
             </h3>
             <p className="text-[#162355] font-medium leading-7 text-lg">
-              Học viên đã tham gia
+              Lượt bán toàn quốc
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
-              1,000,000+
+              61,265,000+
             </h3>
             <p className="text-[#162355] font-medium leading-7 text-lg">
-              Giờ học đã diễn ra
+              Đánh giá 5* từ khách hàng
             </p>
           </div>
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
-              60,000+
+              133,689,000+
             </h3>
             <p className="text-[#162355] font-medium leading-7 text-lg">
-              RENEC đã được phát
+              Khách hàng cần hỗ trợ
             </p>
           </div>
         </div>
@@ -78,46 +85,28 @@ export default function AboutPage() {
       <section className="w-full py-[100px] overflow-hidden">
         <div className="px-4 flex flex-row flex-wrap ">
           <div className="px-3 w-1/2">
-            <img
-              src={Doctor}
-              alt=""
-              width={566}
-              height={566}
-            />
+            <img src={Doctor} alt="" width={566} height={566} />
           </div>
           <div className="px-3 w-1/2 text-sm flex flex-col justify-center text-[#162355]">
             <h2 className="text-start text-[32px] font-semibold">
-              Giá trị cốt lõi
+              Tầm nhìn tương lai
             </h2>
             <p className="text-base leading-6 py-[18px]">
-              Tri thức hướng đến những giá trị của 7 sự giàu toàn diện và trưởng
-              thành tận cùng. Các khóa học xoay quanh 4 chủ đề chính:
+              Tầm nhìn tương lai của Bác sĩ Cúc và thương hiệu Hangy là mở rộng
+              hơn nữa các dòng sản phẩm chăm sóc răng miệng, tạo ra một hệ sinh
+              thái chăm sóc răng miệng toàn diện từ máy tăm nước, bàn chải điện,
+              nước súc miệng đến các sản phẩm hỗ trợ điều trị nha khoa khác…để
+              đảm bảo đến từng đối tượng khách hàng được chăm sóc một cách tốt
+              nhất. Bác sĩ Cúc mong muốn Hangy trở thành biểu tượng cho sự yêu
+              thương và quan tâm đến sức khoẻ của mỗi gia đình.
             </p>
-            <div>
-              <div className="flex items-center gap-4 mb-5">
-                <CheckIcon />
-                <span>Nội tâm</span>
-              </div>
-              <div className="flex items-center gap-4 mb-5">
-                <CheckIcon />
-                <span>Sức khỏe</span>
-              </div>
-              <div className="flex items-center gap-4 mb-5">
-                <CheckIcon />
-                <span>Mối quan hệ</span>
-              </div>
-              <div className="flex items-center gap-4 mb-5">
-                <CheckIcon />
-                <span>Tài chính</span>
-              </div>
-            </div>
           </div>
         </div>
       </section>
-      <section className="w-full py-[100px] overflow-hidden bg-white">
+      <section className="w-full py-[100px] overflow-hidden bg-transparent">
         <div className="flex flex-col px-4">
           <h2 className="text-center text-[32px] font-semibold text-[#162355]">
-            Câu chuyện của học viên
+            Đánh giá của khách hàng
           </h2>
           <div className="mt-[100px] flex flex-row flex-wrap">
             <div className="px-2 w-1/2 flex items-center">
