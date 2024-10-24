@@ -13,11 +13,14 @@ import SwiperSlider from "../components/SwiperSlider";
 import { buttonVariant, typographyVariant } from "../lib/variants";
 import { useBestSellingProducts, useGetFlashSales } from "../apis/web";
 import LoadingPage from "./LoadingPage";
+import WelcomePopup from "../components/HomePage/WelcomePopup";
+import useHangyStore from "../lib/useStore";
 
 export default function HomePage() {
   const swiperFlashSale = useRef<SwiperType>();
   const swiperBestSeller = useRef<SwiperType>();
   const swiperCombos = useRef<SwiperType>();
+  const welcomePopup = useHangyStore((state) => state.welcomePopup);
   const { data: bestSellingProducts, isLoading } = useBestSellingProducts();
   const { data: flashSales, isLoading: flashSaleLoading } = useGetFlashSales();
 
@@ -136,6 +139,7 @@ export default function HomePage() {
       <div className="w-full flex justify-center">
         <Services />
       </div>
+      {welcomePopup && !isLoading && !flashSaleLoading && <WelcomePopup />}
     </Container>
   );
 }
