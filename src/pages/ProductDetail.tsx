@@ -6,6 +6,8 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation } from "swiper/modules";
+import ReactMarkdown from "react-markdown";
+import rehypeRaw from "rehype-raw";
 import Container from "../components/layout/Container";
 import BreadcrumbIcon from "../components/icons/BreadcrumbIcon";
 import { MallBrand } from "../assets";
@@ -424,6 +426,13 @@ export default function ProductDetail() {
             </div>
           </div>
         </section>
+      </div>
+      <div className="mt-6 w-full bg-white p-7">
+        <p className="uppercase text-xl font-bold py-2">Mô tả sản phẩm</p>
+        <ReactMarkdown
+          children={product?.description}
+          rehypePlugins={[rehypeRaw]}
+        />
       </div>
       <div className="mt-6 mb-12 bg-white p-7 w-full">
         <div className="flex flex-row items-center justify-between w-full">
