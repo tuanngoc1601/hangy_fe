@@ -21,19 +21,12 @@ export default function ProductItem({
   return (
     <div
       className={clsx(
-        "border hover:border-[#ee4d2d] transition ease-in-out duration-300 cursor-pointer hover:shadow-[0_0_15px_0_#ee4d2d66]",
+        "border hover:border-primary transition ease-in-out duration-300 cursor-pointer hover:shadow-[0_0_15px_0_#1c95c966]",
         className
       )}
       onClick={() => navigate(`/products/${slug}`)}
     >
-      <img
-        src={
-          image ||
-          "https://down-vn.img.susercontent.com/file/vn-11134201-7r98o-lzm89uqf9jmpb2_tn.webp"
-        }
-        alt=""
-        className="w-full aspect-square object-contain"
-      />
+      <img src={image} alt="" className="w-full aspect-square object-contain" />
       <div className="p-2">
         <h3 className="text-base text-[#000000cc] font-medium min-h-12 line-clamp-2">
           <img
@@ -41,8 +34,7 @@ export default function ProductItem({
             alt=""
             className="w-[30px] h-[14px] mr-1 mb-0.5 inline-block"
           />
-          {name ??
-            "Máy tăm nước HANGY HG23 và HF-2 nâng cấp chống thấm nước [BẢO HÀNH ĐỔI"}
+          {name}
         </h3>
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2 mt-1">

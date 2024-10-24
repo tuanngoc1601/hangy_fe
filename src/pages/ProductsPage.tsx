@@ -87,7 +87,7 @@ export default function ProductsPage() {
                 Sắp xếp theo
               </span>
               <span className="bg-primary text-white rounded-sm h-[34px] px-[15px] outline-none capitalize leading-[34px] cursor-pointer">
-                Phổ biến
+                Tất cả
               </span>
               <span className="bg-white h-[34px] px-[15px] rounded-sm leading-[34px] cursor-pointer">
                 Bán chạy

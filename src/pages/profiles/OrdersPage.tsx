@@ -12,6 +12,7 @@ import {
 import toast from "react-hot-toast";
 import { OrderItem } from "../../types/app";
 import useHangyStore from "../../lib/useStore";
+import { OrderEmpty } from "../../assets";
 
 export default function OrdersPage() {
   const [status, setStatus] = useState<string>("");
@@ -87,8 +88,7 @@ export default function OrdersPage() {
           />
         </div>
         <div className="flex flex-col gap-4">
-          {orders &&
-            !!orders.length &&
+          {orders && !!orders.length ? (
             orders.map((order) => (
               <div className="flex flex-col w-full" key={order.id}>
                 <div className="bg-white px-6 pt-6 pb-3 rounded-sm shadow-md w-full border-b border-dashed">
@@ -176,7 +176,12 @@ export default function OrdersPage() {
                   </div>
                 </div>
               </div>
-            ))}
+            ))
+          ) : (
+            <div className="w-full flex items-center justify-center bg-white h-96">
+              <img src={OrderEmpty} alt="" className="w-36" />
+            </div>
+          )}
         </div>
       </div>
     </div>

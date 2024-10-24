@@ -4,13 +4,13 @@ import { HiUser, HiBellAlert } from "react-icons/hi2";
 import { FaBitcoin } from "react-icons/fa";
 import { PiNotepadFill } from "react-icons/pi";
 import { BiSolidDiscount } from "react-icons/bi";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function Sidebar() {
   const [isOpenMenu, setIsOpenMenu] = useState<boolean>(true);
   return (
     <aside className="w-64 transition-transform text-sm h-fit sticky bottom-0 top-[95px]">
-      <div className="h-full px-3 py-4 overflow-y-auto bg-gray-50">
+      <div className="h-full px-3 py-4 overflow-y-auto bg-transparent">
         <ul className="space-y-2 font-medium">
           <li>
             <button
@@ -36,12 +36,17 @@ export default function Sidebar() {
               )}
             >
               <li>
-                <Link
+                <NavLink
                   to={"/user/account"}
-                  className="flex items-center w-full text-primary transition duration-75 rounded-lg pl-11 group"
+                  className={({ isActive }: { isActive: boolean }) =>
+                    [
+                      "flex items-center w-full transition duration-75 rounded-lg pl-11 group",
+                      isActive ? "text-primary font-semibold" : "text-gray-900",
+                    ].join(" ")
+                  }
                 >
                   Hồ sơ
-                </Link>
+                </NavLink>
               </li>
               <li>
                 <a
@@ -78,13 +83,18 @@ export default function Sidebar() {
             </ul>
           </li>
           <li>
-            <Link
+            <NavLink
               to={"/user/orders"}
-              className="flex items-center px-2 py-1 text-gray-900 rounded-lg group"
+              className={({ isActive }: { isActive: boolean }) =>
+                [
+                  "flex items-center px-2 py-1 rounded-lg group",
+                  isActive ? "text-primary font-semibold" : "text-grey-90",
+                ].join(" ")
+              }
             >
               <PiNotepadFill className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900" />
               <span className="ms-3">Đơn mua</span>
-            </Link>
+            </NavLink>
           </li>
           <li>
             <a

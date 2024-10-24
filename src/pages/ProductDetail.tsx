@@ -304,7 +304,7 @@ export default function ProductDetail() {
                 <div className="flex items-center text-sm font-medium gap-5">
                   <p className="text-[#222] flex items-center gap-1">
                     Bảo hiểm Bảo vệ người tiêu dùng
-                    <span className="rounded-lg text-white text-[10px] font-medium px-[5px] h-4 bg-[#ee4d2d] leading-4 rounded-bl-none">
+                    <span className="rounded-lg text-white text-[10px] font-medium px-[5px] h-4 bg-primary leading-4 rounded-bl-none">
                       Mới
                     </span>
                   </p>
