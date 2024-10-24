@@ -3,6 +3,7 @@ export { default as MallBrand } from "./images/mall-brand.png";
 export { default as Banner1 } from "./banners/banner1.png";
 export { default as Banner2 } from "./banners/banner2.png";
 export { default as Banner3 } from "./banners/banner3.png";
+export { default as BannerSp } from "./banners/banner-sp.png";
 export { default as Arrival1 } from "./images/featured/arrival1.png";
 export { default as Arrival2 } from "./images/featured/arrival2.png";
 export { default as Arrival3 } from "./images/featured/arrival3.png";

@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Swiper as SwiperType } from "swiper";
 import Container from "../components/layout/Container";
-import { Banner3 } from "../assets";
+import { BannerSp } from "../assets";
 import { useRef } from "react";
 import ArrowIcon from "../components/icons/ArrowIcon";
 import Button from "../components/common/Button";
@@ -15,11 +15,13 @@ import { useBestSellingProducts, useGetFlashSales } from "../apis/web";
 import LoadingPage from "./LoadingPage";
 import WelcomePopup from "../components/HomePage/WelcomePopup";
 import useHangyStore from "../lib/useStore";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
   const swiperFlashSale = useRef<SwiperType>();
   const swiperBestSeller = useRef<SwiperType>();
   const swiperCombos = useRef<SwiperType>();
+  const navigate = useNavigate();
   const welcomePopup = useHangyStore((state) => state.welcomePopup);
   const { data: bestSellingProducts, isLoading } = useBestSellingProducts();
   const { data: flashSales, isLoading: flashSaleLoading } = useGetFlashSales();
@@ -94,7 +96,9 @@ export default function HomePage() {
             variants={buttonVariant}
             viewport={{ once: true }}
           >
-            <Button className="text-white">Xem tất cả</Button>
+            <Button className="text-white" action={() => navigate("/products")}>
+              Xem tất cả
+            </Button>
           </motion.div>
         </div>
         <SwiperSlider
@@ -105,7 +109,7 @@ export default function HomePage() {
         />
       </div>
       <div className="w-full mt-12">
-        <img src={Banner3} alt="" className="w-full" />
+        <img src={BannerSp} alt="" className="w-full" />
       </div>
       <div className="w-full mt-24">
         <div className="flex items-center justify-between">
@@ -125,7 +129,9 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={buttonVariant}
           >
-            <Button className="text-white">Chi tiết</Button>
+            <Button className="text-white" action={() => navigate("/products")}>
+              Chi tiết
+            </Button>
           </motion.div>
         </div>
         <SwiperSlider

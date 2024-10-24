@@ -26,7 +26,11 @@ export default function PaymentPage() {
   const [noteMessage, setNoteMessage] = useState<string>("");
 
   function placeOrder() {
-    if (!me?.address || !me?.phone) return;
+    if (!me?.address || !me?.phone) {
+      navigate("/user/order");
+      toast.error("Vui lòng thêm cung cấp thêm thông tin địa chỉ nhận hàng!");
+      return;
+    }
     useOrderAction({
       cart_item_ids: selectedItemCarts,
       total_amount: totalPaymentCarts,
