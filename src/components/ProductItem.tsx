@@ -28,11 +28,11 @@ export default function ProductItem({
     >
       <img src={image} alt="" className="w-full aspect-square object-contain" />
       <div className="p-2">
-        <h3 className="text-base text-[#000000cc] font-medium min-h-12 line-clamp-2">
+        <h3 className="md:text-base xs:text-sm text-[#000000cc] font-medium md:min-h-12 xs:min-h-8 line-clamp-2">
           <img
             src={MallBrand}
             alt=""
-            className="w-[30px] h-[14px] mr-1 mb-0.5 inline-block"
+            className="md:w-[30px] md:h-[14px] xs:w-5 xs:h-2.5 mr-1 mb-0.5 inline-block"
           />
           {name}
         </h3>
@@ -40,7 +40,7 @@ export default function ProductItem({
           <div className="flex items-center gap-2 mt-1">
             <p className="font-semibold truncate text-primary">
               <span className="text-sm mr-px">₫</span>
-              <span className="text-lg truncate font-bold">
+              <span className="md:text-lg xs:text-sm truncate font-bold">
                 {new Intl.NumberFormat("vi-VN", {
                   // style: "currency",
                   currency: "VND",
@@ -51,9 +51,9 @@ export default function ProductItem({
               -53%
             </span>
           </div>
-          <FreeShip />
+          <FreeShip className="xs:w-5 sm:w-7" />
         </div>
-        <div className="flex items-center justify-start text-sm text-[#000000de] divide-x mt-2 font-medium">
+        <div className="flex items-center justify-start md:text-sm xs:text-xs text-[#000000de] divide-x mt-2 font-medium">
           <div className="flex items-center gap-0.5 mr-1.5">
             <StarRating />
             <span>5.0</span>

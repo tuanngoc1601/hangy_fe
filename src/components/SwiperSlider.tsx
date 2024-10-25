@@ -10,6 +10,7 @@ import ProductItem from "./ProductItem";
 import clsx from "clsx";
 import SliderButton from "./SliderButton";
 import { ProductItem as ProductItemType } from "../types/app";
+import useWindowSize from "../hooks/useWindowSize";
 
 export default function SwiperSlider({
   swiperRef,
@@ -24,6 +25,7 @@ export default function SwiperSlider({
   slideNav?: boolean;
   autoLoop?: boolean;
 }) {
+  const { width } = useWindowSize();
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -36,9 +38,11 @@ export default function SwiperSlider({
       className={clsx("w-full mt-4", className)}
     >
       <Swiper
-        spaceBetween={60}
+        spaceBetween={width < 768 ? 20 : width >= 768 && width < 1194 ? 40 : 60}
         loop={autoLoop ? true : false}
-        slidesPerView={4}
+        slidesPerView={
+          width >= 320 && width < 480 ? 2 : width >= 480 && width < 690 ? 3 : 4
+        }
         navigation={false}
         modules={[Navigation, Autoplay]}
         autoplay={

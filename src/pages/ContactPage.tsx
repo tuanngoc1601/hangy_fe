@@ -51,23 +51,26 @@ export default function ContactPage() {
             <div className="flex items-center justify-start gap-4">
               <PhoneContactIcon />
               <h3 className="capitalize text-xl font-medium text-start">
-                Call to us
+                Liên hệ Hangy
               </h3>
             </div>
-            <p>We are available 24/7, 7 days a week.</p>
-            <p>Phone: +8801611112222</p>
+            <p>Hỗ trợ chăm sóc răng miệng tận tâm từ Nha sĩ.</p>
+            <p>Phone: 0971.334.888 - 0843.784.888</p>
           </div>
           <div className="h-px w-full bg-black/50"></div>
           <div className="text-base text-start flex flex-col gap-4">
             <div className="flex items-center justify-start gap-4">
               <MailContactIcon />
               <h3 className="capitalize text-xl font-medium text-start">
-                Write to us
+                Hỗ trợ
               </h3>
             </div>
-            <p>Fill out our form and we will contact you within 24 hours.</p>
-            <p>Emails: customer@exclusive.com</p>
-            <p>Emails: support@exclusive.com</p>
+            <p>Sẵn sàng giải đáp mọi thắc mắc từ 8h - 22h mỗi ngàys.</p>
+            <p>
+              {" "}
+              Bạn có thể nhắn tin trực tiếp trên Website để được hỗ trợ tốt nhất.
+            </p>
+            <p>Emails: hangy.official@gmail.com</p>
           </div>
         </div>
         <div className="w-full shadow-lg p-6 bg-white">
@@ -76,7 +79,7 @@ export default function ContactPage() {
               <input
                 type="text"
                 name="name"
-                placeholder="Your Name *"
+                placeholder="Họ và tên *"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="px-4 py-2 outline-none rounded-sm bg-[#f5f5f5] flex-1 text-base text-black/50"
@@ -84,7 +87,7 @@ export default function ContactPage() {
               <input
                 type="text"
                 name="email"
-                placeholder="Your Email *"
+                placeholder="Email *"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 className="px-4 py-2 outline-none rounded-sm bg-[#f5f5f5] flex-1 text-base text-black/50"
@@ -92,7 +95,7 @@ export default function ContactPage() {
               <input
                 type="text"
                 name="phone"
-                placeholder="Your Phone *"
+                placeholder="Số điện thoại *"
                 value={phone}
                 onChange={(e) => setPhone(e.target.value)}
                 className="px-4 py-2 outline-none rounded-sm bg-[#f5f5f5] flex-1 text-base text-black/50"
@@ -100,7 +103,7 @@ export default function ContactPage() {
             </div>
             <div className="w-full h-full flex-1">
               <textarea
-                placeholder="Your Message"
+                placeholder="Lời nhắn của bạn *"
                 className="bg-[#f5f5f5] p-4 outline-none text-black/50 rounded-sm w-full h-full"
                 rows={10}
                 value={textMessage}
@@ -116,7 +119,7 @@ export default function ContactPage() {
                   isMutating && "opacity-70"
                 )}
               >
-                {isMutating ? <Spinner /> : "Send Message"}
+                {isMutating ? <Spinner /> : "Gửi"}
               </button>
             </div>
           </form>

@@ -22,7 +22,7 @@ export default function SwiperBanner() {
       whileInView="visible"
       variants={cardVariants}
       viewport={{ amount: 0.5, once: true }}
-      className="w-full rounded-3xl mt-5 relative"
+      className="w-full sm:rounded-xl md:rounded-xl lg:rounded-3xl xs:rounded mt-5 relative"
     >
       <Swiper
         spaceBetween={30}
@@ -49,7 +49,11 @@ export default function SwiperBanner() {
             viewport={{ amount: 0.5, once: true }}
             className="flex flex-1 items-center justify-center relative rounded-3xl w-full"
           >
-            <img src={Banner1} alt="" className="rounded-3xl w-full" />
+            <img
+              src={Banner1}
+              alt=""
+              className="sm:rounded-xl md:rounded-xl lg:rounded-3xl xs:rounded-md w-full"
+            />
           </motion.div>
         </SwiperSlide>
         <SwiperSlide>
@@ -60,7 +64,11 @@ export default function SwiperBanner() {
             viewport={{ amount: 0.5, once: true }}
             className="flex flex-1 items-center justify-center relative rounded-3xl w-full"
           >
-            <img src={Banner2} alt="" className="rounded-3xl w-full" />
+            <img
+              src={Banner2}
+              alt=""
+              className="sm:rounded-xl md:rounded-xl lg:rounded-3xl xs:rounded-md w-full"
+            />
           </motion.div>
         </SwiperSlide>
         <SwiperSlide>
@@ -71,7 +79,11 @@ export default function SwiperBanner() {
             viewport={{ amount: 0.5, once: true }}
             className="flex flex-1 items-center justify-center relative rounded-3xl w-full"
           >
-            <img src={Banner3} alt="" className="rounded-3xl w-full" />
+            <img
+              src={Banner3}
+              alt=""
+              className="sm:rounded-xl md:rounded-xl lg:rounded-3xl xs:rounded-md w-full"
+            />
           </motion.div>
         </SwiperSlide>
       </Swiper>

@@ -6,6 +6,7 @@ import { useState } from "react";
 import UserDropdown from "../dropdown/UserDropdown";
 import { useGetCart } from "../../apis/web";
 import LoadingPage from "../../pages/LoadingPage";
+import { FaBars } from "react-icons/fa6";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -16,11 +17,12 @@ export default function Header() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <header className="w-full h-[75px] px-8 bg-white border-b shadow border-[#fce0de] fixed flex flex-row items-center z-50">
+    <header className="w-full h-[75px] sm:px-8 xs:px-6 bg-white border-b shadow border-[#fce0de] fixed flex flex-row xs:justify-between items-center z-50">
+      <FaBars className="w-6 h-6 sm:hidden cursor-pointer" />
       <div className="cursor-pointer" onClick={() => navigate("/")}>
-        <img src={LogoHangy} alt="hangy-logo" className="w-[167px]" />
+        <img src={LogoHangy} alt="hangy-logo" className="sm:w-[167px] xs:w-[130px]" />
       </div>
-      <nav className="h-full w-full py-[15px] flex items-center justify-center">
+      <nav className="h-full w-full py-[15px] sm:flex items-center justify-center xs:hidden">
         <ul className="flex items-center gap-4 list-none text-base h-full font-semibold">
           <li className="h-full cursor-pointer">
             <NavLink
@@ -86,7 +88,7 @@ export default function Header() {
       </nav>
       <div className="flex items-center justify-end gap-6 flex-none">
         <div
-          className="relative cursor-pointer"
+          className="relative cursor-pointer xs:hidden md:inline-block"
           onClick={() => navigate("/cart")}
         >
           <HiOutlineShoppingBag className="text-3xl text-textColor" />

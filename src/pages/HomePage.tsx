@@ -32,7 +32,7 @@ export default function HomePage() {
     <Container>
       <SwiperBanner />
       {flashSales?.is_flash_sales && (
-        <div className="w-full mt-12">
+        <div className="w-full md:mt-14 xs:mt-10 sm:mt-12 lg:mt-16">
           <div className="flex flex-row items-center justify-between">
             <motion.div
               initial="hidden"
@@ -43,7 +43,7 @@ export default function HomePage() {
             >
               <div className="flex items-center justify-start">
                 <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
-                <h3 className="text-4xl font-semibold">Flash Sales</h3>
+                <h3 className="md:text-4xl xs:text-2xl sm:text-3xl font-semibold">Flash Sales</h3>
               </div>
               <CountdownTime time_end={flashSales?.time_end} />
             </motion.div>
@@ -52,7 +52,7 @@ export default function HomePage() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={buttonVariant}
-              className="flex items-center justify-end gap-4"
+              className="sm:flex items-center justify-end gap-4 xs:hidden"
             >
               <button
                 type="button"
@@ -78,7 +78,7 @@ export default function HomePage() {
         </div>
       )}
       {/* <div className="w-full h-[0.5px] bg-black mb-6"></div> */}
-      <div className="w-full mt-24">
+      <div className="w-full md:mt-14 xs:mt-10 sm:mt-12 lg:mt-16">
         <div className="flex items-center justify-between">
           <motion.div
             initial="hidden"
@@ -88,7 +88,9 @@ export default function HomePage() {
             className="flex items-center justify-start"
           >
             <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
-            <h2 className="text-4xl font-semibold">Sản phẩm bán chạy nhất</h2>
+            <h2 className="md:text-4xl xs:text-2xl sm:text-3xl font-semibold">
+              Sản phẩm bán chạy nhất
+            </h2>
           </motion.div>
           <motion.div
             initial="hidden"
@@ -96,7 +98,10 @@ export default function HomePage() {
             variants={buttonVariant}
             viewport={{ once: true }}
           >
-            <Button className="text-white" action={() => navigate("/products")}>
+            <Button
+              className="text-white xs:hidden sm:block"
+              action={() => navigate("/products")}
+            >
               Xem tất cả
             </Button>
           </motion.div>
@@ -111,7 +116,7 @@ export default function HomePage() {
       <div className="w-full mt-12">
         <img src={BannerSp} alt="" className="w-full" />
       </div>
-      <div className="w-full mt-24">
+      <div className="w-full md:mt-14 xs:mt-10 sm:mt-12 lg:mt-16">
         <div className="flex items-center justify-between">
           <motion.div
             initial="hidden"
@@ -121,7 +126,9 @@ export default function HomePage() {
             className="flex items-center justify-start"
           >
             <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
-            <h2 className="text-4xl font-semibold">Combo sản phẩm</h2>
+            <h2 className="md:text-4xl xs:text-2xl sm:text-3xl font-semibold">
+              Combo sản phẩm
+            </h2>
           </motion.div>
           <motion.div
             initial="hidden"
@@ -129,7 +136,10 @@ export default function HomePage() {
             viewport={{ once: true }}
             variants={buttonVariant}
           >
-            <Button className="text-white" action={() => navigate("/products")}>
+            <Button
+              className="text-white xs:hidden sm:block"
+              action={() => navigate("/products")}
+            >
               Chi tiết
             </Button>
           </motion.div>
