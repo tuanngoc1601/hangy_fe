@@ -8,12 +8,12 @@ export default function AboutPage() {
   return (
     <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1300px]">
       <section className="bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] overflow-hidden">
-        <div className="px-4 flex flex-row items-center">
-          <div className="p-3 w-2/3 text-[#162355]">
-            <h1 className="text-left leading-[50px] font-semibold text-[40px] mt-[37px] mb-[50px] tracking-wide">
+        <div className="px-4 flex md:flex-row xs:flex-col items-center">
+          <div className="p-3 md:w-2/3 text-[#162355]">
+            <h1 className="md:text-left xs:text-center leading-[50px] font-semibold md:text-[40px] sm:text-[32px] xs:text-[28px] mt-[37px] mb-[50px] tracking-wide">
               Bác sĩ/ Nha sĩ Nguyễn Kim Cúc - Nhà sáng lập thương hiệu Hangy
             </h1>
-            <p className="pr-20 leading-7 text-lg">
+            <p className="md:pr-20 md:text-left xs:text-center leading-7 text-lg">
               Năm 2020, bác sĩ Cúc chính thức sáng lập thương hiệu Hangy, cùng
               sự ra đời của sản phẩm máy tăm nước đầu tiên. Không chỉ là một sản
               phẩm, máy tăm nước Hangy còn mang trong mình tâm huyết và sự am
@@ -21,18 +21,18 @@ export default function AboutPage() {
               đồng.
             </p>
           </div>
-          <div className="w-1/2 p-3 flex items-center relative">
+          <div className="md:w-1/3 p-3 flex items-center relative">
             <img src={Doctor} alt="" className="h-full mx-auto z-30" />
           </div>
         </div>
       </section>
-      <section className="pt-20 w-full">
+      <section className="pt-44 w-full">
         <div className="px-4 flex flex-col items-center gap-5 text-[#162355]">
-          <h2 className="max-w-[770px] text-4xl font-semibold text-center leading-[1.265]">
+          <h2 className="max-w-[770px] md:text-4xl sm:text-3xl xs:text-2xl font-semibold text-center leading-[1.265]">
             Xây dựng một đội ngũ chuyên viên có trình độ cao trong lĩnh vực nha
             khoa
           </h2>
-          <p className="w-3/4 text-center text-lg leading-[1.4] text-[#404968]">
+          <p className="w-4/5 text-center text-base leading-[1.4] text-[#404968]">
             Với tâm huyết của mình, Bác sĩ Cúc đã đào tạo 1 đội ngũ chuyên viên
             có trình độ cao, có đầy đủ kiến thức và kỹ năng chuyên môn trong
             lĩnh vực nha khoa để đáp ứng nhu cầu đa dạng và phục vụ tận tâm cho
@@ -55,7 +55,7 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="w-full pb-[100px]">
-        <div className="px-4 flex items-center justify-around">
+        <div className="px-4 flex lg:flex-row xs:flex-col lg:items-center lg:justify-around xs:gap-28">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               267,300,000+
@@ -83,15 +83,15 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="w-full py-[100px] overflow-hidden">
-        <div className="px-4 flex flex-row flex-wrap ">
-          <div className="px-3 w-1/2">
+        <div className="px-4 flex md:flex-row xs:flex-col flex-wrap ">
+          <div className="px-3 md:w-1/2 xs:flex xs:justify-center">
             <img src={Doctor} alt="" width={566} height={566} />
           </div>
-          <div className="px-3 w-1/2 text-sm flex flex-col justify-center text-[#162355]">
-            <h2 className="text-start text-[32px] font-semibold">
+          <div className="px-3 md:w-1/2 text-sm flex flex-col justify-center text-[#162355] xs:mt-20">
+            <h2 className="md:text-start xs:text-center text-[32px] font-semibold">
               Tầm nhìn tương lai
             </h2>
-            <p className="text-base leading-6 py-[18px]">
+            <p className="text-base md:text-start xs:text-center leading-6 py-[18px]">
               Tầm nhìn tương lai của Bác sĩ Cúc và thương hiệu Hangy là mở rộng
               hơn nữa các dòng sản phẩm chăm sóc răng miệng, tạo ra một hệ sinh
               thái chăm sóc răng miệng toàn diện từ máy tăm nước, bàn chải điện,
@@ -108,8 +108,8 @@ export default function AboutPage() {
           <h2 className="text-center text-[32px] font-semibold text-[#162355]">
             Đánh giá của khách hàng
           </h2>
-          <div className="mt-[100px] flex flex-row flex-wrap">
-            <div className="px-2 w-1/2 flex items-center">
+          <div className="mt-[100px] flex md:flex-row xs:flex-col flex-wrap">
+            <div className="px-2 md:w-1/2 flex items-center">
               <div className="flex flex-col items-start justify-center w-full relative">
                 <p className="line-clamp-[7] text-2xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
                   Câu 1: Khóa học “Thấu hiểu nội tâm - kiến tạo an vui" đã hệ
@@ -246,7 +246,7 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-            <div className="px-2 w-1/2 flex items-center justify-end relative">
+            <div className="px-2 md:w-1/2 flex items-center md:justify-end xs:justify-center relative xs:mt-10">
               <img
                 src={Doctor}
                 alt=""
@@ -260,7 +260,7 @@ export default function AboutPage() {
                 viewBox="0 0 464 488"
                 name="rendemy-light-textless"
                 width="463"
-                className="absolute right-0 h-full"
+                className="absolute xs:right-1/2 md:right-0 h-full xs:translate-x-1/2 md:translate-x-0"
               >
                 <path
                   fill="url(#rendemy-light-textless_svg__a)"
