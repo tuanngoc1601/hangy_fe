@@ -7,9 +7,11 @@ import UserDropdown from "../dropdown/UserDropdown";
 import { useGetCart } from "../../apis/web";
 import LoadingPage from "../../pages/LoadingPage";
 import { FaBars } from "react-icons/fa6";
+import useWindowSize from "../../hooks/useWindowSize";
 
 export default function Header() {
   const navigate = useNavigate();
+  const { width } = useWindowSize();
   const access_token = useHangyStore((state) => state.access_token);
   const [isMenu, setIsMenu] = useState<boolean>(false);
   const { data: cart, isLoading } = useGetCart();
@@ -20,7 +22,11 @@ export default function Header() {
     <header className="w-full h-[75px] sm:px-8 xs:px-6 bg-white border-b shadow border-[#fce0de] fixed flex flex-row xs:justify-between items-center z-50">
       <FaBars className="w-6 h-6 sm:hidden cursor-pointer" />
       <div className="cursor-pointer" onClick={() => navigate("/")}>
-        <img src={LogoHangy} alt="hangy-logo" className="sm:w-[167px] xs:w-[130px]" />
+        <img
+          src={LogoHangy}
+          alt="hangy-logo"
+          className="sm:w-[167px] xs:w-[130px]"
+        />
       </div>
       <nav className="h-full w-full py-[15px] sm:flex items-center justify-center xs:hidden">
         <ul className="flex items-center gap-4 list-none text-base h-full font-semibold">
@@ -113,13 +119,20 @@ export default function Header() {
             </div>
             {isMenu && <UserDropdown setIsOpenDropdown={setIsMenu} />}
           </div>
-        ) : (
+        ) : width > 768 ? (
           <button
-            className="px-4 py-2 rounded-md border outline-none flex items-center text-center text-base bg-transparent shadow-sm bg-primary"
+            className="px-4 py-2 rounded-md border outline-none sm:flex items-center text-center text-base bg-transparent shadow-sm bg-primary xs:hidden"
             onClick={() => navigate("/auth/login")}
           >
             Đăng nhập
           </button>
+        ) : (
+          <img
+            src={Avatar}
+            alt=""
+            className="w-9 h-9 rounded-full object-cover cursor-pointer"
+            onClick={() => navigate("/auth/login")}
+          />
         )}
       </div>
     </header>
