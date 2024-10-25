@@ -45,8 +45,8 @@ export default function ContactPage() {
         <BreadcrumbIcon />
         <span>Liên hệ</span>
       </div>
-      <div className="flex w-full my-12 gap-10">
-        <div className="w-[340px] flex flex-none flex-col shadow-lg p-6 gap-6 bg-white">
+      <div className="flex sm:flex-row xs:flex-col w-full sm:my-12 xs:mb-12 xs:mt-6 gap-10">
+        <div className="sm:w-[340px] flex sm:grow-0 sm:shrink flex-col shadow-lg p-6 gap-6 bg-white">
           <div className="text-base text-start flex flex-col gap-4">
             <div className="flex items-center justify-start gap-4">
               <PhoneContactIcon />
@@ -65,17 +65,21 @@ export default function ContactPage() {
                 Hỗ trợ
               </h3>
             </div>
-            <p>Sẵn sàng giải đáp mọi thắc mắc từ 8h - 22h mỗi ngàys.</p>
+            <p>Sẵn sàng giải đáp mọi thắc mắc từ 8h - 22h mỗi ngày.</p>
             <p>
               {" "}
-              Bạn có thể nhắn tin trực tiếp trên Website để được hỗ trợ tốt nhất.
+              Bạn có thể nhắn tin trực tiếp trên Website để được hỗ trợ tốt
+              nhất.
             </p>
             <p>Emails: hangy.official@gmail.com</p>
           </div>
         </div>
-        <div className="w-full shadow-lg p-6 bg-white">
-          <form onSubmit={handleSubmit} className="w-full flex flex-col gap-6">
-            <div className="flex items-center gap-4">
+        <div className="w-full shadow-lg p-6 bg-white flex-1 sm:min-w-[400px]">
+          <form
+            onSubmit={handleSubmit}
+            className="w-full flex flex-1 flex-col gap-6"
+          >
+            <div className="flex dl:flex-row xs:flex-col dl:items-center gap-4">
               <input
                 type="text"
                 name="name"

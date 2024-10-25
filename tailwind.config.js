@@ -8,6 +8,7 @@ export default {
         mx: "480px",
         sm: "768px",
         md: "960px",
+        dl: "1080px",
         lg: "1194px",
         xl: "1280px",
       },
