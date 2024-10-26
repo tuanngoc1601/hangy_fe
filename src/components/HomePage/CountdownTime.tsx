@@ -8,25 +8,25 @@ export default function CountdownTime({
 }) {
   const { countdown } = useCountDown({ duration: time_end });
   return (
-    <div className="flex items-center justify-center gap-4 text-primary">
+    <div className="flex items-center justify-center mx:gap-4 xs:gap-2 text-primary">
       <p className="flex flex-col">
         <span className="text-[10px]">Days</span>
-        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[0]}</span>
+        <span className="mx:text-2xl xs:text-lg font-bold tracking-wider">{countdown?.split(":")[0]}</span>
       </p>
       <span className="text-red-400">:</span>
       <p className="flex flex-col">
         <span className="text-[10px]">Hours</span>
-        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[1]}</span>
+        <span className="mx:text-2xl xs:text-lg font-bold tracking-wider">{countdown?.split(":")[1]}</span>
       </p>
       <span className="text-red-400">:</span>
       <p className="flex flex-col">
         <span className="text-[10px]">Minutes</span>
-        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[2]}</span>
+        <span className="mx:text-2xl xs:text-lg font-bold tracking-wider">{countdown?.split(":")[2]}</span>
       </p>
       <span className="text-red-400">:</span>
       <p className="flex flex-col">
         <span className="text-[10px]">Seconds</span>
-        <span className="text-2xl font-bold tracking-wider">{countdown?.split(":")[3]}</span>
+        <span className="mx:text-2xl xs:text-lg font-bold tracking-wider">{countdown?.split(":")[3]}</span>
       </p>
     </div>
   );

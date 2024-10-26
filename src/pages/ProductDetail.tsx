@@ -23,7 +23,8 @@ import Button from "../components/common/Button";
 import SwiperSlider from "../components/SwiperSlider";
 import { useEffect, useRef, useState } from "react";
 import ArrowImgIcon from "../components/icons/ArrowImgIcon";
-import HeartIcon from "../components/icons/HeartIcon";
+import { FaStar } from "react-icons/fa";
+// import HeartIcon from "../components/icons/HeartIcon";
 import {
   useAddToCart,
   useBestSellingProducts,
@@ -36,6 +37,7 @@ import LoadingPage from "./LoadingPage";
 import toast from "react-hot-toast";
 import { TOAST_IDS } from "../lib/constants";
 import { useCountDown } from "../hooks/useCountDown";
+import useWindowSize from "../hooks/useWindowSize";
 
 export default function ProductDetail() {
   const { slug } = useParams();
@@ -51,6 +53,7 @@ export default function ProductDetail() {
   const [imgPreview, setImgPreview] = useState<string>(
     product?.images[0].url || ""
   );
+  const { width } = useWindowSize();
   const { countdown } = useCountDown({
     duration: product?.flash_sale_end_time,
   });
@@ -103,46 +106,49 @@ export default function ProductDetail() {
   return (
     <Container>
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
-        <Link to={"/"} className="text-[#0055aa]">
+        <Link to={"/"} className="text-[#0055aa] flex-none">
           Trang chủ
         </Link>
         <BreadcrumbIcon />
-        <Link to={"/products"} className="text-[#0055aa]">
+        <Link to={"/products"} className="text-[#0055aa] flex-none">
           Sản phẩm
         </Link>
         <BreadcrumbIcon />
-        <span>{product?.name}</span>
+        <span className="xs:line-clamp-1">{product?.name}</span>
       </div>
-      <div className="mt-5 w-full flex flex-row bg-white">
-        <section className="p-[15px] shrink-0">
-          <div>
+      <div className="mt-5 w-full flex md:flex-row xs:flex-col bg-white">
+        <section className="sm:p-[15px] xs:p-2 md:shrink-0">
+          <div className="mx:flex mx:flex-col items-center">
             <img
               src={imgPreview}
               alt=""
-              className="w-[450px] h-[450px] object-contain cursor-pointer"
+              className="mx:w-[450px] mx:h-[450px] aspect-square object-contain cursor-pointer"
             />
-            <div className="mt-3 w-[450px] relative">
+            <div className="mt-3 flex-1 mx:w-[450px] relative">
               <Swiper
                 spaceBetween={0}
                 loop={false}
-                slidesPerView={5}
+                slidesPerView={
+                  width < 400 ? 3 : width >= 400 && width < 480 ? 4 : 5
+                }
                 navigation={false}
                 modules={[Navigation]}
                 onBeforeInit={(swiper) => {
                   swiperImgSlide.current = swiper;
                 }}
+                className="flex-1"
               >
                 {product?.images.map((item) => (
                   <SwiperSlide key={item.id}>
                     <div
-                      className="w-[92px] h-[92px] p-[5px]"
+                      className="w-[92px] h-[92px] shrink p-[5px]"
                       onMouseOver={() => setImgPreview(item.url)}
                     >
                       <div className="relative group w-full h-full cursor-pointer">
                         <img
                           src={item.url}
                           alt=""
-                          className="w-full h-full object-contain"
+                          className="w-full h-full flex-1 object-contain"
                         />
                         <div className="absolute top-0 left-0 right-0 bottom-0 group-hover:border-2 group-hover:border-[#d0011b]"></div>
                       </div>
@@ -168,14 +174,14 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
-          <div className="flex items-center justify-center text-[#222] gap-3 font-medium mt-4">
+          {/* <div className="flex items-center justify-center text-[#222] gap-3 font-medium mt-4">
             <HeartIcon />
             <span>Đã thích (39,2k)</span>
-          </div>
+          </div> */}
         </section>
         <section className="flex w-full flex-1 flex-col">
-          <div className="flex flex-col p-[20px] w-full">
-            <h3 className="text-xl text-[#000000cc] font-semibold line-clamp-2 max-h-14 text-ellipsis">
+          <div className="flex flex-col sm:p-[20px] xs:p-2 w-full">
+            <h3 className="sm:text-xl xs:text-lg text-[#000000cc] font-semibold line-clamp-2 max-h-14 text-ellipsis">
               <img
                 src={MallBrand}
                 alt=""
@@ -183,30 +189,30 @@ export default function ProductDetail() {
               />
               {product?.name}
             </h3>
-            <div className="flex w-full items-center mt-[10px]">
-              <div className="text-[#d0011b] flex items-center gap-2 font-medium pe-[15px] border-e">
+            <div className="flex w-full items-center mt-[10px] xs:text-xs sm:text-base">
+              <div className="text-[#d0011b] flex items-center gap-2 font-medium sm:pe-[15px] xs:pe-1.5 border-e">
                 <span className="border-b border-[#d0011b] mt-[1px]">5.0</span>
                 <div className="flex items-center gap-0.5 py-1 me-[5px]">
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
-                  <StarIcon />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
+                  <FaStar />
                 </div>
               </div>
-              <div className="px-[20px] flex items-center gap-2 font-medium border-e">
-                <span className="text-[#222] me-[5px] border-b border-[#555]">
+              <div className="sm:px-[20px] xs:px-2.5 flex items-center gap-2 font-medium border-e">
+                <span className="text-[#222] sm:me-[5px] xs:me-[2px] border-b border-[#555]">
                   36,7k
                 </span>
-                <span className="py-1 me-[5px] text-[#767676] text-sm capitalize">
+                <span className="py-1 sm:me-[5px] text-[#767676] sm:text-sm capitalize">
                   Đánh giá
                 </span>
               </div>
-              <div className="ps-[20px] flex items-center gap-2 font-medium">
-                <span className="text-[#222] me-[5px] border-b border-[#555] ">
+              <div className="sm:ps-[20px] xs:px-2.5 flex items-center gap-2 font-medium">
+                <span className="text-[#222] sm:me-[5px] xs:me-[2px] border-b border-[#555] ">
                   {product?.sold_quantity}
                 </span>
-                <span className="py-1 me-[5px] text-[#767676] text-sm capitalize">
+                <span className="py-1 sm:me-[5px] text-[#767676] sm:text-sm capitalize">
                   Đã bán
                 </span>
               </div>
@@ -217,7 +223,7 @@ export default function ProductDetail() {
                   <FlashSaleIcon />
                   <div className="flex items-center justify-end gap-2">
                     <TimerIcon />
-                    <span className="uppercase font-light text-white">
+                    <span className="uppercase font-light text-white dl:inline-block md:hidden sm:inline-block xs:hidden">
                       Kết thúc trong
                     </span>
                     <div className="flex items-center gap-1">
@@ -240,15 +246,15 @@ export default function ProductDetail() {
                   </div>
                 </div>
               )}
-              <div className="h-[66px] bg-[#fafafa] px-5 py-[15px] flex items-center justify-start gap-4">
-                <span className="text-[#929292] text-base line-through font-medium">
+              <div className="h-[66px] bg-[#fafafa] md:px-5 xs:px-2 py-[15px] flex items-center justify-start gap-4">
+                <span className="text-[#929292] sm:text-base xs:text-sm line-through font-medium">
                   ₫
                   {new Intl.NumberFormat("vi-VN", {
                     // style: "currency",
                     currency: "VND",
                   }).format(product?.real_price || 0)}
                 </span>
-                <span className="text-[#d0011b] text-3xl font-bold">
+                <span className="text-[#d0011b] sm:text-3xl xs:text-xl font-bold">
                   ₫
                   {new Intl.NumberFormat("vi-VN", {
                     // style: "currency",
@@ -273,7 +279,7 @@ export default function ProductDetail() {
                 </span>
               </div>
             </div>
-            <div className="mt-6 px-5 flex flex-col">
+            <div className="mt-6 md:px-5 xs:px-2 flex flex-col">
               <div className="flex items-center justify-start gap-6 text-sm">
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Mã giảm giá của shop
@@ -301,7 +307,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Bảo hiểm
                 </h3>
-                <div className="flex items-center text-sm font-medium gap-5">
+                <div className="flex flex-wrap items-center text-sm font-medium gap-5">
                   <p className="text-[#222] flex items-center gap-1">
                     Bảo hiểm Bảo vệ người tiêu dùng
                     <span className="rounded-lg text-white text-[10px] font-medium px-[5px] h-4 bg-primary leading-4 rounded-bl-none">
@@ -356,7 +362,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Số lượng
                 </h3>
-                <div className="bg-transparent flex items-center gap-6">
+                <div className="bg-transparent flex items-center sm:gap-6 xs:gap-2">
                   <div className="text-black/80 text-2xl font-light flex items-center">
                     <button
                       type="button"
@@ -381,14 +387,14 @@ export default function ProductDetail() {
                       +
                     </button>
                   </div>
-                  <span className="text-[#757575] text-sm">
+                  <span className="text-[#757575] sm:text-sm xs:text-xs">
                     {product?.stock_quantity} sản phẩm sẵn có
                   </span>
                 </div>
               </div>
             </div>
           </div>
-          <div className="mt-[15px] px-5 flex items-center justify-start gap-4 text-sm font-medium">
+          <div className="mt-[15px] px-5 flex items-center md:justify-start xs:justify-end gap-4 text-sm font-medium">
             <button
               type="button"
               className="flex items-center justify-center capitalize bg-[#d0011b14] border border-[#d0011b] px-5 h-12 gap-2 text-[#d0011b] rounded-sm hover:bg-[#f1b4bb2a]"
@@ -411,7 +417,7 @@ export default function ProductDetail() {
           <div className="pe-5 w-full">
             <div className="h-px w-full bg-[#0000000d] mt-[30px]"></div>
           </div>
-          <div className="px-5 py-6 flex items-center justify-between">
+          <div className="sm:px-5 xs:px-2.5 py-6 flex items-center justify-between sm:text-base xs:text-sm">
             <div className="flex items-center gap-1 text-[#222]">
               <img src={RefundImg} alt="" className="w-[18px] h-[18px]" />
               Đổi ý miễn phí 15 ngày
@@ -427,20 +433,25 @@ export default function ProductDetail() {
           </div>
         </section>
       </div>
-      <div className="mt-6 w-full bg-white p-7">
+      <div className="mt-6 w-full bg-white md:p-7 sm:p-5 xs:p-4">
         <p className="uppercase text-xl font-bold py-2">Mô tả sản phẩm</p>
         <ReactMarkdown
           children={product?.description}
           rehypePlugins={[rehypeRaw]}
         />
       </div>
-      <div className="mt-6 mb-12 bg-white p-7 w-full">
+      <div className="mt-6 mb-12 bg-white md:p-7 sm:p-5 xs:p-4 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
             <div className="bg-primary h-8 w-3 rounded-sm"></div>
-            <h3 className="text-4xl font-semibold">Sản phẩm liên quan</h3>
+            <h3 className="md:text-4xl xs:text-2xl sm:text-3xl font-semibold">
+              Sản phẩm liên quan
+            </h3>
           </div>
-          <Button className="text-white" action={() => navigate("/products")}>
+          <Button
+            className="text-white xs:hidden sm:block"
+            action={() => navigate("/products")}
+          >
             Xem tất cả
           </Button>
         </div>

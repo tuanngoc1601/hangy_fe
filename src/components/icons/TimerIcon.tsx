@@ -4,6 +4,7 @@ const TimerIcon = () => (
     height="20"
     view-box="0 0 20 20"
     width="20"
+    className="xs:hidden"
   >
     <g
       fill="none"

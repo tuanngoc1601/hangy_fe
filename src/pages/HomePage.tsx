@@ -39,7 +39,7 @@ export default function HomePage() {
               whileInView="visible"
               viewport={{ once: true }}
               variants={typographyVariant}
-              className="flex items-center justify-start gap-10"
+              className="flex items-center justify-start mx:gap-10 xs:gap-5"
             >
               <div className="flex items-center justify-start">
                 <div className="bg-primary h-8 w-3 rounded-sm mr-4"></div>
