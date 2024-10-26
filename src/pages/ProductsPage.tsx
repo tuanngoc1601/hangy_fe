@@ -31,7 +31,7 @@ export default function ProductsPage() {
   return (
     <Container>
       <div className="w-full flex flex-row items-start my-8 gap-[22px]">
-        <aside className="shrink-0 grow-0 w-[180px] flex flex-col sticky bottom-0 top-[95px]">
+        <aside className="shrink-0 grow-0 w-[180px] dl:flex flex-col sticky bottom-0 top-[95px] xs:hidden">
           <div className="border-b text-black/80 text-base font-bold h-[50px] w-full flex items-center justify-start capitalize mb-2.5">
             <BarIcon />
             Danh mục
@@ -83,19 +83,19 @@ export default function ProductsPage() {
         <div className="w-full">
           <div className="flex items-center justify-between text-sm rounded-sm py-[13px] px-5 bg-[#00000008]">
             <div className="flex items-center text-[#000000cc] font-medium gap-2">
-              <span className="bg-transparent text-[#555555]">
+              <span className="bg-transparent text-[#555555] md:inline-block xs:hidden">
                 Sắp xếp theo
               </span>
-              <span className="bg-primary text-white rounded-sm h-[34px] px-[15px] outline-none capitalize leading-[34px] cursor-pointer">
+              <span className="bg-primary text-white rounded-sm h-[34px] px-[15px] outline-none capitalize flex items-center justify-center cursor-pointer xs:text-xs sm:text-sm">
                 Tất cả
               </span>
-              <span className="bg-white h-[34px] px-[15px] rounded-sm leading-[34px] cursor-pointer">
+              <span className="bg-white h-[34px] px-[15px] rounded-sm leading-[34px] cursor-pointer sm:inline-block xs:hidden">
                 Bán chạy
               </span>
-              <span className="bg-white h-[34px] px-[15px] rounded-sm leading-[34px] cursor-pointer">
+              <span className="bg-white h-[34px] px-[15px] rounded-sm leading-[34px] cursor-pointer sm:inline-block xs:hidden">
                 Phổ biến
               </span>
-              <button className="bg-white px-3 py-[1px] text-start w-[210px] rounded-sm h-[34px] leading-[34px]">
+              <button className="bg-white px-3 py-[1px] text-start w-[210px] rounded-sm h-[34px] leading-[34px] sm:inline-block xs:hidden">
                 Giá
               </button>
             </div>
@@ -111,7 +111,7 @@ export default function ProductsPage() {
             </div>
           </div>
           <div className="mt-5">
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid md:grid-cols-5 sm:grid-cols-4 xm:grid-cols-3 xs:grid-cols-2 gap-2">
               {results?.map((product) => (
                 <ProductItem
                   key={product.id}
