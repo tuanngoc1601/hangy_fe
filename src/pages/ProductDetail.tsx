@@ -11,7 +11,7 @@ import rehypeRaw from "rehype-raw";
 import Container from "../components/layout/Container";
 import BreadcrumbIcon from "../components/icons/BreadcrumbIcon";
 import { MallBrand } from "../assets";
-import StarIcon from "../components/icons/StarIcon";
+// import StarIcon from "../components/icons/StarIcon";
 import FlashSaleIcon from "../components/icons/FlashSaleIcon";
 import TimerIcon from "../components/icons/TimerIcon";
 import FreeShip from "../components/icons/FreeShip";

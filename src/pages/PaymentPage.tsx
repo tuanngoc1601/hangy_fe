@@ -61,39 +61,39 @@ export default function PaymentPage() {
             backgroundSize: "116px 3px",
           }}
         ></div>
-        <div className="pt-7 px-[30px] pb-6 w-full">
+        <div className="xm:pt-7 xs:pt-4 xm:px-[30px] xs:px-5 pb-6 w-full">
           <div className="flex items-center text-lg text-[#1c95c9] font-medium mb-5">
             <LocationIcon />
             <span className="capitalize ms-[9px]">Địa chỉ nhận hàng</span>
           </div>
-          <div className="flex items-center text-base">
+          <div className="flex sm:items-center text-base sm:flex-row xs:flex-col">
             <span className="font-bold text-[#222222]">
               {me?.name} (+84) {me?.phone?.slice(1, 10)}
             </span>
-            <span className="text-[#000000cc] font-medium ms-5">
+            <span className="text-[#000000cc] font-medium sm:ms-5">
               {me?.address}
             </span>
-            <span className="text-[#1c95c9] flex items-center justify-center border-[0.5px] rounded-[1px] text-[10px] py-0.5 px-[5px] capitalize ms-[15px] font-medium border-[#1c95c9] h-[17px]">
+            <span className="text-[#1c95c9] flex items-center justify-center border-[0.5px] rounded-[1px] text-[10px] py-0.5 px-[5px] capitalize ms-[15px] font-medium border-[#1c95c9] h-[17px] md:inline-block xs:hidden">
               Mặc định
             </span>
-            <span className="text-sm text-[#4080ee] cursor-pointer ms-10 ">
+            <span className="text-sm text-[#4080ee] cursor-pointer ms-10 dl:inline-block xs:hidden">
               Thay đổi
             </span>
           </div>
         </div>
       </div>
       <div className="mt-3 shadow-[0_1px_1px_0px_rgba(0,0,0,0.05)] rounded-[3px] bg-white w-full">
-        <div className="grid grid-cols-6 pt-6 px-[30px] text-[##0000008a] h-[74px] text-sm font-medium">
-          <span className="col-span-3 text-start text-lg text-[#222222] flex items-center">
+        <div className="grid grid-cols-6 xm:pt-6 xs:pt-4 xm:px-[30px] xs:px-[20px] text-[##0000008a] h-[74px] text-sm font-medium">
+          <span className="xm:col-span-3 xs:col-span-6 text-start text-lg text-[#222222] flex items-center">
             Sản phẩm
           </span>
-          <span className="col-span-1 text-end text-sm text-[#0000008a] flex items-center justify-end">
+          <span className="xm:col-span-1 xs:hidden text-end text-sm text-[#0000008a] xm:flex items-center justify-end">
             Đơn giá
           </span>
-          <span className="col-span-1 text-end text-sm text-[#0000008a] flex items-center justify-end">
+          <span className="xm:col-span-1 xs:hidden text-end text-sm text-[#0000008a] xm:flex items-center justify-end">
             Số lượng
           </span>
-          <span className="col-span-1 text-end text-sm text-[#0000008a] flex items-center justify-end">
+          <span className="xm:col-span-1 xs:hidden text-end text-sm text-[#0000008a] xm:flex items-center justify-end">
             Thành tiền
           </span>
         </div>
@@ -101,10 +101,10 @@ export default function PaymentPage() {
           {paymentData?.map((data) => (
             <div
               key={data.id}
-              className="grid grid-cols-6 min-h-[55px] text-sm px-[30px] text-[#222222] overflow-hidden font-medium mt-[15px]"
+              className="grid grid-cols-6 min-h-[55px] text-sm xm:px-[30px] xs:px-[20px] text-[#222222] overflow-hidden font-medium mt-[15px]"
             >
-              <div className="col-span-3 grid grid-cols-3">
-                <div className="flex items-center col-span-2">
+              <div className="xm:col-span-3 xs:col-span-6 grid xm:grid-cols-3 xs:grid-cols-6">
+                <div className="flex items-center sm:col-span-2 xm:col-span-3 xs:col-span-5">
                   <img
                     src={data.product.images[0].url}
                     alt=""
@@ -114,12 +114,27 @@ export default function PaymentPage() {
                     <h3 className="line-clamp-1 cursor-pointer">
                       {data.product.name}
                     </h3>
+                    {data.sub_product && (
+                      <span className="line-clamp-1 overflow-hidden text-[#929292] font-medium text-sm sm:hidden">
+                        Loại: {data.sub_product.name}
+                      </span>
+                    )}
                     <span className="mt-0.5 text-[#1c95c9] leading-3 border border-[#1c95c9] rounded-sm text-[10px] px-0.5 w-fit">
                       Đổi trả miễn phí 7 ngày
                     </span>
                   </div>
                 </div>
-                <div className="text-[#929292] flex items-center justify-center col-span-1 font-medium text-sm">
+                <div className="xs:flex xm:hidden flex-col items-end justify-end">
+                  <span>x{data.quantity}</span>
+                  <span>
+                    ₫
+                    {new Intl.NumberFormat("vi-VN", {
+                      // style: "currency",
+                      currency: "VND",
+                    }).format(data.price)}
+                  </span>
+                </div>
+                <div className="text-[#929292] sm:flex xs:hidden items-center justify-center col-span-1 font-medium text-sm">
                   {data.sub_product && (
                     <span className="line-clamp-1 ps-[13px] overflow-hidden">
                       Loại: {data.sub_product.name}
@@ -127,7 +142,7 @@ export default function PaymentPage() {
                   )}
                 </div>
               </div>
-              <div className="col-span-1 flex items-center justify-end">
+              <div className="xm:col-span-1 xm:flex xs:hidden items-center justify-end">
                 <span>
                   ₫
                   {new Intl.NumberFormat("vi-VN", {
@@ -136,10 +151,10 @@ export default function PaymentPage() {
                   }).format(data.price)}
                 </span>
               </div>
-              <div className="col-span-1 flex items-center justify-end">
+              <div className="xm:col-span-1 xs:hidden xm:flex items-center justify-end">
                 <span>{data.quantity}</span>
               </div>
-              <div className="col-span-1 flex items-center justify-end">
+              <div className="xm:col-span-1 xm:flex xs:hidden items-center justify-end">
                 <span className="font-semibold">
                   ₫
                   {new Intl.NumberFormat("vi-VN", {
@@ -150,7 +165,7 @@ export default function PaymentPage() {
               </div>
             </div>
           ))}
-          <div className="border-y border-dashed flex px-[30px] py-[18px] items-center justify-end text-sm font-medium gap-20 mt-4">
+          <div className="border-y border-dashed flex xm:px-[30px] xm:py-[18px] xs:px-5 xs:py-2.5 items-center justify-end text-sm font-medium gap-20 mt-4">
             <div className="flex items-center gap-1">
               <VoucherIcon />
               <span>Voucher của Shop</span>
@@ -159,8 +174,8 @@ export default function PaymentPage() {
               Chọn Voucher
             </span>
           </div>
-          <div className="bg-[#fafdff] border-b border-dashed text-sm text-[#000000cc] grid grid-cols-3">
-            <div className="flex items-center py-4 px-[30px] col-span-1">
+          <div className="bg-[#fafdff] border-b border-dashed text-sm text-[#000000cc] sm:grid sm:grid-cols-3">
+            <div className="flex items-center py-4 px-[30px] sm:col-span-1">
               <span className="flex-none">Lời nhắn: </span>
               <input
                 type="text"
@@ -170,12 +185,12 @@ export default function PaymentPage() {
                 className="h-10 py-1 px-3 w-full text-[#222] outline-none ms-[15px] flex-1 bg-transparent border"
               />
             </div>
-            <div className="py-4 text-sm text-[#000000cc] font-medium col-span-2 border-s border-dashed">
+            <div className="py-4 text-sm text-[#000000cc] font-medium sm:col-span-2 border-s border-dashed">
               <div className="flex flex-col w-full pb-5 border-b border-dashed">
                 <div className="flex items-center justify-between w-full ps-5 pe-[30px] font-semibold">
                   <span>Đơn vị vận chuyển:</span>
                   <span>Nhanh</span>
-                  <span className="text-[#0055aa]">Thay đổi</span>
+                  <span className="text-[#0055aa] mx:inline-block xs:hidden">Thay đổi</span>
                   <span>₫16.500</span>
                 </div>
                 <p className="flex items-center justify-center text-xs text-[#26aa99] gap-1 mt-2.5">
@@ -189,7 +204,7 @@ export default function PaymentPage() {
               </div>
             </div>
           </div>
-          <div className="bg-[#fafdff] py-[15px] flex items-center justify-end px-[30px] gap-5">
+          <div className="bg-[#fafdff] xm:py-[15px] xs:py-2 flex items-center justify-end xm:px-[30px] xs:px-5 gap-5">
             <span className="text-sm text-[#0000008a]">
               Tổng số tiền ({selectedItemCarts.length} sản phẩm):
             </span>
@@ -204,11 +219,11 @@ export default function PaymentPage() {
         </div>
       </div>
       <div className="bg-white rounded-[3px] mb-3 mt-5 text-[#222222] font-semibold w-full">
-        <div className="px-[30px] flex items-center justify-between min-h-[90px] ">
-          <span className="text-lg">Phương thức thanh toán</span>
+        <div className="xm:px-[30px] xs:px-5 flex items-center justify-between min-h-[90px] ">
+          <span className="mx:text-lg xs:text-base">Phương thức thanh toán</span>
           <div className="flex items-center justify-end text-sm gap-16">
             <span className="font-normal">Thanh toán khi nhận hàng</span>
-            <span className="text-[#05a] cursor-pointer uppercase">
+            <span className="text-[#05a] cursor-pointer uppercase xm:inline-block xs:hidden">
               Thay đổi
             </span>
           </div>
@@ -228,7 +243,7 @@ export default function PaymentPage() {
               }).format(totalPaymentCarts)}
             </span>
             <span className="text-end leading-10">₫16.500</span>
-            <span className="text-[28px] text-[#1c95c9] text-end leading-[50px]">
+            <span className="xm:text-[28px] xs:text-xl text-[#1c95c9] text-end leading-[50px]">
               ₫
               {new Intl.NumberFormat("vi-VN", {
                 // style: "currency",
@@ -237,7 +252,7 @@ export default function PaymentPage() {
             </span>
           </div>
         </div>
-        <div className="px-[30px] flex items-center justify-between text-sm font-medium py-6">
+        <div className="xm:px-[30px] xs:px-5 flex items-center justify-between xs:gap-4 xm:gap-0 text-sm font-medium xm:py-6 xs:py-2">
           <p className="font-normal">
             Nhấn "Đặt hàng" đồng nghĩa với việc bạn đồng ý tuân theo{" "}
             <span className="text-[#4080ee] font-medium cursor-pointer">
