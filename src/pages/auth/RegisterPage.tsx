@@ -67,21 +67,21 @@ export default function RegisterPage() {
   }, [email, username, password, confirmPassword]);
   return (
     <main className="h-full w-full flex flex-col justify-start">
-      <header className="flex w-full flex-row items-center justify-between h-[84px] max-w-[1200px] mx-auto">
+      <header className="flex w-full flex-row items-center sm:justify-between xs:justify-center h-[84px] max-w-[1200px] mx-auto">
         <div className="flex flex-row gap-4 items-center">
           <img src={LogoHangy} alt="hangy-logo" className="w-[167px]" />
-          <span className="text-2xl text-gray-700 whitespace-nowrap font-medium">
+          <span className="text-2xl text-gray-700 whitespace-nowrap font-medium sm:inline-block xs:hidden">
             Đăng ký
           </span>
         </div>
-        <span className="text-primary text-base cursor-pointer">
+        <span className="text-primary text-base cursor-pointer dl:inline-block xs:hidden">
           Bạn cần giúp đỡ?
         </span>
       </header>
-      <div className="bg-[#ee4e2e] h-full w-full">
-        <div className="bg-authBg bg-center bg-no-repeat bg-contain h-[600px] w-[1040px] mx-auto flex items-center justify-end">
-          <div className="py-16">
-            <div className="bg-white rounded-lg flex flex-col w-[400px] gap-2 pb-7">
+      <div className="bg-primary/30 h-full w-full">
+        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-contain h-[600px] dl:max-w-[1040px] shrink mx-auto flex items-center dl:justify-end xs:justify-center">
+          <div className="py-16 shrink mx:w-[400px] xs:w-4/5">
+            <div className="bg-white rounded-lg flex flex-col shrink gap-2 pb-7">
               <div className="px-7 py-4 text-start text-[#222222] text-xl font-medium">
                 Đăng ký
               </div>

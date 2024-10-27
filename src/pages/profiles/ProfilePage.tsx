@@ -40,7 +40,7 @@ export default function ProfilePage() {
   // if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="w-full flex-1 bg-white mx:px-[30px] xs:px-3 mx:pb-8 xs:pb-2">
+    <div className="w-full flex-1 bg-white mx:px-[30px] xs:px-5 mx:pb-8 xs:pb-2">
       <div className="py-[18px] leading-6 font-medium">
         <h2 className="capitalize text-lg text-[#333]">Hồ sơ của tôi</h2>
         <p className="text-sm mt-1 text-[#555] font-normal">
@@ -51,8 +51,8 @@ export default function ProfilePage() {
       <div className="pt-[30px] flex items-start">
         <div className="flex-1 md:pr-[50px] xs:p-0 w-full text-sm">
           <form method="put" onSubmit={updateMe}>
-            <div className="flex items-center gap-8">
-              <label className="min-w-[20%] text-right">Email</label>
+            <div className="flex mx:flex-row xs:flex-col mx:items-center xs:items-start mx:gap-8 xs:gap-2">
+              <label className="mx:min-w-[20%] text-right">Email</label>
               <input
                 type="text"
                 name="email"
@@ -61,8 +61,8 @@ export default function ProfilePage() {
                 className="w-full px-4 py-2 bg-gray-100 outline-none rounded-sm border cursor-not-allowed"
               />
             </div>
-            <div className="flex items-center gap-8 mt-4">
-              <label className="min-w-[20%] text-right">Họ và tên</label>
+            <div className="flex mx:flex-row xs:flex-col mx:items-center xs:items-start mx:gap-8 xs:gap-2 mt-4">
+              <label className="mx:min-w-[20%] text-right">Họ và tên</label>
               <input
                 type="text"
                 name="name"
@@ -71,8 +71,8 @@ export default function ProfilePage() {
                 className="w-full px-4 py-2 bg-white outline-none rounded-sm border"
               />
             </div>
-            <div className="flex items-center gap-8 mt-4">
-              <label className="min-w-[20%] text-right">Số điện thoại</label>
+            <div className="flex mx:flex-row xs:flex-col mx:items-center xs:items-start mx:gap-8 xs:gap-2 mt-4">
+              <label className="mx:min-w-[20%] text-right">Số điện thoại</label>
               <input
                 type="text"
                 name="phone"
@@ -81,8 +81,8 @@ export default function ProfilePage() {
                 className="w-full px-4 py-2 bg-white outline-none rounded-sm border"
               />
             </div>
-            <div className="flex items-center gap-8 mt-4">
-              <label className="min-w-[20%] text-right">Địa chỉ</label>
+            <div className="flex mx:flex-row xs:flex-col mx:items-center xs:items-start mx:gap-8 xs:gap-2 mt-4">
+              <label className="mx:min-w-[20%] text-right">Địa chỉ</label>
               <input
                 type="text"
                 name="address"
@@ -92,7 +92,7 @@ export default function ProfilePage() {
               />
             </div>
             <div className="flex items-center gap-8 mt-4 py-2">
-              <label className="min-w-[20%] text-right">Giới tính</label>
+              <label className="mx:min-w-[20%] text-right">Giới tính</label>
               <div className="flex items-center">
                 <input
                   type="radio"
@@ -123,8 +123,8 @@ export default function ProfilePage() {
                 Khác
               </div>
             </div>
-            <div className="flex items-center gap-8 mt-4">
-              <label className="min-w-[20%] text-right">Ngày sinh</label>
+            <div className="flex mx:flex-row xs:flex-col mx:items-center xs:items-start mx:gap-8 xs:gap-2 mt-4">
+              <label className="mx:min-w-[20%] text-right">Ngày sinh</label>
               <input
                 type="date"
                 name="birthdate"
@@ -145,7 +145,7 @@ export default function ProfilePage() {
             </div>
           </form>
         </div>
-        <div className="w-[280px] dl:flex flex-col flex-1 items-center border-s border-[#efefef] xs:hidden">
+        <div className="w-[280px] dl:flex flex-col items-center border-s border-[#efefef] xs:hidden">
           <img
             src={Avatar}
             alt=""
