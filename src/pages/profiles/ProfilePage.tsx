@@ -40,7 +40,7 @@ export default function ProfilePage() {
   // if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="w-full flex-1 bg-white px-[30px] pb-8">
+    <div className="w-full flex-1 bg-white mx:px-[30px] xs:px-3 mx:pb-8 xs:pb-2">
       <div className="py-[18px] leading-6 font-medium">
         <h2 className="capitalize text-lg text-[#333]">Hồ sơ của tôi</h2>
         <p className="text-sm mt-1 text-[#555] font-normal">
@@ -49,7 +49,7 @@ export default function ProfilePage() {
       </div>
       <div className="h-px w-full bg-black/10"></div>
       <div className="pt-[30px] flex items-start">
-        <div className="flex-1 pr-[50px] w-full text-sm">
+        <div className="flex-1 md:pr-[50px] xs:p-0 w-full text-sm">
           <form method="put" onSubmit={updateMe}>
             <div className="flex items-center gap-8">
               <label className="min-w-[20%] text-right">Email</label>
@@ -145,7 +145,7 @@ export default function ProfilePage() {
             </div>
           </form>
         </div>
-        <div className="w-[280px] flex flex-col items-center border-s border-[#efefef]">
+        <div className="w-[280px] dl:flex flex-col flex-1 items-center border-s border-[#efefef] xs:hidden">
           <img
             src={Avatar}
             alt=""

@@ -52,13 +52,13 @@ export default function OrdersPage() {
   }
   // if (statusLoading) return <LoadingPage />;
   return (
-    <div className="w-full flex-1 px-4">
+    <div className="w-full flex-1 md:px-4 xs:px-0">
       <div className="">
         <div className="mb-4">
-          <div className="grid grid-cols-7 bg-white text-sm">
+          <div className="sm:grid sm:grid-cols-7 sm:overflow-hidden xs:flex bg-white sm:text-sm xs:text-[13px] xs:overflow-x-auto xs:whitespace-nowrap sm:whitespace-normal no-scrollbar">
             <button
               className={clsx(
-                "border-b-2 hover:text-primary py-4",
+                "border-b-2 hover:text-primary py-4 xs:px-6 sm:px-0",
                 status === "" && "border-primary font-medium text-primary"
               )}
               onClick={() => setStatus("")}
@@ -69,7 +69,7 @@ export default function OrdersPage() {
               <button
                 key={item.id}
                 className={clsx(
-                  "border-b-2 hover:text-primary py-4",
+                  "border-b-2 hover:text-primary py-4 xs:px-6 sm:px-0",
                   item.id === status &&
                     "border-primary font-medium text-primary"
                 )}
@@ -91,13 +91,13 @@ export default function OrdersPage() {
           {orders && !!orders.length ? (
             orders.map((order) => (
               <div className="flex flex-col w-full" key={order.id}>
-                <div className="bg-white px-6 pt-6 pb-3 rounded-sm shadow-md w-full border-b border-dashed">
+                <div className="bg-white sm:px-6 sm:pt-6 xs:px-4 xs:pt-2 pb-3 rounded-sm shadow-md w-full border-b border-dashed">
                   <div className="flex items-center justify-end pb-3">
-                    <span className="uppercase px-4 border-r text-sm font-medium">
+                    <span className="uppercase px-4 border-r xs:text-[10px] sm:text-sm font-medium">
                       Mã đơn hàng:{" "}
                       {order.order_date.split("-").join("").concat(order.id)}
                     </span>
-                    <span className="font-semibold text-[#26aa99] uppercase text-xs ps-4">
+                    <span className="font-semibold text-[#26aa99] uppercase xs:text-[10px] sm:text-xs ps-4">
                       {order.status}
                     </span>
                   </div>
@@ -107,15 +107,15 @@ export default function OrdersPage() {
                       className="flex items-center justify-between py-4"
                       key={item.id}
                     >
-                      <div className="flex items-center">
+                      <div className="flex items-start">
                         <img
                           src={item.product_image}
                           alt=""
-                          className="mr-4 w-[90px] h-[90px] flex-none object-contain"
+                          className="mr-4 sm:w-[90px] sm:h-[90px] xs:w-[70px] xs:h-[70px] flex-none object-contain"
                         />
                         <div className="flex flex-col items-start gap-0.5">
                           <h2
-                            className="font-medium text-base text-[#000000de] line-clamp-1 cursor-pointer"
+                            className="font-medium sm:text-base xs:text-sm text-[#000000de] line-clamp-1 cursor-pointer"
                             onClick={() => navigate(`/products/${item.slug}`)}
                           >
                             {item.product_name}
@@ -128,12 +128,26 @@ export default function OrdersPage() {
                           <p className="text-[#000000de] text-sm">
                             Số lượng: {item.quantity}
                           </p>
+                          <div className="xm:hidden xs:flex items-center justify-start text-sm font-medium">
+                            <span className="line-through text-[#bdbdbd] mr-1">
+                              ₫
+                              {new Intl.NumberFormat("vi-VN", {
+                                currency: "VND",
+                              }).format(item.price)}
+                            </span>
+                            <span className="text-primary">
+                              ₫
+                              {new Intl.NumberFormat("vi-VN", {
+                                currency: "VND",
+                              }).format(item.price)}
+                            </span>
+                          </div>
                           <span className="text-primary border border-primary rounded-sm block text-[10px] leading-3 py-0.5 px-1 w-fit">
                             Đổi trả miễn phí 7 ngày
                           </span>
                         </div>
                       </div>
-                      <div className="flex items-center justify-end text-sm font-medium">
+                      <div className="xs:hidden xm:flex items-center justify-end text-sm font-medium">
                         <span className="line-through text-[#bdbdbd] mr-1">
                           ₫
                           {new Intl.NumberFormat("vi-VN", {

@@ -170,3 +170,12 @@ body {
   bottom: -75%;
   z-index: 0;
 }
+
+/* Ẩn thanh cuộn ngang */
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Đối với Chrome, Safari và các trình duyệt dựa trên Webkit */
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* Đối với IE và Edge */
+  scrollbar-width: none;  /* Đối với Firefox */
+}
