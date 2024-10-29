@@ -8,6 +8,7 @@ interface HangyStore {
   setToken(v: string | undefined): void;
 
   welcomePopup: boolean;
+  isOpenMenu: boolean;
   isSelectedAllCart: boolean;
   setIsSeletedAllCart(v: boolean): void;
   selectedItemCarts: string[];
@@ -30,6 +31,7 @@ const useHangyStore = createWithEqualityFn<HangyStore>()(
   persist(
     (set) => ({
       ...initialState,
+      isOpenMenu: false,
       setToken(v) {
         set({ access_token: v });
       },
