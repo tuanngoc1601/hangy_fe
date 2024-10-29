@@ -58,6 +58,15 @@ const UserDropdown = ({
               Thông tin tài khoản
             </Link>
           </li>
+          <li className="md:hidden xs:block">
+            <Link
+              to={"/cart"}
+              className="block px-4 py-2 hover:bg-gray-100"
+              onClick={() => setIsOpenDropdown(false)}
+            >
+              Giỏ hàng
+            </Link>
+          </li>
           <li>
             <Link
               to={"/user/orders"}
