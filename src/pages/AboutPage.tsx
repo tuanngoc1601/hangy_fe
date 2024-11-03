@@ -1,8 +1,12 @@
-// import Container from "../components/layout/Container";
-
-import { Avatar, Doctor } from "../assets";
-import ArrowIcon from "../components/icons/ArrowIcon";
-// import CheckIcon from "../components/icons/CheckIcon";
+import { Doctor } from "../assets";
+// import ArrowIcon from "../components/icons/ArrowIcon";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Autoplay } from "swiper/modules";
+import { REVIEWS } from "../lib/constants";
 
 export default function AboutPage() {
   return (
@@ -55,10 +59,10 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="w-full pb-[100px]">
-        <div className="px-4 flex lg:flex-row xs:flex-col lg:items-center lg:justify-around xs:gap-28">
+        <div className="px-4 flex dl:flex-row xs:flex-col dl:items-center dl:justify-around xs:gap-28">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
-              267,300,000+
+              267,300K+
             </h3>
             <p className="text-[#162355] font-medium leading-7 text-lg">
               Lượt bán toàn quốc
@@ -66,7 +70,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
-              61,265,000+
+              61,265K+
             </h3>
             <p className="text-[#162355] font-medium leading-7 text-lg">
               Đánh giá 5* từ khách hàng
@@ -74,7 +78,7 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
-              133,689,000+
+              133,689K+
             </h3>
             <p className="text-[#162355] font-medium leading-7 text-lg">
               Khách hàng cần hỗ trợ
@@ -108,143 +112,41 @@ export default function AboutPage() {
           <h2 className="text-center text-[32px] font-semibold text-[#162355]">
             Đánh giá của khách hàng
           </h2>
-          <div className="mt-[100px] flex md:flex-row xs:flex-col flex-wrap">
+          <div className="mt-12 flex md:flex-row xs:flex-col">
             <div className="px-2 md:w-1/2 flex items-center">
-              <div className="flex flex-col items-start justify-center w-full relative">
-                <p className="line-clamp-[7] text-2xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
-                  Câu 1: Khóa học “Thấu hiểu nội tâm - kiến tạo an vui" đã hệ
-                  thống và mang lại nhiều thông tin hữu ích đối với bản thân em.
-                  Trong đó, vấn đề em tâm đắc nhất và dành nhiều thời gian suy
-                  ngẫm nhất là Công thức cội nguồn cuộc sống. Có thể tóm lược
-                  lại công thức cội nguồn cuộc sống như sau: những điều chúng ta
-                  nghe, thấy, nói và biết sẽ tạo nên hình ảnh trong tâm trí, từ
-                  đó tạo nên niềm tin trong chúng ta; niềm tin sẽ dẫn lối suy
-                  nghĩ, suy nghĩ sẽ tạo nên hành động, hành động sẽ tạo thành
-                  thói quen, thói quen sẽ xây dựng nên tính cách và tính cách
-                  kết hợp với những sự lựa chọn của bản thân sẽ mang lại những
-                  kết quả trong cuộc sống. Hay nói cách khác, những kết quả
-                  trong cuộc sống mà chúng ta có được và trải qua bắt nguồn từ
-                  chính những điều chúng ta nghe, thấy, nói và biết. Khi ngộ
-                  được điều này và hiểu tại sao những kết quả cả thành công lẫn
-                  thất bại mà em đã từng trải qua đều xuất phát từ chính bản
-                  thân mình. Công thức cội nguồn cuộc sống đã lý giải và trả lời
-                  cho em những câu hỏi mà bản thân chưa có đáp án bấy lâu nay là
-                  tại sao mình lại đưa ra lựa chọn như vậy tại thời điểm đó và
-                  tại sao mình đạt được kết quả như vậy. Có thể kể ra nhiều kết
-                  quả trong cuộc sống của em đến từ công thức cội nguồn cuộc
-                  sống. Trước đây, bản thân em chỉ chạy được 500 mét là cơ thể
-                  cảm thấy mệt và không thể chịu nổi. Mỗi lần như thế là em luôn
-                  dừng lại nghỉ ngơi và thắc mắc tại sao mình chạy mãi chạy mãi
-                  mà không thể khỏe hơn được. Tuy nhiên sau khi vào đại học và
-                  trong môn giáo dục thể chất, em được thầy dạy lý thuyết cách
-                  chạy bền: nếu cảm thấy mệt lần đầu thì cứ cố gắng chạy thêm 5
-                  đến 10 mét thì sau đó cơ thể sẽ dần dần quen với cảm giác mệt
-                  và chúng ta sẽ chạy thêm được một quãng dài nữa. Sau khi biết
-                  được lý thuyết này em đã thực hiện theo và quả nhiên là đúng
-                  như vậy, em hoàn toàn có thể chạy hơn 1km. Nhờ việc biết và
-                  tin vào lý thuyết trên mà em đã biết cách cải thiện và nâng
-                  tầm kết quả chạy của bản thân. Công thức cội nguồn cuộc sống
-                  cũng đúng trong những ngày mới đầu em tham gia làm các bài tập
-                  lớn trong trường đại học. Khi đang trong quá trình tìm hiểu để
-                  học 1 công nghệ mới thì những người bạn luôn bảo là cái đó khó
-                  lắm, học mãi không hiểu. Điều này mới đầu hay khiến em tin
-                  rằng là bản thân mình cũng sẽ bỏ cuộc vì sự khó khăn của công
-                  nghệ đó. Nhưng đến khi thấy 1 em nhỏ tuổi hơn và còn rất giỏi
-                  trong lĩnh vực đó chia sẻ các kiến thức liên quan, đồng thời
-                  thầy giáo cũng giảng giải, mổ xẻ vấn đề thì thực sự công nghệ
-                  đó không thực sự khó đến mức như những lời những người bạn
-                  nói. Nhờ việc biết, nghe và thấy những điều của những người đi
-                  trước mà em đã tin vào bản thân hoàn toàn có thể làm được và
-                  đã thành công trong việc tiếp thu công nghệ. Công thức cội
-                  nguồn cuộc sống hoàn toàn có thể áp dụng trong việc phát triển
-                  của Remitano. Để tạo ra những kết quả tốt, thì theo công thức
-                  chúng ta cần có những sự nghe, thấy, nói và biết đúng đắn.
-                  Chúng ta có thể tạo ra những buổi chia sẻ về công nghệ, về
-                  thành tựu ấn tượng mà các nhân viên đã xây dựng, về sự phát
-                  triển của hệ thống - công ty, về những bài học rút ra và việc
-                  áp dụng chúng cho tương lai. Từ những thông tin đó, mọi thành
-                  viên trong công ty sẽ có những cái nghe, thấy, nói và biết rõ
-                  ràng; từ đó tạo ra niềm tin tích cực vào định hướng phát triển
-                  của công ty, và mang đến thành công cho công ty thông qua
-                  những cống hiến trong công việc. Câu 2: Mục tiêu giàu toàn
-                  diện trong 3 năm tới của em gồm 7 khía cạnh từ 7 sự giàu có
-                  toàn diện: 1, Về thể chất: mỗi ngày dành thời gian tập thể dục
-                  ít nhất 15 phút, mỗi tuần dành 1 tiếng 30 phút cho việc vận
-                  động mạnh và duy trì thói quen ăn uống điều độ, lành mạnh, hạn
-                  chế thực phẩm chế biến sẵn nhiều chất béo để có 1 cơ thể ít mỡ
-                  thừa, linh hoạt trong các vận động thể chất. 2, Về vật chất:
-                  nâng cao nguồn thu nhập, đồng thời mở rộng sang các nguồn thu
-                  nhập thụ động và thực hiện tiết kiệm, tích lũy với lối sống
-                  tối giản. Để từ đó sự giàu vật chất đạt cấp độ đảm bảo tài
-                  chính và là tiền đề vươn tới cấp độ độc lập tài chính. 3, Về
-                  nhân cách: tập luyện để bản thân có đủ 9 biểu hiện tốt của
-                  nhân cách: vui vẻ, hy vọng, niềm tin, trí tuệ, trân trọng biết
-                  ơn, yêu thương, bao dung, khiêm tốn, chân thật. Nhìn nhận
-                  những điều bản thân đã đạt được, những bài học hay rút ra được
-                  thay vì quá chú trọng vào những việc làm không tốt để cảm thấy
-                  vui vẻ, thoải mái. Nhìn vào những điểm tích cực để mang đến hy
-                  vọng, niềm tin cho bản thân cũng như những người xung quanh.
-                  Cố gắng học tập và trau dồi kiến thức để có thêm trí tuệ và
-                  tạo sự khiêm tốn. Thể hiện sự yêu thương, bao dung với những
-                  người bên cạnh và thể hiện sự biết ơn với những người đã giúp
-                  đỡ trong cuộc sống một cách chân thật. 4, Về tâm thái: hạn chế
-                  những suy nghĩ và mơ tưởng không có thực để giảm tánh Tham và
-                  Tưởng về các khía cạnh Tài - Sắc - Danh - Thùy - Thực, tập
-                  trung vào sự chân thật của các sự kiện, trải nghiệm của bản
-                  thân tại thời điểm hiện tại. Để từ đó bản thân giảm bớt các
-                  vấn nạn mà do suy nghĩ của chính mình đem lại và tăng sự an
-                  vui trong cuộc sống. 5, Về trí tuệ: Nâng tầm bản thân để đạt
-                  được trí tuệ tầng bậc 3. Giảm bớt suy tưởng để sống với thực
-                  tại, từ đó làm chủ được những gì mình nói và biết; có được sự
-                  an vui trong cuộc sống. 6, Về năng lực: Tập trung đi sâu vào
-                  chuyên môn để trở thành chuyên gia. Nâng cao khả năng, trình
-                  độ, cố gắng học hỏi, tiến bộ mỗi ngày; đồng thời chia sẻ kiến
-                  thức, giúp đỡ được những đồng nghiệp xung quanh. Từ đó xây
-                  dựng và tạo lập các mối quan hệ phát triển trong công việc nói
-                  riêng và cuộc sống nói chung. 7, Về phẩm chất: thực hiện các
-                  hành động cũng như lựa chọn cái nghe, nhìn, nói và hiểu để cải
-                  thiện 5 yếu tố Nhân, Lễ, Nghĩa, Trí, Tín ở cả 4 động lực bản
-                  thân, gia đình, tổ chức và xã hội. Trong thời gian tới, với
-                  bản thân, trước hết chú trọng trong việc ăn uống, nghỉ ngơi,
-                  an toàn; thực hiện những cảm kết mà chính bản thân đã đề ra;
-                  với gia đình, tập trung tạo sự yêu thương, gắn kết thông qua
-                  cách lắng nghe, giúp đỡ mọi người; với tổ chức, giúp đỡ, chia
-                  sẻ thông tin trong công việc, gửi những lời cảm ơn đến đồng
-                  nghiệp đã giúp đỡ mình, thực hiện những cam kết đã đề ra trong
-                  công việc; còn với xã hội, giúp đỡ những người xung quanh nhằm
-                  lan tỏa tình thương, giữ chữ tín với mọi người như gặp mặt
-                  đúng giờ, thực hiện những việc làm đã nói.
-                </p>
-                <div className="flex items-center justify-start gap-4 mt-12">
-                  <img
-                    src={Avatar}
-                    alt="thumb-nail"
-                    className="rounded-full object-cover w-14 h-14"
-                  />
-                  <div>
-                    <p className="text-xl font-medium text-[#202d40]">
-                      Anonymous User
-                    </p>
-                    <span className="text-lg text-[#566776]">Course</span>
-                  </div>
-                </div>
-                <div className="flex items-center justify-end gap-4 absolute right-0 bottom-0">
-                  <button
-                    type="button"
-                    className="w-14 h-14 rounded-full flex items-center justify-center bg-[#f5f5f5]"
-                    // onClick={() => swiperFlashSale.current?.slidePrev()}
-                  >
-                    <ArrowIcon className="rotate-180" />
-                  </button>
-                  <button
-                    type="button"
-                    className="w-14 h-14 rounded-full flex items-center justify-center bg-[#f5f5f5]"
-                    // onClick={() => swiperFlashSale.current?.slideNext()}
-                  >
-                    <ArrowIcon />
-                  </button>
-                </div>
-              </div>
+              <Swiper
+                spaceBetween={30}
+                loop={true}
+                slidesPerView={1}
+                autoplay={{
+                  delay: 4000,
+                  disableOnInteraction: false,
+                }}
+                modules={[Navigation, Autoplay]}
+              >
+                {REVIEWS.map((review) => (
+                  <SwiperSlide className="flex items-center">
+                    <div className="flex flex-col items-start justify-center w-full">
+                      <p className="text-2xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
+                        {review}
+                      </p>
+                      {/* <div className="flex items-center justify-start gap-4 mt-12">
+                        <img
+                          src={Avatar}
+                          alt="thumb-nail"
+                          className="rounded-full object-cover w-14 h-14"
+                        />
+                        <div>
+                          <p className="text-xl font-medium text-[#202d40]">
+                            Anonymous User
+                          </p>
+                          <span className="text-lg text-[#566776]">Course</span>
+                        </div>
+                      </div> */}
+                    </div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
             </div>
             <div className="px-2 md:w-1/2 flex items-center md:justify-end xs:justify-center relative xs:mt-10">
               <img

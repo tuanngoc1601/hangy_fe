@@ -6,7 +6,12 @@ export default function WelcomePopup() {
     <div className="h-screen w-screen fixed left-0 top-0 flex items-center justify-center bg-black/40 z-[100]">
       <div className="relative flex flex-col items-center">
         <img src={Doctor} alt="" className="" />
-        <span className="text-2xl font-semibold text-white mt-4">Bác sĩ - Nha sĩ Nguyễn Kim Cúc</span>
+        <span className="text-2xl font-semibold text-white mt-4">
+          Bác sĩ - Nha sĩ Nguyễn Kim Cúc
+        </span>
+        <span className="text-2xl font-semibold text-white mt-1">
+          Nhà sáng lập thương hiệu Hangy
+        </span>
         <div
           className="cursor-pointer h-[30px] w-[30px] flex rounded-full absolute top-0 right-10 items-center justify-center bg-[#efefef]"
           onClick={() => {
