@@ -1,4 +1,4 @@
-import { Doctor } from "../assets";
+import { CommentImg, Doctor, FeatureImg } from "../assets";
 // import ArrowIcon from "../components/icons/ArrowIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -11,7 +11,8 @@ import { REVIEWS } from "../lib/constants";
 export default function AboutPage() {
   return (
     <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1300px]">
-      <section className="bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] overflow-hidden">
+      <section className="bg-transparent overflow-hidden">
+        {/* bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] */}
         <div className="px-4 flex md:flex-row xs:flex-col items-center">
           <div className="p-3 md:w-2/3 text-[#162355]">
             <h1 className="md:text-left xs:text-center leading-[50px] font-semibold md:text-[40px] sm:text-[32px] xs:text-[28px] mt-[37px] mb-[50px] tracking-wide">
@@ -47,7 +48,7 @@ export default function AboutPage() {
           </p>
         </div>
       </section>
-      <section className="relative overflow-hidden my-[100px] bg-gradient-to-b to-[#d0ebfb] from-[#dbeef8] w-full about-page">
+      {/* <section className="relative overflow-hidden my-[100px] bg-gradient-to-b to-[#d0ebfb] from-[#dbeef8] w-full about-page">
         <div className="px-4 relative w-full z-20">
           <img
             src="https://rendemy.org/assets/images/learn-baner-aboutus.webp"
@@ -57,8 +58,8 @@ export default function AboutPage() {
             className="mx-auto"
           />
         </div>
-      </section>
-      <section className="w-full pb-[100px]">
+      </section> */}
+      <section className="w-full pb-[100px] pt-[250px]">
         <div className="px-4 flex dl:flex-row xs:flex-col dl:items-center dl:justify-around xs:gap-28">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
@@ -89,7 +90,7 @@ export default function AboutPage() {
       <section className="w-full py-[100px] overflow-hidden">
         <div className="px-4 flex md:flex-row xs:flex-col flex-wrap ">
           <div className="px-3 md:w-1/2 xs:flex xs:justify-center">
-            <img src={Doctor} alt="" width={566} height={566} />
+            <img src={FeatureImg} alt="" width={400} height={600} />
           </div>
           <div className="px-3 md:w-1/2 text-sm flex flex-col justify-center text-[#162355] xs:mt-20">
             <h2 className="md:text-start xs:text-center text-[32px] font-semibold">
@@ -107,12 +108,12 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-      <section className="w-full py-[100px] overflow-hidden bg-transparent">
+      <section className="w-full pb-[100px] overflow-hidden bg-transparent">
         <div className="flex flex-col px-4">
           <h2 className="text-center text-[32px] font-semibold text-[#162355]">
             Đánh giá của khách hàng
           </h2>
-          <div className="mt-12 flex md:flex-row xs:flex-col">
+          <div className="flex md:flex-row xs:flex-col">
             <div className="px-2 md:w-1/2 flex items-center">
               <Swiper
                 spaceBetween={30}
@@ -127,7 +128,7 @@ export default function AboutPage() {
                 {REVIEWS.map((review) => (
                   <SwiperSlide className="flex items-center">
                     <div className="flex flex-col items-start justify-center w-full">
-                      <p className="text-2xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
+                      <p className="text-xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
                         {review}
                       </p>
                       {/* <div className="flex items-center justify-start gap-4 mt-12">
@@ -148,15 +149,15 @@ export default function AboutPage() {
                 ))}
               </Swiper>
             </div>
-            <div className="px-2 md:w-1/2 flex items-center md:justify-end xs:justify-center relative xs:mt-10">
+            <div className="px-2 md:w-1/2 flex items-center justify-center relative xs:mt-10">
               <img
-                src={Doctor}
+                src={CommentImg}
                 alt=""
-                width={463}
-                height={482}
+                width={400}
+                height={600}
                 className="z-20"
               />
-              <svg
+              {/* <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 464 488"
@@ -217,7 +218,7 @@ export default function AboutPage() {
                     <stop offset="1" stopColor="#FC7D36"></stop>
                   </linearGradient>
                 </defs>
-              </svg>
+              </svg> */}
             </div>
           </div>
         </div>

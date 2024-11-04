@@ -18,5 +18,5 @@ export { default as LogoHangy } from "./logo.png";
 export { default as EmptyCart } from "./images/empty-cart.jpg";
 export { default as Doctor } from "./doctor.png";
 export { default as OrderEmpty } from "./images/order-empty.png";
-export { default as CommentImg } from "./images/comment.jpg";
-export { default as FeatureImg } from "./images/feature.jpg";
+export { default as CommentImg } from "./images/comment.png";
+export { default as FeatureImg } from "./images/feature.png";

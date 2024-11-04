@@ -440,7 +440,7 @@ export default function ProductDetail() {
           rehypePlugins={[rehypeRaw]}
         />
       </div>
-      <div className="mt-6 mb-12 bg-white md:p-7 sm:p-5 xs:p-4 w-full">
+      <div className="mt-6 mb-12 bg-transparent md:p-7 sm:p-5 xs:p-4 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
             <div className="bg-primary h-8 w-3 rounded-sm"></div>

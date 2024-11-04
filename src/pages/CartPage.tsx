@@ -264,7 +264,7 @@ export default function CartPage() {
           </div>
         </div>
       )}
-      <div className="mt-12 mb-12 bg-white md:p-7 xs:p-4 w-full">
+      <div className="mt-12 mb-12 bg-transparent md:p-7 xs:p-4 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
             <div className="bg-primary h-6 w-3 rounded-sm"></div>

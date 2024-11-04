@@ -18,6 +18,7 @@ export default {
       },
       backgroundImage: {
         authBg: "url('/src/assets/backgrounds/bgAuth.png')",
+        appBg: "url('/src/assets/backgrounds/bgApp.png')",
         flashSaleBg: "url('/src/assets/backgrounds/flashSale.png')",
         gradient:
           "linear-gradient(274.59deg, #19bfef -11.3%, #0dc9ec 50.13%, #00e3d0 111.55%)",
