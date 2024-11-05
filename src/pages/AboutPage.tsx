@@ -10,7 +10,7 @@ import { REVIEWS } from "../lib/constants";
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1600px] bg-gradient-to-b from-[#daf1ff] to-[#fde9e800]">
+    <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] px-8 bg-gradient-to-b from-[#daf1ff] to-[#fde9e800]">
       <section className="bg-transparent overflow-hidden">
         {/* bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] */}
         <div className="px-4 flex md:flex-row xs:flex-col items-center">
