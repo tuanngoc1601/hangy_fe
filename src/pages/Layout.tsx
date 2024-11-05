@@ -9,7 +9,8 @@ export const LayoutFull: FC = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return (
-    <div className="relative h-full w-full flex-col text-foreground bg-appBg bg-repeat bg-center bg-contain">
+    <div className="relative h-full w-full flex-col text-foreground bg-white">
+      {/* bg-appBg bg-repeat bg-center bg-contain */}
       <Header />
       <div className="flex-1">
         <Outlet />

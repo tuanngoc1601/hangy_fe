@@ -17,7 +17,7 @@ export default {
         primary: "#1c95c9",
       },
       backgroundImage: {
-        authBg: "url('/src/assets/backgrounds/bgAuth.png')",
+        authBg: "url('/src/assets/backgrounds/bgAuth1.png')",
         appBg: "url('/src/assets/backgrounds/bgApp.png')",
         flashSaleBg: "url('/src/assets/backgrounds/flashSale.png')",
         gradient:

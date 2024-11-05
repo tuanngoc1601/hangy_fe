@@ -1,4 +1,4 @@
-import { CommentImg, Doctor, FeatureImg } from "../assets";
+import { CommentImg, Doctor, DoctorTeamImg, FeatureImg } from "../assets";
 // import ArrowIcon from "../components/icons/ArrowIcon";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -10,7 +10,7 @@ import { REVIEWS } from "../lib/constants";
 
 export default function AboutPage() {
   return (
-    <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1300px]">
+    <main className="mx-auto w-full flex flex-col items-center justify-center mt-[75px] max-w-[1600px] bg-gradient-to-b from-[#daf1ff] to-[#fde9e800]">
       <section className="bg-transparent overflow-hidden">
         {/* bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] */}
         <div className="px-4 flex md:flex-row xs:flex-col items-center">
@@ -32,7 +32,7 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="pt-44 w-full">
-        <div className="px-4 flex flex-col items-center gap-5 text-[#162355]">
+        <div className="px-4 flex flex-col items-center justify-center gap-5 text-[#162355]">
           <h2 className="max-w-[770px] md:text-4xl sm:text-3xl xs:text-2xl font-semibold text-center leading-[1.265]">
             Xây dựng một đội ngũ chuyên viên có trình độ cao trong lĩnh vực nha
             khoa
@@ -46,6 +46,7 @@ export default function AboutPage() {
             thực qua đội ngũ chuyên nghiệp và tâm huyết. Sự đồng hành với khách
             hàng là giá trị mà Hangy đang hướng tới.
           </p>
+          <img src={DoctorTeamImg} alt="" className="mt-20" />
         </div>
       </section>
       {/* <section className="relative overflow-hidden my-[100px] bg-gradient-to-b to-[#d0ebfb] from-[#dbeef8] w-full about-page">
@@ -113,7 +114,7 @@ export default function AboutPage() {
           <h2 className="text-center text-[32px] font-semibold text-[#162355]">
             Đánh giá của khách hàng
           </h2>
-          <div className="flex md:flex-row xs:flex-col">
+          <div className="flex md:flex-row xs:flex-col-reverse">
             <div className="px-2 md:w-1/2 flex items-center">
               <Swiper
                 spaceBetween={30}

@@ -72,9 +72,9 @@ export default function LoginPage() {
           Bạn cần giúp đỡ?
         </span>
       </header>
-      <div className="h-full w-full bg-primary/30">
-        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-contain h-[600px] dl:max-w-[1040px] shrink mx-auto flex items-center dl:justify-end xs:justify-center">
-          <div className="py-16 shrink mx:w-[400px] xs:w-4/5">
+      <div className="h-full w-full bg-white">
+        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-cover w-full shrink mx-auto flex items-center dl:justify-end xs:justify-center">
+          <div className="py-16 shrink mx:w-[400px] xs:w-4/5 me-36">
             <div className="bg-white rounded-lg flex flex-col shrink gap-2 pb-7">
               <div className="px-7 py-4 text-start text-[#222222] text-xl font-medium">
                 Đăng nhập

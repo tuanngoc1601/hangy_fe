@@ -21,7 +21,7 @@ export default function ProductItem({
   return (
     <div
       className={clsx(
-        "border hover:border-primary transition ease-in-out duration-300 cursor-pointer hover:shadow-[0_0_15px_0_#1c95c966] bg-white",
+        "border hover:border-primary transition ease-in-out duration-300 cursor-pointer hover:shadow-[0_0_15px_0_#1c95c966]",
         className
       )}
       onClick={() => navigate(`/products/${slug}`)}
