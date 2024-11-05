@@ -8,7 +8,7 @@ export default function Container({
   return (
     <main
       className={clsx(
-        "mx-auto w-full sm:px-8 xs:px-4 flex flex-col items-center justify-center mt-[75px] max-w-[1600px]",
+        "mx-auto w-full sm:px-8 xs:px-4 flex flex-col items-center justify-center mt-[75px]",
         className
       )}
     >
