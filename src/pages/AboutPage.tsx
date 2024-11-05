@@ -14,7 +14,7 @@ export default function AboutPage() {
       <section className="bg-transparent overflow-hidden">
         {/* bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] */}
         <div className="px-4 flex md:flex-row xs:flex-col items-center">
-          <div className="p-3 md:w-2/3 text-[#162355]">
+          <div className="p-3 md:w-2/3 text-[#0A96E7]">
             <h1 className="md:text-left xs:text-center leading-[50px] font-semibold md:text-[40px] sm:text-[32px] xs:text-[28px] mt-[37px] mb-[50px] tracking-wide">
               Bác sĩ/ Nha sĩ Nguyễn Kim Cúc - Nhà sáng lập thương hiệu Hangy
             </h1>
@@ -26,14 +26,14 @@ export default function AboutPage() {
               đồng.
             </p>
           </div>
-          <div className="md:w-1/3 p-3 flex items-center relative">
+          <div className="md:w-1/2 p-3 flex items-center relative">
             <img src={Doctor} alt="" className="h-full mx-auto z-30" />
           </div>
         </div>
       </section>
-      <section className="pt-44 w-full">
+      <section className="pt-20 w-full">
         <div className="px-4 flex flex-col items-center justify-center gap-5 text-[#162355]">
-          <h2 className="max-w-[770px] md:text-4xl sm:text-3xl xs:text-2xl font-semibold text-center leading-[1.265]">
+          {/* <h2 className="max-w-[770px] md:text-4xl sm:text-3xl xs:text-2xl font-semibold text-center leading-[1.265]">
             Xây dựng một đội ngũ chuyên viên có trình độ cao trong lĩnh vực nha
             khoa
           </h2>
@@ -45,8 +45,8 @@ export default function AboutPage() {
             chăm sóc răng miệng tốt nhất, mà còn là mang đến những giá trị đích
             thực qua đội ngũ chuyên nghiệp và tâm huyết. Sự đồng hành với khách
             hàng là giá trị mà Hangy đang hướng tới.
-          </p>
-          <img src={DoctorTeamImg} alt="" className="mt-20" />
+          </p> */}
+          <img src={DoctorTeamImg} alt="" className="mt-20 w-full" />
         </div>
       </section>
       {/* <section className="relative overflow-hidden my-[100px] bg-gradient-to-b to-[#d0ebfb] from-[#dbeef8] w-full about-page">
@@ -60,13 +60,13 @@ export default function AboutPage() {
           />
         </div>
       </section> */}
-      <section className="w-full pb-[100px] pt-[250px]">
+      <section className="w-full py-12">
         <div className="px-4 flex dl:flex-row xs:flex-col dl:items-center dl:justify-around xs:gap-28">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               267,300K+
             </h3>
-            <p className="text-[#162355] font-medium leading-7 text-lg">
+            <p className="text-[#0A96E7] font-medium leading-7 text-lg">
               Lượt bán toàn quốc
             </p>
           </div>
@@ -74,7 +74,7 @@ export default function AboutPage() {
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               61,265K+
             </h3>
-            <p className="text-[#162355] font-medium leading-7 text-lg">
+            <p className="text-[#0A96E7] font-medium leading-7 text-lg">
               Đánh giá 5* từ khách hàng
             </p>
           </div>
@@ -82,7 +82,7 @@ export default function AboutPage() {
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               133,689K+
             </h3>
-            <p className="text-[#162355] font-medium leading-7 text-lg">
+            <p className="text-[#0A96E7] font-medium leading-7 text-lg">
               Khách hàng cần hỗ trợ
             </p>
           </div>
@@ -91,13 +91,13 @@ export default function AboutPage() {
       <section className="w-full py-[100px] overflow-hidden">
         <div className="px-4 flex md:flex-row xs:flex-col flex-wrap ">
           <div className="px-3 md:w-1/2 xs:flex xs:justify-center">
-            <img src={FeatureImg} alt="" width={400} height={600} />
+            <img src={FeatureImg} alt="" width={500} height={750} />
           </div>
-          <div className="px-3 md:w-1/2 text-sm flex flex-col justify-center text-[#162355] xs:mt-20">
-            <h2 className="md:text-start xs:text-center text-[32px] font-semibold">
+          <div className="px-3 md:w-1/2 text-sm flex flex-col justify-center text-[#0A96E7] xs:mt-20">
+            <h2 className="md:text-start xs:text-center text-[40px] font-semibold">
               Tầm nhìn tương lai
             </h2>
-            <p className="text-base md:text-start xs:text-center leading-6 py-[18px]">
+            <p className="text-lg md:text-start xs:text-center leading-6 py-[18px] w-2/3 mt-8">
               Tầm nhìn tương lai của Bác sĩ Cúc và thương hiệu Hangy là mở rộng
               hơn nữa các dòng sản phẩm chăm sóc răng miệng, tạo ra một hệ sinh
               thái chăm sóc răng miệng toàn diện từ máy tăm nước, bàn chải điện,
@@ -111,11 +111,11 @@ export default function AboutPage() {
       </section>
       <section className="w-full pb-[100px] overflow-hidden bg-transparent">
         <div className="flex flex-col px-4">
-          <h2 className="text-center text-[32px] font-semibold text-[#162355]">
-            Đánh giá của khách hàng
-          </h2>
           <div className="flex md:flex-row xs:flex-col-reverse">
-            <div className="px-2 md:w-1/2 flex items-center">
+            <div className="px-2 md:w-1/2 flex flex-col justify-center ">
+              <h2 className="text-center text-[32px] font-semibold text-[#0A96E7] mb-10">
+                Đánh giá của khách hàng
+              </h2>
               <Swiper
                 spaceBetween={30}
                 loop={true}
@@ -125,11 +125,12 @@ export default function AboutPage() {
                   disableOnInteraction: false,
                 }}
                 modules={[Navigation, Autoplay]}
+                style={{ height: "280px" }}
               >
                 {REVIEWS.map((review) => (
-                  <SwiperSlide className="flex items-center">
+                  <SwiperSlide className="flex items-start h-fit">
                     <div className="flex flex-col items-start justify-center w-full">
-                      <p className="text-xl leading-[38.5px] text-[#162355] font-medium italic overflow-hidden">
+                      <p className="text-xl leading-[38.5px] text-[#0A96E7] font-medium italic overflow-hidden">
                         {review}
                       </p>
                       {/* <div className="flex items-center justify-start gap-4 mt-12">
@@ -154,8 +155,8 @@ export default function AboutPage() {
               <img
                 src={CommentImg}
                 alt=""
-                width={400}
-                height={600}
+                width={500}
+                height={750}
                 className="z-20"
               />
               {/* <svg

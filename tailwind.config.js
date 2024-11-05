@@ -12,6 +12,7 @@ export default {
         dl: "1080px",
         lg: "1194px",
         xl: "1280px",
+        xxl: "1560px",
       },
       colors: {
         primary: "#1c95c9",
