@@ -60,8 +60,8 @@ export default function AboutPage() {
           />
         </div>
       </section> */}
-      <section className="w-full py-12">
-        <div className="px-4 flex dl:flex-row xs:flex-col dl:items-center dl:justify-around xs:gap-28">
+      <section className="w-full pb-12 pt-36">
+        <div className="px-4 flex dl:flex-row xs:flex-col dl:items-center dl:justify-around xl:justify-center xl:gap-40 xs:gap-28">
           <div className="flex flex-col items-center gap-2">
             <h3 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-[#c6e1f9] to-[#31a0f5] leading-[1.265]">
               267,300K+

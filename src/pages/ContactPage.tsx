@@ -45,7 +45,7 @@ export default function ContactPage() {
         <BreadcrumbIcon />
         <span>Liên hệ</span>
       </div>
-      <div className="flex sm:flex-row xs:flex-col w-full sm:my-12 xs:mb-12 xs:mt-6 gap-10">
+      <div className="flex sm:flex-row xs:flex-col w-full sm:my-12 xs:mb-12 xl:mb-28 xs:mt-6 gap-10">
         <div className="sm:w-[340px] flex sm:grow-0 sm:shrink flex-col shadow-lg p-6 gap-6 bg-white">
           <div className="text-base text-start flex flex-col gap-4">
             <div className="flex items-center justify-start gap-4">

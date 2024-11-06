@@ -105,7 +105,7 @@ export default function ProductDetail() {
 
   return (
     <Container className="xxl:max-w-[1500px] xs:max-w-[1300px]">
-      <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
+      <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm xs:px-2">
         <Link to={"/"} className="text-[#0055aa] flex-none">
           Trang chủ
         </Link>
@@ -284,7 +284,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Mã giảm giá của shop
                 </h3>
-                <div className="flex items-center text-sm font-medium uppercase gap-4">
+                <div className="flex items-center sm:text-sm xs:text-xs font-medium uppercase gap-4">
                   <span className="text-[#d0011b] px-[7px] py-[3px] rounded-sm bg-[#d0011b14]">
                     10% Giảm
                   </span>
@@ -297,7 +297,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Deal sốc
                 </h3>
-                <div className="flex items-center text-sm font-medium gap-4">
+                <div className="flex items-center sm:text-sm xs:text-xs font-medium gap-4">
                   <span className="text-[#d0011b] px-[7px] py-[3px] rounded-sm bg-[#d0011b14]">
                     Mua để nhận quà
                   </span>
@@ -307,7 +307,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Bảo hiểm
                 </h3>
-                <div className="flex flex-wrap items-center text-sm font-medium gap-5">
+                <div className="flex flex-wrap items-center sm:text-sm xs:text-xs font-medium gap-5">
                   <p className="text-[#222] flex items-center gap-1">
                     Bảo hiểm Bảo vệ người tiêu dùng
                     <span className="rounded-lg text-white text-[10px] font-medium px-[5px] h-4 bg-primary leading-4 rounded-bl-none">
@@ -323,14 +323,14 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Vận chuyển
                 </h3>
-                <div className="flex items-start text-sm font-medium gap-5">
+                <div className="flex items-start sm:text-sm xs:text-xs font-medium gap-5">
                   <FreeShip />
                   <div>
                     <span className="text-[#222]">Miễn phí vận chuyển</span>
                     <p className="flex items-center gap-3 mt-4">
                       <span className="text-[#636363]">Phí vận chuyển</span>
                       <span className="flex hover:text-primary cursor-pointer">
-                        ₫0 <ArrowIcon className="rotate-90 w-5 h-5" />
+                        ₫0 <ArrowIcon className="rotate-90 sm:w-5 sm:h-5 xs:w-4 xs:h-4" />
                       </span>
                     </p>
                   </div>
@@ -341,7 +341,7 @@ export default function ProductDetail() {
                   <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                     Phân loại
                   </h3>
-                  <div className="flex flex-wrap items-center max-h-[220px] overflow-y-scroll text-[#222] font-medium w-full gap-2 text-sm">
+                  <div className="flex flex-wrap items-center max-h-[220px] overflow-y-scroll text-[#222] font-medium w-full gap-2 sm:text-sm xs:text-xs">
                     {product.sub_products.map((sub) => (
                       <div
                         key={sub.id}
@@ -394,7 +394,7 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
-          <div className="mt-[15px] px-5 flex items-center md:justify-start xs:justify-end gap-4 text-sm font-medium">
+          <div className="mt-[15px] px-5 flex items-center md:justify-start xs:justify-end gap-4 sm:text-sm xs:text-xs font-medium">
             <button
               type="button"
               className="flex items-center justify-center capitalize bg-[#d0011b14] border border-[#d0011b] px-5 h-12 gap-2 text-[#d0011b] rounded-sm hover:bg-[#f1b4bb2a]"
