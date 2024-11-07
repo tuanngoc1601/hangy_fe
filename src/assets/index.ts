@@ -21,3 +21,4 @@ export { default as OrderEmpty } from "./images/order-empty.png";
 export { default as CommentImg } from "./images/comment.png";
 export { default as FeatureImg } from "./images/feature.png";
 export { default as DoctorTeamImg } from "./images/doctor-team.png";
+export { default as LoginForm } from "./images/login-form.png";

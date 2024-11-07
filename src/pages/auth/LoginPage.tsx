@@ -78,112 +78,115 @@ export default function LoginPage() {
         </span>
       </header>
       <div className="h-full w-full bg-white">
-        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-cover w-full shrink mx-auto flex items-center dl:justify-end xs:justify-center">
-          <div className="py-16 shrink mx:w-[400px] xs:w-4/5 me-36">
-            <div className="bg-white rounded-lg flex flex-col shrink gap-2 pb-7">
-              <div className="px-7 py-4 text-start text-[#222222] text-xl font-medium">
-                Đăng nhập
-              </div>
-              <div className="px-7 bg-white">
-                <form
-                  onSubmit={onSubmit}
-                  className="w-full flex flex-col gap-6"
-                >
-                  <div className="w-full flex-1">
-                    <input
-                      type="text"
-                      placeholder="Email *"
-                      name="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className={clsx(
-                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
-                        !!errorMessage.email && "border-[#ff424f] bg-[#fff6f7]"
-                      )}
-                    />
-                    {errorMessage.email && (
-                      <p className="text-[#ff424f] mt-1 text-xs">
-                        {errorMessage.email}
-                      </p>
-                    )}
-                  </div>
-                  <div className="w-full relative">
-                    <input
-                      type={show ? "text" : "password"}
-                      placeholder="Mật khẩu *"
-                      name="password"
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className={clsx(
-                        "w-full p-3 flex-1 bg-white border rounded outline-none h-10",
-                        !!errorMessage.password &&
-                          "border-[#ff424f] bg-[#fff6f7]"
-                      )}
-                    />
-                    {show ? (
-                      <Eye
-                        className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer"
-                        onClick={() => setShow(false)}
+        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-cover w-full h-full shrink mx-auto flex items-center dl:justify-end xs:justify-center">
+          <div className="dl:w-1/2 dl:flex dl:justify-center">
+            <div className="py-16 shrink mx:w-[400px] xs:w-4/5">
+              <div className="bg-[#CCE9FF] rounded-lg flex flex-col shrink gap-2 pb-7">
+                <div className="px-7 py-4 text-start text-[#0A96E7] text-2xl font-bold uppercase">
+                  Đăng nhập
+                </div>
+                <div className="px-7 bg-[#CCE9FF]">
+                  <form
+                    onSubmit={onSubmit}
+                    className="w-full flex flex-col gap-6"
+                  >
+                    <div className="w-full flex-1">
+                      <input
+                        type="text"
+                        placeholder="Email *"
+                        name="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        className={clsx(
+                          "w-full py-3 px-4 flex-1 bg-white border rounded-3xl outline-none h-10",
+                          !!errorMessage.email &&
+                            "border-[#ff424f] bg-[#fff6f7]"
+                        )}
                       />
-                    ) : (
-                      <EyeOff
-                        className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer"
-                        onClick={() => setShow(true)}
+                      {errorMessage.email && (
+                        <p className="text-[#ff424f] mt-1 text-xs">
+                          {errorMessage.email}
+                        </p>
+                      )}
+                    </div>
+                    <div className="w-full relative">
+                      <input
+                        type={show ? "text" : "password"}
+                        placeholder="Mật khẩu *"
+                        name="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        className={clsx(
+                          "w-full py-3 px-4 flex-1 bg-white border rounded-3xl outline-none h-10",
+                          !!errorMessage.password &&
+                            "border-[#ff424f] bg-[#fff6f7]"
+                        )}
                       />
-                    )}
-                    {errorMessage.password && (
-                      <p className="text-[#ff424f] mt-1 text-xs">
-                        {errorMessage.password}
-                      </p>
-                    )}
+                      {show ? (
+                        <Eye
+                          className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer"
+                          onClick={() => setShow(false)}
+                        />
+                      ) : (
+                        <EyeOff
+                          className="absolute right-3 top-2.5 text-[#00000042] w-5 h-5 cursor-pointer"
+                          onClick={() => setShow(true)}
+                        />
+                      )}
+                      {errorMessage.password && (
+                        <p className="text-[#ff424f] mt-1 text-xs">
+                          {errorMessage.password}
+                        </p>
+                      )}
+                    </div>
+                    <button
+                      type="submit"
+                      disabled={
+                        !email ||
+                        !password ||
+                        !!errorMessage.email ||
+                        !!errorMessage.password
+                      }
+                      className="w-full rounded-3xl text-white bg-[#0A96E7] uppercase text-center outline-none h-10 text-md disabled:bg-[#0A96E7]/[0.7]"
+                    >
+                      Đăng nhập
+                    </button>
+                  </form>
+                  <div className="flex flex-row items-center justify-end text-[#0A96E7] text-xs cursor-pointer hover:opacity-80 my-2">
+                    <span>Quên mật khẩu</span>
                   </div>
-                  <button
-                    type="submit"
-                    disabled={
-                      !email ||
-                      !password ||
-                      !!errorMessage.email ||
-                      !!errorMessage.password
-                    }
-                    className="w-full rounded text-white bg-primary uppercase text-center outline-none h-10 text-md disabled:bg-primary/[0.7]"
-                  >
-                    Đăng nhập
-                  </button>
-                </form>
-                <div className="flex flex-row items-center justify-end text-[#0055aa] text-xs cursor-pointer hover:opacity-80 my-2">
-                  <span>Quên mật khẩu</span>
-                </div>
-                <div className="flex items-center">
-                  <div className="h-[0.5px] flex-1 w-full bg-[#dbdbdb]"></div>
-                  <span className="uppercase text-[#cccccc] text-sm px-4">
-                    hoặc
-                  </span>
-                  <div className="h-[0.5px] flex-1 w-full bg-[#dbdbdb]"></div>
-                </div>
-                <div className="flex flex-wrap justify-between items-center gap-2.5 mt-4">
-                  <a
-                    href={facebookUrlRedirect}
-                    className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer"
-                  >
-                    <FacebookIcon />
-                    Facebook
-                  </a>
-                  <a
-                    href={googleUrlRedirect}
-                    className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-sm outline-none border-[#000000]/[.26] cursor-pointer"
-                  >
-                    <GoogleIcon />
-                    Google
-                  </a>
-                </div>
-                <div className="text-sm text-[#00000042] flex gap-1 justify-center items-center mt-4">
-                  Bạn chưa có tài khoản?{" "}
-                  <span
-                    className="text-primary font-semibold cursor-pointer hover:opacity-80"
-                    onClick={() => navigate("/auth/register")}
-                  >
-                    Đăng ký
-                  </span>
+                  <div className="flex items-center">
+                    <div className="h-[0.5px] flex-1 w-full bg-white"></div>
+                    <span className="uppercase text-white text-sm px-4">
+                      hoặc
+                    </span>
+                    <div className="h-[0.5px] flex-1 w-full bg-white"></div>
+                  </div>
+                  <div className="flex flex-wrap justify-between items-center gap-2.5 mt-4">
+                    <a
+                      href={facebookUrlRedirect}
+                      className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-3xl outline-none border-[#000000]/[.26] cursor-pointer"
+                    >
+                      <FacebookIcon />
+                      Facebook
+                    </a>
+                    <a
+                      href={googleUrlRedirect}
+                      className="flex items-center justify-center gap-2 text-[#000000de] text-sm flex-1 h-10 border bg-white rounded-3xl outline-none border-[#000000]/[.26] cursor-pointer"
+                    >
+                      <GoogleIcon />
+                      Google
+                    </a>
+                  </div>
+                  <div className="text-sm text-[#00000042] flex gap-1 justify-center items-center mt-4 uppercase">
+                    Bạn chưa có tài khoản?{" "}
+                    <span
+                      className="text-primary font-semibold cursor-pointer hover:opacity-80"
+                      onClick={() => navigate("/auth/register")}
+                    >
+                      Đăng ký
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
