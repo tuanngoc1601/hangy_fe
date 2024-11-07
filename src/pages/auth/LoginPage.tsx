@@ -66,7 +66,7 @@ export default function LoginPage() {
           <img
             src={LogoHangy}
             alt="hangy-logo"
-            className="w-[167px]"
+            className="w-[167px] cursor-pointer"
             onClick={() => navigate("/")}
           />
           <span className="text-2xl text-gray-700 whitespace-nowrap font-medium sm:inline-block xs:hidden">
