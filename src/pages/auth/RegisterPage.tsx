@@ -69,7 +69,12 @@ export default function RegisterPage() {
     <main className="h-full w-full flex flex-col justify-start">
       <header className="flex w-full flex-row items-center sm:justify-between xs:justify-center h-[84px] max-w-[1200px] mx-auto">
         <div className="flex flex-row gap-4 items-center">
-          <img src={LogoHangy} alt="hangy-logo" className="w-[167px]" />
+          <img
+            src={LogoHangy}
+            alt="hangy-logo"
+            className="w-[167px]"
+            onClick={() => navigate("/")}
+          />
           <span className="text-2xl text-gray-700 whitespace-nowrap font-medium sm:inline-block xs:hidden">
             Đăng ký
           </span>

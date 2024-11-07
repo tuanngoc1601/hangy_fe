@@ -38,9 +38,11 @@ import toast from "react-hot-toast";
 import { TOAST_IDS } from "../lib/constants";
 import { useCountDown } from "../hooks/useCountDown";
 import useWindowSize from "../hooks/useWindowSize";
+import useHangyStore from "../lib/useStore";
 
 export default function ProductDetail() {
   const { slug } = useParams();
+  const access_token = useHangyStore((state) => state.access_token);
   const { data: product, isLoading } = useGetProductDetail(slug || "");
   const { data: bestSellingProducts } = useBestSellingProducts();
   const { dispatch: useAddCart } = useAddToCart();
@@ -58,6 +60,13 @@ export default function ProductDetail() {
     duration: product?.flash_sale_end_time,
   });
   function addToCart() {
+    if (!access_token) {
+      toast.error("Vui lòng đăng nhập để đặt hàng!");
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 2000);
+      return;
+    }
     if (product?.sub_products && product.sub_products.length && !subId) {
       toast.error("Vui lòng chọn loại sản phẩm!", {
         id: TOAST_IDS.CHOOSE_VARIANT,
@@ -330,7 +339,8 @@ export default function ProductDetail() {
                     <p className="flex items-center gap-3 mt-4">
                       <span className="text-[#636363]">Phí vận chuyển</span>
                       <span className="flex hover:text-primary cursor-pointer">
-                        ₫0 <ArrowIcon className="rotate-90 sm:w-5 sm:h-5 xs:w-4 xs:h-4" />
+                        ₫0{" "}
+                        <ArrowIcon className="rotate-90 sm:w-5 sm:h-5 xs:w-4 xs:h-4" />
                       </span>
                     </p>
                   </div>
