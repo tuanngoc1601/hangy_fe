@@ -79,7 +79,7 @@ export default function LoginPage() {
       </header>
       <div className="h-full w-full bg-white">
         <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-contain w-full h-full shrink mx-auto flex items-center dl:justify-end xs:justify-center">
-          <div className="dl:w-1/2 dl:flex dl:justify-center">
+          <div className="dl:w-1/2 dl:flex dl:justify-center xxxl:justify-start xxxl:translate-x-[200px]">
             <div className="py-16 shrink mx:w-[400px] xs:w-4/5">
               <div className="bg-[#CCE9FF] rounded-lg flex flex-col shrink gap-2 pb-7">
                 <div className="px-7 py-4 text-start text-[#0A96E7] text-2xl font-bold uppercase">
