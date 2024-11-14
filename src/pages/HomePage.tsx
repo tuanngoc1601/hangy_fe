@@ -29,7 +29,7 @@ export default function HomePage() {
   if (isLoading || flashSaleLoading) return <LoadingPage />;
 
   return (
-    <Container>
+    <Container className="xs:px-4">
       <SwiperBanner />
       {flashSales?.is_flash_sales && (
         <div className="w-full md:mt-14 xs:mt-10 sm:mt-12 lg:mt-16">

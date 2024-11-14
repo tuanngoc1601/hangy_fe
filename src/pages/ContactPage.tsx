@@ -37,7 +37,7 @@ export default function ContactPage() {
     });
   }
   return (
-    <Container>
+    <Container className="xs:px-4">
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
         <Link to={"/"} className="text-[#0055aa]">
           Trang chủ

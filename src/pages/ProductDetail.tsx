@@ -113,7 +113,7 @@ export default function ProductDetail() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <Container className="xxl:max-w-[1500px] xs:max-w-[1300px]">
+    <Container className="xxl:max-w-[1500px] xs:max-w-[1300px] xs:px-0">
       <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm xs:px-2">
         <Link to={"/"} className="text-[#0055aa] flex-none">
           Trang chủ

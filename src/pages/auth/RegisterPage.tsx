@@ -84,8 +84,8 @@ export default function RegisterPage() {
         </span>
       </header>
       <div className="h-full w-full bg-white">
-        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-cover w-full shrink mx-auto flex items-center dl:justify-end xs:justify-center">
-          <div className="dl:w-1/2 dl:flex dl:justify-center">
+        <div className="dl:bg-authBg dl:bg-center dl:bg-no-repeat dl:bg-contain w-full shrink mx-auto flex items-center dl:justify-end xs:justify-center">
+          <div className="dl:w-1/2 xs:w-full xs:flex xs:justify-center">
             <div className="py-16 shrink mx:w-[400px] xs:w-4/5">
               <div className="bg-[#CCE9FF] rounded-lg flex flex-col shrink gap-2 pb-7">
                 <div className="px-7 py-4 text-start text-[#0A96E7] text-2xl font-bold uppercase">
