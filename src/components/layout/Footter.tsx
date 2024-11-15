@@ -31,10 +31,13 @@ export default function Footter() {
       </div>
       <div className="py-6 flex md:flex-row xs:flex-col items-start gap-16 border-b border-[#0A96E7]">
         <div className="min-w-[300px] sm:w-[520px] sm:flex-1 xl:flex-none flex-1">
-          <img src={LogoHangy} alt="" className="w-[167px] xs:-translate-x-6 md:translate-x-0" />
+          <img
+            src={LogoHangy}
+            alt=""
+            className="w-[167px] xs:-translate-x-6 md:translate-x-0"
+          />
           <p className="mt-8 text-[15px] text-[#0A96E7]">
-            Thương hiệu được sáng lập bởi Bác sĩ Nguyễn Kim Cúc, chuyên cung cấp
-            các giải pháp chăm sóc răng miệng tiên tiến, phù hợp cho mọi lứa
+            Thương hiệu chăm sóc răng miệng chuẩn nha khoa, phù hợp cho mọi lứa
             tuổi, giúp nâng cao chất lượng chăm sóc răng miệng hàng ngày.
           </p>
         </div>

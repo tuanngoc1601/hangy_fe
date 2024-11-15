@@ -98,13 +98,13 @@ export default function AboutPage() {
               Tầm nhìn tương lai
             </h2>
             <p className="sm:text-lg xs:text-base md:text-center xs:text-center leading-6 py-[18px] w-2/3 mx-auto mt-8">
-              Tầm nhìn tương lai của Bác sĩ Cúc và thương hiệu Hangy là mở rộng
-              hơn nữa các dòng sản phẩm chăm sóc răng miệng, tạo ra một hệ sinh
-              thái chăm sóc răng miệng toàn diện từ máy tăm nước, bàn chải điện,
-              nước súc miệng đến các sản phẩm hỗ trợ điều trị nha khoa khác…để
-              đảm bảo đến từng đối tượng khách hàng được chăm sóc một cách tốt
-              nhất. Bác sĩ Cúc mong muốn Hangy trở thành biểu tượng cho sự yêu
-              thương và quan tâm đến sức khoẻ của mỗi gia đình.
+              Tầm nhìn tương lai của thương hiệu Hangy là mở rộng hơn nữa các
+              dòng sản phẩm chăm sóc răng miệng, tạo ra một hệ sinh thái chăm
+              sóc răng miệng toàn diện từ máy tăm nước, bàn chải điện, nước súc
+              miệng đến các sản phẩm hỗ trợ điều trị nha khoa khác…để đảm bảo
+              đến từng đối tượng khách hàng được chăm sóc một cách tốt nhất.
+              Hangy mong muốn trở thành biểu tượng cho sự yêu thương và quan tâm
+              đến sức khoẻ của mỗi gia đình.
             </p>
           </div>
         </div>
