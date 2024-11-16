@@ -46,7 +46,7 @@ export default function ProductDetail() {
   const { data: product, isLoading } = useGetProductDetail(slug || "");
   const { data: bestSellingProducts } = useBestSellingProducts();
   const { dispatch: useAddCart } = useAddToCart();
-  const { mutate, isLoading: cartLoading } = useGetCart();
+  const { data: carts, mutate, isLoading: cartLoading } = useGetCart();
   const swiperRelated = useRef<SwiperType>();
   const swiperImgSlide = useRef<SwiperType>();
   const navigate = useNavigate();
@@ -59,6 +59,16 @@ export default function ProductDetail() {
   const { countdown } = useCountDown({
     duration: product?.flash_sale_end_time,
   });
+  const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
+  const setSelectedItemCarts = useHangyStore(
+    (state) => state.setSelectedItemCarts
+  );
+  const setIsSeletedAllCart = useHangyStore(
+    (state) => state.setIsSeletedAllCart
+  );
+  const setTotalPaymentCarts = useHangyStore(
+    (state) => state.setTotalPaymentCarts
+  );
   function addToCart() {
     if (!access_token) {
       toast.error("Vui lòng đăng nhập để đặt hàng!");
@@ -74,19 +84,20 @@ export default function ProductDetail() {
       return;
     }
     const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
-    const price = product?.is_flash_sales
-      ? subProduct?.flash_sale_price
-        ? subProduct.flash_sale_price
-        : product?.flash_sale_price || 0
-      : subProduct?.daily_price
+    const price = subProduct?.daily_price
       ? subProduct.daily_price
       : product?.daily_price || 0;
+    const flash_sale_price = subProduct?.flash_sale_price
+      ? subProduct.flash_sale_price
+      : product?.flash_sale_price || 0;
     useAddCart({
       product_id: product?.id || "",
       sub_product_id: subId,
       quantity: quantity,
       price: price,
+      flash_sale_price: flash_sale_price,
       amount: price * quantity,
+      flash_sale_amount: flash_sale_price * quantity,
     })
       .then((resp) => {
         if (!resp.data) {
@@ -104,6 +115,28 @@ export default function ProductDetail() {
           console.error(err);
         }
       });
+  }
+
+  function handleByNow() {
+    addToCart();
+    let newSelectedItems = [...selectedItemCarts];
+    if (product?.id && !newSelectedItems.includes(product.id)) {
+      newSelectedItems = [...newSelectedItems, product.id].sort(
+        (a, b) =>
+          (carts?.findIndex((item) => item.id === a) || 0) -
+          (carts?.findIndex((item) => item.id === b) || 0)
+      );
+      setSelectedItemCarts(newSelectedItems);
+    }
+
+    setIsSeletedAllCart(newSelectedItems.length === carts?.length);
+
+    setTotalPaymentCarts(
+      newSelectedItems.reduce((acc, itemId) => {
+        const selected = carts?.find((item) => item.id === itemId);
+        return acc + (selected?.amount || 0);
+      }, 0)
+    );
   }
 
   useEffect(() => {
@@ -420,6 +453,7 @@ export default function ProductDetail() {
             <button
               type="button"
               className="flex items-center justify-center capitalize bg-[#d0011b] px-5 h-12 text-white max-w-[250px] w-[180px] rounded-sm hover:bg-[#d41830]"
+              onClick={() => handleByNow()}
             >
               Mua ngay
             </button>

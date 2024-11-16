@@ -79,7 +79,9 @@ export interface CartItem {
   id: string;
   quantity: number;
   price: number;
+  flash_sale_price: number;
   amount: number;
+  flash_sale_amount: number;
   product: ProductItem;
   sub_product: SubProductType | null;
 }
@@ -89,7 +91,9 @@ export interface CartPayload {
   sub_product_id: string | null;
   quantity: number;
   price: number;
+  flash_sale_price: number;
   amount: number;
+  flash_sale_amount: number;
 }
 
 export interface ContactPayload {

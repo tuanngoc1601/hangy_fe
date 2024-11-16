@@ -162,13 +162,6 @@ export default function CartPage() {
             </div>
             {!!carts?.length &&
               carts?.map((item) => {
-                const price = item.product.is_flash_sales
-                  ? item.sub_product?.flash_sale_price
-                    ? item.sub_product.flash_sale_price
-                    : item.product.flash_sale_price
-                  : item.sub_product?.daily_price
-                  ? item.sub_product.daily_price
-                  : item.product.daily_price;
                 return (
                   <CartItem
                     key={item.id}
@@ -179,8 +172,16 @@ export default function CartPage() {
                     real_price={
                       item.sub_product?.real_price || item.product.real_price
                     }
-                    price={price}
-                    amount={price * item.quantity}
+                    price={
+                      item.product.is_flash_sales
+                        ? item.flash_sale_price
+                        : item.price
+                    }
+                    amount={
+                      item.product.is_flash_sales
+                        ? item.flash_sale_amount
+                        : item.amount
+                    }
                     checked={selectedItemCarts.includes(item.id)}
                     onChange={() => handleCheckboxChange(item.id)}
                     image={item.product.images[0].url}
