@@ -12,12 +12,15 @@ export default {
         dl: "1080px",
         lg: "1194px",
         xl: "1280px",
+        xxl: "1560px",
+        xxxl: "2180px",
       },
       colors: {
         primary: "#1c95c9",
       },
       backgroundImage: {
-        authBg: "url('/src/assets/backgrounds/bgAuth.png')",
+        authBg: "url('/src/assets/backgrounds/bgAuth.jpg')",
+        appBg: "url('/src/assets/backgrounds/bgApp.png')",
         flashSaleBg: "url('/src/assets/backgrounds/flashSale.png')",
         gradient:
           "linear-gradient(274.59deg, #19bfef -11.3%, #0dc9ec 50.13%, #00e3d0 111.55%)",

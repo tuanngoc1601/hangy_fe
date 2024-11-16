@@ -38,13 +38,15 @@ import toast from "react-hot-toast";
 import { TOAST_IDS } from "../lib/constants";
 import { useCountDown } from "../hooks/useCountDown";
 import useWindowSize from "../hooks/useWindowSize";
+import useHangyStore from "../lib/useStore";
 
 export default function ProductDetail() {
   const { slug } = useParams();
+  const access_token = useHangyStore((state) => state.access_token);
   const { data: product, isLoading } = useGetProductDetail(slug || "");
   const { data: bestSellingProducts } = useBestSellingProducts();
   const { dispatch: useAddCart } = useAddToCart();
-  const { mutate, isLoading: cartLoading } = useGetCart();
+  const { data: carts, mutate, isLoading: cartLoading } = useGetCart();
   const swiperRelated = useRef<SwiperType>();
   const swiperImgSlide = useRef<SwiperType>();
   const navigate = useNavigate();
@@ -57,7 +59,24 @@ export default function ProductDetail() {
   const { countdown } = useCountDown({
     duration: product?.flash_sale_end_time,
   });
+  const selectedItemCarts = useHangyStore((state) => state.selectedItemCarts);
+  const setSelectedItemCarts = useHangyStore(
+    (state) => state.setSelectedItemCarts
+  );
+  const setIsSeletedAllCart = useHangyStore(
+    (state) => state.setIsSeletedAllCart
+  );
+  const setTotalPaymentCarts = useHangyStore(
+    (state) => state.setTotalPaymentCarts
+  );
   function addToCart() {
+    if (!access_token) {
+      toast.error("Vui lòng đăng nhập để đặt hàng!");
+      setTimeout(() => {
+        navigate("/auth/login");
+      }, 2000);
+      return;
+    }
     if (product?.sub_products && product.sub_products.length && !subId) {
       toast.error("Vui lòng chọn loại sản phẩm!", {
         id: TOAST_IDS.CHOOSE_VARIANT,
@@ -65,19 +84,20 @@ export default function ProductDetail() {
       return;
     }
     const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
-    const price = product?.is_flash_sales
-      ? subProduct?.flash_sale_price
-        ? subProduct.flash_sale_price
-        : product?.flash_sale_price || 0
-      : subProduct?.daily_price
+    const price = subProduct?.daily_price
       ? subProduct.daily_price
       : product?.daily_price || 0;
+    const flash_sale_price = subProduct?.flash_sale_price
+      ? subProduct.flash_sale_price
+      : product?.flash_sale_price || 0;
     useAddCart({
       product_id: product?.id || "",
       sub_product_id: subId,
       quantity: quantity,
       price: price,
+      flash_sale_price: flash_sale_price,
       amount: price * quantity,
+      flash_sale_amount: flash_sale_price * quantity,
     })
       .then((resp) => {
         if (!resp.data) {
@@ -97,6 +117,28 @@ export default function ProductDetail() {
       });
   }
 
+  function handleByNow() {
+    addToCart();
+    let newSelectedItems = [...selectedItemCarts];
+    if (product?.id && !newSelectedItems.includes(product.id)) {
+      newSelectedItems = [...newSelectedItems, product.id].sort(
+        (a, b) =>
+          (carts?.findIndex((item) => item.id === a) || 0) -
+          (carts?.findIndex((item) => item.id === b) || 0)
+      );
+      setSelectedItemCarts(newSelectedItems);
+    }
+
+    setIsSeletedAllCart(newSelectedItems.length === carts?.length);
+
+    setTotalPaymentCarts(
+      newSelectedItems.reduce((acc, itemId) => {
+        const selected = carts?.find((item) => item.id === itemId);
+        return acc + (selected?.amount || 0);
+      }, 0)
+    );
+  }
+
   useEffect(() => {
     setImgPreview(product?.images[0].url || "");
   }, [product, setImgPreview]);
@@ -104,8 +146,8 @@ export default function ProductDetail() {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <Container>
-      <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm">
+    <Container className="xxl:max-w-[1500px] xs:max-w-[1300px] xs:px-0">
+      <div className="w-full mt-5 flex items-center justify-start gap-2 text-sm xs:px-2">
         <Link to={"/"} className="text-[#0055aa] flex-none">
           Trang chủ
         </Link>
@@ -284,7 +326,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Mã giảm giá của shop
                 </h3>
-                <div className="flex items-center text-sm font-medium uppercase gap-4">
+                <div className="flex items-center sm:text-sm xs:text-xs font-medium uppercase gap-4">
                   <span className="text-[#d0011b] px-[7px] py-[3px] rounded-sm bg-[#d0011b14]">
                     10% Giảm
                   </span>
@@ -297,7 +339,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Deal sốc
                 </h3>
-                <div className="flex items-center text-sm font-medium gap-4">
+                <div className="flex items-center sm:text-sm xs:text-xs font-medium gap-4">
                   <span className="text-[#d0011b] px-[7px] py-[3px] rounded-sm bg-[#d0011b14]">
                     Mua để nhận quà
                   </span>
@@ -307,7 +349,7 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Bảo hiểm
                 </h3>
-                <div className="flex flex-wrap items-center text-sm font-medium gap-5">
+                <div className="flex flex-wrap items-center sm:text-sm xs:text-xs font-medium gap-5">
                   <p className="text-[#222] flex items-center gap-1">
                     Bảo hiểm Bảo vệ người tiêu dùng
                     <span className="rounded-lg text-white text-[10px] font-medium px-[5px] h-4 bg-primary leading-4 rounded-bl-none">
@@ -323,14 +365,15 @@ export default function ProductDetail() {
                 <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                   Vận chuyển
                 </h3>
-                <div className="flex items-start text-sm font-medium gap-5">
+                <div className="flex items-start sm:text-sm xs:text-xs font-medium gap-5">
                   <FreeShip />
                   <div>
                     <span className="text-[#222]">Miễn phí vận chuyển</span>
                     <p className="flex items-center gap-3 mt-4">
                       <span className="text-[#636363]">Phí vận chuyển</span>
                       <span className="flex hover:text-primary cursor-pointer">
-                        ₫0 <ArrowIcon className="rotate-90 w-5 h-5" />
+                        ₫0{" "}
+                        <ArrowIcon className="rotate-90 sm:w-5 sm:h-5 xs:w-4 xs:h-4" />
                       </span>
                     </p>
                   </div>
@@ -341,7 +384,7 @@ export default function ProductDetail() {
                   <h3 className="w-[110px] capitalize shrink-0 text-[#757575]">
                     Phân loại
                   </h3>
-                  <div className="flex flex-wrap items-center max-h-[220px] overflow-y-scroll text-[#222] font-medium w-full gap-2 text-sm">
+                  <div className="flex flex-wrap items-center max-h-[220px] overflow-y-scroll text-[#222] font-medium w-full gap-2 sm:text-sm xs:text-xs">
                     {product.sub_products.map((sub) => (
                       <div
                         key={sub.id}
@@ -394,7 +437,7 @@ export default function ProductDetail() {
               </div>
             </div>
           </div>
-          <div className="mt-[15px] px-5 flex items-center md:justify-start xs:justify-end gap-4 text-sm font-medium">
+          <div className="mt-[15px] px-5 flex items-center md:justify-start xs:justify-end gap-4 sm:text-sm xs:text-xs font-medium">
             <button
               type="button"
               className="flex items-center justify-center capitalize bg-[#d0011b14] border border-[#d0011b] px-5 h-12 gap-2 text-[#d0011b] rounded-sm hover:bg-[#f1b4bb2a]"
@@ -410,6 +453,7 @@ export default function ProductDetail() {
             <button
               type="button"
               className="flex items-center justify-center capitalize bg-[#d0011b] px-5 h-12 text-white max-w-[250px] w-[180px] rounded-sm hover:bg-[#d41830]"
+              onClick={() => handleByNow()}
             >
               Mua ngay
             </button>
@@ -440,7 +484,7 @@ export default function ProductDetail() {
           rehypePlugins={[rehypeRaw]}
         />
       </div>
-      <div className="mt-6 mb-12 bg-white md:p-7 sm:p-5 xs:p-4 w-full">
+      <div className="mt-6 mb-12 bg-transparent md:p-7 sm:p-5 xs:p-4 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
             <div className="bg-primary h-8 w-3 rounded-sm"></div>

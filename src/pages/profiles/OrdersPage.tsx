@@ -164,7 +164,7 @@ export default function OrdersPage() {
                     </div>
                   ))}
                 </div>
-                <div className="flex flex-col bg-[#fffefb]">
+                <div className="flex flex-col bg-[#fffefb] shadow-md">
                   <div className="text-lg flex items-center justify-end gap-2 font-medium pt-6 pb-3 px-6">
                     <span className="text-sm">Thành tiền:</span>
                     <span className="text-2xl text-primary">

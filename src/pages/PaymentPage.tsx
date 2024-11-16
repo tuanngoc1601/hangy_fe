@@ -5,7 +5,12 @@ import VoucherIcon from "../components/icons/VoucherIcon";
 import Container from "../components/layout/Container";
 import Button from "../components/common/Button";
 import useHangyStore from "../lib/useStore";
-import { useGetCart, useGetSelectedItems, usePlaceOrder } from "../apis/web";
+import {
+  useGetCart,
+  useGetOrders,
+  useGetSelectedItems,
+  usePlaceOrder,
+} from "../apis/web";
 import LoadingPage from "./LoadingPage";
 import { useMe } from "../apis/auth";
 import { useState } from "react";
@@ -23,6 +28,7 @@ export default function PaymentPage() {
     useGetSelectedItems(selectedItemCarts);
   const { data: me } = useMe();
   const { mutate } = useGetCart();
+  const { mutate: mutateOrders } = useGetOrders();
   const [noteMessage, setNoteMessage] = useState<string>("");
 
   function placeOrder() {
@@ -42,6 +48,7 @@ export default function PaymentPage() {
       }
       toast.success("Đặt hàng thành công!", { id: TOAST_IDS.ORDER });
       mutate();
+      mutateOrders();
       resetState();
       navigate("/order/complete", { replace: true });
     });
@@ -190,7 +197,9 @@ export default function PaymentPage() {
                 <div className="flex items-center justify-between w-full ps-5 pe-[30px] font-semibold">
                   <span>Đơn vị vận chuyển:</span>
                   <span>Nhanh</span>
-                  <span className="text-[#0055aa] mx:inline-block xs:hidden">Thay đổi</span>
+                  <span className="text-[#0055aa] mx:inline-block xs:hidden">
+                    Thay đổi
+                  </span>
                   <span>₫16.500</span>
                 </div>
                 <p className="flex items-center justify-center text-xs text-[#26aa99] gap-1 mt-2.5">
@@ -220,7 +229,9 @@ export default function PaymentPage() {
       </div>
       <div className="bg-white rounded-[3px] mb-3 mt-5 text-[#222222] font-semibold w-full">
         <div className="xm:px-[30px] xs:px-5 flex items-center justify-between min-h-[90px] ">
-          <span className="mx:text-lg xs:text-base">Phương thức thanh toán</span>
+          <span className="mx:text-lg xs:text-base">
+            Phương thức thanh toán
+          </span>
           <div className="flex items-center justify-end text-sm gap-16">
             <span className="font-normal">Thanh toán khi nhận hàng</span>
             <span className="text-[#05a] cursor-pointer uppercase xm:inline-block xs:hidden">

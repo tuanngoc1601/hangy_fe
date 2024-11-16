@@ -29,7 +29,7 @@ export default function ProductsPage() {
   if (cateLoading) return <LoadingPage />;
 
   return (
-    <Container>
+    <Container className="xs:px-4">
       <div className="w-full flex flex-row items-start my-8 gap-[22px]">
         <aside className="shrink-0 grow-0 w-[180px] dl:flex flex-col sticky bottom-0 top-[95px] xs:hidden">
           <div className="border-b text-black/80 text-base font-bold h-[50px] w-full flex items-center justify-start capitalize mb-2.5">

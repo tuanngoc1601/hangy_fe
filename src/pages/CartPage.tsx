@@ -162,13 +162,6 @@ export default function CartPage() {
             </div>
             {!!carts?.length &&
               carts?.map((item) => {
-                const price = item.product.is_flash_sales
-                  ? item.sub_product?.flash_sale_price
-                    ? item.sub_product.flash_sale_price
-                    : item.product.flash_sale_price
-                  : item.sub_product?.daily_price
-                  ? item.sub_product.daily_price
-                  : item.product.daily_price;
                 return (
                   <CartItem
                     key={item.id}
@@ -179,8 +172,16 @@ export default function CartPage() {
                     real_price={
                       item.sub_product?.real_price || item.product.real_price
                     }
-                    price={price}
-                    amount={price * item.quantity}
+                    price={
+                      item.product.is_flash_sales
+                        ? item.flash_sale_price
+                        : item.price
+                    }
+                    amount={
+                      item.product.is_flash_sales
+                        ? item.flash_sale_amount
+                        : item.amount
+                    }
                     checked={selectedItemCarts.includes(item.id)}
                     onChange={() => handleCheckboxChange(item.id)}
                     image={item.product.images[0].url}
@@ -264,7 +265,7 @@ export default function CartPage() {
           </div>
         </div>
       )}
-      <div className="mt-12 mb-12 bg-white md:p-7 xs:p-4 w-full">
+      <div className="mt-12 mb-12 bg-transparent md:p-7 xs:p-4 w-full">
         <div className="flex flex-row items-center justify-between w-full">
           <div className="flex items-center justify-start gap-4">
             <div className="bg-primary h-6 w-3 rounded-sm"></div>
