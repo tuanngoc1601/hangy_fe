@@ -74,9 +74,9 @@ export function useGetCart() {
 }
 
 export function useAddToCart() {
-  const useFetch = useFetchTyped<string>();
+  const useFetch = useFetchTyped<CartItem>();
   const access_token = useHangyStore((state) => state.access_token);
-  const { trigger } = useSWRMutation(
+  const { trigger, data } = useSWRMutation(
     access_token ? "/api/v1/carts/add-cart" : null,
     (url: string, { arg }: { arg: CartPayload }) =>
       useFetch(url, {
@@ -88,7 +88,7 @@ export function useAddToCart() {
       })
   );
 
-  return { dispatch: trigger };
+  return { dispatch: trigger, data };
 }
 
 export function useUpdateQuantity(

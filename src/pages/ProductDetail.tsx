@@ -75,13 +75,13 @@ export default function ProductDetail() {
       setTimeout(() => {
         navigate("/auth/login");
       }, 2000);
-      return;
+      return null;
     }
     if (product?.sub_products && product.sub_products.length && !subId) {
       toast.error("Vui lòng chọn loại sản phẩm!", {
         id: TOAST_IDS.CHOOSE_VARIANT,
       });
-      return;
+      return null;
     }
     const subProduct = product?.sub_products?.find((sub) => sub.id === subId);
     const price = subProduct?.daily_price
@@ -90,7 +90,7 @@ export default function ProductDetail() {
     const flash_sale_price = subProduct?.flash_sale_price
       ? subProduct.flash_sale_price
       : product?.flash_sale_price || 0;
-    useAddCart({
+    return useAddCart({
       product_id: product?.id || "",
       sub_product_id: subId,
       quantity: quantity,
@@ -102,41 +102,44 @@ export default function ProductDetail() {
       .then((resp) => {
         if (!resp.data) {
           toast.error("Something went wrong!", { id: TOAST_IDS.FETCH_ERROR });
-          return;
+          return null;
         }
         mutate();
         toast.success("Thêm vào giỏ hàng thành công!", {
           id: TOAST_IDS.ADD_TO_CART,
         });
         if (!cartLoading) navigate("/cart");
+        return resp.data;
       })
       .catch((err) => {
         if (err instanceof AppError) {
           console.error(err);
         }
+        return null;
       });
   }
 
   function handleByNow() {
-    addToCart();
-    let newSelectedItems = [...selectedItemCarts];
-    if (product?.id && !newSelectedItems.includes(product.id)) {
-      newSelectedItems = [...newSelectedItems, product.id].sort(
-        (a, b) =>
-          (carts?.findIndex((item) => item.id === a) || 0) -
-          (carts?.findIndex((item) => item.id === b) || 0)
+    addToCart()?.then((res) => {
+      let newSelectedItems = [...selectedItemCarts];
+      if (res?.id && !newSelectedItems.includes(res.id)) {
+        newSelectedItems = [...newSelectedItems, res.id].sort(
+          (a, b) =>
+            (carts?.findIndex((item) => item.id === a) || 0) -
+            (carts?.findIndex((item) => item.id === b) || 0)
+        );
+        setSelectedItemCarts(newSelectedItems);
+      }
+
+      setIsSeletedAllCart(newSelectedItems.length === carts?.length);
+
+      setTotalPaymentCarts(
+        newSelectedItems.reduce((acc, itemId) => {
+          const selected = carts?.find((item) => item.id === itemId);
+          return acc + (selected?.amount || 0);
+        }, 0)
       );
-      setSelectedItemCarts(newSelectedItems);
-    }
-
-    setIsSeletedAllCart(newSelectedItems.length === carts?.length);
-
-    setTotalPaymentCarts(
-      newSelectedItems.reduce((acc, itemId) => {
-        const selected = carts?.find((item) => item.id === itemId);
-        return acc + (selected?.amount || 0);
-      }, 0)
-    );
+    });
   }
 
   useEffect(() => {
@@ -420,6 +423,7 @@ export default function ProductDetail() {
                       type="text"
                       value={quantity}
                       name="amount"
+                      // onChange={(e) => setQuantity(Number(e.target.value))}
                       className="border border-black/10 border-s-0 border-e-0 text-base h-8 w-[50px] text-center cursor-text bg-transparent font-medium flex items-center outline-none"
                     />
                     <button

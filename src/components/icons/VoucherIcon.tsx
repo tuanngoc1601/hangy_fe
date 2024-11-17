@@ -29,9 +29,9 @@ const VoucherIcon = () => (
         width="20"
         height="16"
         filterUnits="userSpaceOnUse"
-        color-interpolation-filters="#ee4e2e"
+        // colorInterpolationFilters="#ee4e2e"
       >
-        <feFlood flood-opacity="0" result="BackgroundImageFix"></feFlood>
+        <feFlood floodOpacity="0" result="BackgroundImageFix"></feFlood>
         <feColorMatrix
           in="SourceAlpha"
           values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
