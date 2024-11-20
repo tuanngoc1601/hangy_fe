@@ -15,19 +15,19 @@ export default function AboutPage() {
         {/* bg-gradient-to-b from-[#daf1ff] to-[#fde9e800] */}
         <div className="px-4 flex md:flex-row xs:flex-col items-center">
           <div className="p-3 md:w-2/3 text-[#0A96E7]">
-            <h1 className="md:text-left xs:text-center leading-[50px] font-semibold md:text-[40px] sm:text-[32px] xs:text-[28px] mt-[37px] mb-[50px] tracking-wide">
+            {/* <h1 className="md:text-left xs:text-center leading-[50px] font-semibold md:text-[40px] sm:text-[32px] xs:text-[28px] mt-[37px] mb-[50px] tracking-wide">
               Bác sĩ/ Nha sĩ Nguyễn Kim Cúc - Nhà sáng lập thương hiệu Hangy
-            </h1>
-            <p className="md:pr-20 md:text-left xs:text-center leading-7 text-lg">
-              Năm 2020, bác sĩ Cúc chính thức sáng lập thương hiệu Hangy, cùng
-              sự ra đời của sản phẩm máy tăm nước đầu tiên. Không chỉ là một sản
-              phẩm, máy tăm nước Hangy còn mang trong mình tâm huyết và sự am
-              hiểu của bác sĩ về nhu cầu chăm sóc sức khỏe răng miệng của cộng
-              đồng.
+            </h1> */}
+            <p className="md:pr-20 md:text-left xs:text-center leading-10 sm:text-2xl xm:text-xl xs:text-lg mt-[37px]">
+              Năm 2020, Hangy mang đến sản phẩm máy tăm nước đầu tiên tại thị
+              trường Việt Nam. Không chỉ là một sản phẩm, máy tăm nước Hangy còn
+              mang trong mình tâm huyết và sự am hiểu của bác sĩ về nhu cầu chăm
+              sóc sức khỏe răng miệng của cộng đồng.
             </p>
           </div>
-          <div className="md:w-1/2 p-3 flex items-center relative">
+          <div className="md:w-1/2 p-3 flex flex-col justify-center items-center relative">
             <img src={Doctor} alt="" className="h-full mx-auto z-30" />
+            <p className="text-center xm:text-2xl xs:text-xl font-semibold text-[#0A96E7] mt-4">Bác sĩ Nha khoa Nguyễn Kim Cúc</p>
           </div>
         </div>
       </section>
@@ -89,7 +89,7 @@ export default function AboutPage() {
         </div>
       </section>
       <section className="w-full md:pt-[100px] xs:pt-12 pb-0 overflow-hidden">
-        <div className="px-4 flex md:flex-row xs:flex-col flex-wrap ">
+        <div className="px-4 flex md:flex-row xs:flex-col flex-wrap">
           <div className="px-3 md:w-1/2 xs:flex xs:justify-center">
             <img src={FeatureImg} alt="" width={500} height={750} />
           </div>
@@ -97,7 +97,7 @@ export default function AboutPage() {
             <h2 className="md:text-center xs:text-center sm:text-[40px] xs:text-3xl font-semibold">
               Tầm nhìn tương lai
             </h2>
-            <p className="sm:text-lg xs:text-base md:text-center xs:text-center leading-6 py-[18px] w-2/3 mx-auto mt-8">
+            <p className="sm:text-lg xs:text-base md:text-center xs:text-center leading-6 py-[18px] xs:w-full xm:w-2/3 mx-auto mt-8">
               Tầm nhìn tương lai của thương hiệu Hangy là mở rộng hơn nữa các
               dòng sản phẩm chăm sóc răng miệng, tạo ra một hệ sinh thái chăm
               sóc răng miệng toàn diện từ máy tăm nước, bàn chải điện, nước súc
@@ -125,7 +125,7 @@ export default function AboutPage() {
                   disableOnInteraction: false,
                 }}
                 modules={[Navigation, Autoplay]}
-                style={{ height: "280px" }}
+                style={{ height: "310px" }}
               >
                 {REVIEWS.map((review) => (
                   <SwiperSlide className="flex items-start h-fit">
