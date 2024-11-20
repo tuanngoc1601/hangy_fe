@@ -6,7 +6,7 @@ const MailContactIcon = () => (
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
   >
-    <rect width="40" height="40" rx="20" fill="#DB4444" />
+    <rect width="40" height="40" rx="20" fill="#1C95C9" />
     <path
       d="M10 13L20 20L30 13M10 27H30V13H10V27Z"
       stroke="white"

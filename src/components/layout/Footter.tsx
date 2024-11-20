@@ -1,5 +1,6 @@
 import { LogoHangy } from "../../assets";
 import Facebook from "../icons/footer/Facebook";
+import Zalo from "../icons/footer/Zalo";
 
 export default function Footter() {
   return (
@@ -66,8 +67,11 @@ export default function Footter() {
           © 2024 Hangy đã đăng ký Bản quyền.
         </p>
         <div className="flex items-center gap-6">
-          <div>
+          <div className="cursor-pointer">
             <Facebook />
+          </div>
+          <div className="cursor-pointer">
+            <Zalo />
           </div>
         </div>
       </div>
