@@ -18,7 +18,7 @@ export default function AboutPage() {
             {/* <h1 className="md:text-left xs:text-center leading-[50px] font-semibold md:text-[40px] sm:text-[32px] xs:text-[28px] mt-[37px] mb-[50px] tracking-wide">
               Bác sĩ/ Nha sĩ Nguyễn Kim Cúc - Nhà sáng lập thương hiệu Hangy
             </h1> */}
-            <p className="md:pr-20 md:text-left xs:text-center leading-10 sm:text-2xl xm:text-xl xs:text-lg mt-[37px]">
+            <p className="md:pr-20 md:text-left xs:text-center leading-10 sm:text-2xl xm:text-xl xs:text-lg mt-[37px] md:leading-10">
               Năm 2020, Hangy mang đến sản phẩm máy tăm nước đầu tiên tại thị
               trường Việt Nam. Không chỉ là một sản phẩm, máy tăm nước Hangy còn
               mang trong mình tâm huyết và sự am hiểu của bác sĩ về nhu cầu chăm
