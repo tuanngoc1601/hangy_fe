@@ -20,7 +20,7 @@ const Services = () => {
       {services.map((service, index) => (
         <motion.div
           key={index}
-          className="p-4 flex flex-col items-center space-y-1"
+          className="p-4 flex flex-col items-center space-y-1 text-[#0A96E7]"
           initial="hidden"
           whileInView="visible"
           viewport={{ amount: 0.5, once: true }} // Removed once: true to re-trigger on each scroll

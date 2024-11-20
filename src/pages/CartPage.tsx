@@ -367,7 +367,7 @@ const CartItem = ({
           <img
             src={image}
             alt=""
-            className="w-20 h-20 flex-1 object-contain cursor-pointer"
+            className="w-20 h-20 flex-none object-contain cursor-pointer"
           />
           <div className="flex leading-4 pe-5 ps-2.5 flex-col items-start">
             <h3 className="mb-[5px] max-h-8 md:line-clamp-2 xs:line-clamp-1 leading-4 cursor-pointer">
