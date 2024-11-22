@@ -1,12 +1,13 @@
 import useHangyStore from "../../lib/useStore";
 import { NavLink, useNavigate } from "react-router-dom";
 import { HiOutlineShoppingBag } from "react-icons/hi";
-import { Avatar, LogoHangy } from "../../assets";
+import { LogoHangy } from "../../assets";
 import { useState } from "react";
 import UserDropdown from "../dropdown/UserDropdown";
 import { useGetCart } from "../../apis/web";
 import LoadingPage from "../../pages/LoadingPage";
 import { FaBars } from "react-icons/fa6";
+import { FaUserCircle } from "react-icons/fa";
 import useWindowSize from "../../hooks/useWindowSize";
 import clsx from "clsx";
 
@@ -114,13 +115,14 @@ export default function Header() {
             <div
               id="dropdownDividerButton"
               data-dropdown-toggle="dropdownDivider"
-              className="w-9 h-9 rounded-full cursor-pointer overflow-hidden flex items-center justify-center"
+              className="w-8 h-8 rounded-full cursor-pointer overflow-hidden flex items-center justify-center"
               onMouseDown={(event: React.MouseEvent) => {
                 event.stopPropagation();
                 setIsMenu(!isMenu);
               }}
             >
-              <img src={Avatar} alt="" className="w-full h-full object-cover" />
+              {/* <img src={Avatar} alt="" className="w-full h-full object-cover" /> */}
+              <FaUserCircle className="w-full h-full" />
             </div>
             {isMenu && <UserDropdown setIsOpenDropdown={setIsMenu} />}
           </div>
@@ -132,10 +134,14 @@ export default function Header() {
             Đăng nhập
           </button>
         ) : (
-          <img
-            src={Avatar}
-            alt=""
-            className="w-9 h-9 rounded-full object-cover cursor-pointer"
+          // <img
+          //   src={Avatar}
+          //   alt=""
+          //   className="w-9 h-9 rounded-full object-cover cursor-pointer"
+          //   onClick={() => navigate("/auth/login")}
+          // />
+          <FaUserCircle
+            className="w-9 h-9 cursor-pointer"
             onClick={() => navigate("/auth/login")}
           />
         )}
