@@ -63,6 +63,7 @@ export default function SwiperSlider({
               slug={product.slug}
               daily_price={product.daily_price}
               image={product.images[0].url}
+              sold_quantity={product.sold_quantity}
             />
           </SwiperSlide>
         ))}

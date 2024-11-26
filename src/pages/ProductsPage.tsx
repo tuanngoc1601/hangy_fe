@@ -119,6 +119,7 @@ export default function ProductsPage() {
                   slug={product.slug}
                   daily_price={product.daily_price}
                   image={product.images[0].url}
+                  sold_quantity={product.sold_quantity}
                   className="hover:-translate-y-[1px] overflow-visible"
                 />
               ))}

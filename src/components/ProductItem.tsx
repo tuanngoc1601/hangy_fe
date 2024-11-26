@@ -9,12 +9,14 @@ export default function ProductItem({
   slug,
   daily_price,
   image,
+  sold_quantity,
   className,
 }: {
   name: string;
   slug: string;
   daily_price: number;
   image: string;
+  sold_quantity: number;
   className?: string;
 }) {
   const navigate = useNavigate();
@@ -58,7 +60,7 @@ export default function ProductItem({
             <StarRating />
             <span>5.0</span>
           </div>
-          <p className="ps-1.5">Đã bán 124,6k</p>
+          <p className="ps-1.5">Đã bán {sold_quantity}</p>
         </div>
       </div>
     </div>
